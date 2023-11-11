@@ -1,0 +1,9 @@
+import qrcode
+
+@bot.command()
+async def qrc(ctx, code: str):
+    await ctx.channel.purge(limit=1)
+
+    img = qrcode.make(code)
+    img.save('img/qrcode.png')
+    await ctx.send(file=disnake.File(fp='img/qrcode.png'))

@@ -1,0 +1,495 @@
+import discord 
+from discord import Embed
+from discord.ext import commands
+import random
+
+intents = discord.Intents.default()
+intents.voice_states = True
+client = discord.Client(intents=intents)
+
+@client.event
+async def on_ready():
+    print('Бот готов')
+
+@client.event
+async def on_voice_state_update(member, before, after):
+    # Проверяем, если участник присоединился к голосовому каналу
+    if after.channel and after.channel != before.channel:
+        
+        if len(after.channel.members) == 10:
+            await list_members(after.channel)
+
+async def list_members(voice_channel):
+
+    list_com1 = []
+    list_com2 = []
+
+    members = voice_channel.members
+    member_names = [member.name for member in members]
+    kapitan_players = random.sample(member_names, 2)
+    kapitan1 = kapitan_players[0]
+    kapitan2 = kapitan_players[1]
+
+    players = [player for player in member_names if player not in kapitan_players]
+
+    target_channel_id = 1134900321341153330  # Замените это на ID нужного вам канала 
+    target_channel = client.get_channel(target_channel_id)
+
+    embed = discord.Embed(title="Добро пожаловать на фейсит", description="Капитаны, пикайте игроков", color=discord.Color.purple())
+    embed.set_thumbnail(url='https://icon-library.com/images/dota-icon/dota-icon-8.jpg')
+
+    embed.add_field(name=f'Капитан 1 - {kapitan1}', value= f'Игроки комманды 1: {list_com1}')
+    embed.add_field(name=f'Капитан 2 - {kapitan2}', value= f'Игроки комманды 2: {list_com2}')
+
+    # Проверяем длину списка players перед добавлением в поле embed
+    
+    embed.add_field(name='Не пикнутые игроки:', value='\n'.join([f'{i + 1} - {players[i]}' for i in range(len(players))]))
+    
+
+    embed.set_footer(text="что бы пикнуть игрока, кажмите на эмодзи его номера")
+    embed.set_author(name="Dota Faceit")
+    
+    message = await target_channel.send(embed=embed)
+
+    emoji = ['\u0031\uFE0F\u20E3', '\u0032\uFE0F\u20E3', '\u0033\uFE0F\u20E3', '\u0034\uFE0F\u20E3', '\u0035\uFE0F\u20E3', '\u0036\uFE0F\u20E3', '\u0037\uFE0F\u20E3','\u0038\uFE0F\u20E3']
+    
+    await message.add_reaction(emoji[0])  
+    await message.add_reaction(emoji[1])
+    await message.add_reaction(emoji[2])
+    await message.add_reaction(emoji[3])
+    await message.add_reaction(emoji[4])
+    await message.add_reaction(emoji[5])
+    await message.add_reaction(emoji[6])
+    await message.add_reaction(emoji[7])
+
+@client.event
+async def on_reaction_add(reaction, user):
+    global kapitan1, kapitan2, list_com1, list_com2, players, kom, target_channel, emoji
+
+    kom = 1
+
+    if user.bot:
+        return
+
+    if user.id == kapitan1.id:
+        if reaction.emoji == '\u0031\uFE0F\u20E3':
+            if kom == 1:
+                if players[0] in list_com2:  # Проверяем наличие players[0] в list_com2
+                    await reaction.message.channel.send(f'{players[0].mention} уже выбран в другой команде')
+                else:
+                    await reaction.message.channel.send(f'{kapitan1.mention} пикнул {players[0].mention}')
+                    removed_player1 = players.pop(0)
+                    list_com1.append(removed_player1)
+                    await reaction.message.remove_reaction(reaction.emoji, client.user)
+                    kom = 2
+                    new_embed = discord.Embed(title="Добро пожаловать на фейсит", description="Капитаны, пикайте игроков", color=discord.Color.purple())
+                    new_embed.set_thumbnail(url='https://icon-library.com/images/dota-icon/dota-icon-8.jpg')
+                    new_embed.add_field(name=f'Капитан 1 - {kapitan1}', value= f'Игроки комманды 1: {list_com1}')
+                    new_embed.add_field(name=f'Капитан 2 - {kapitan2}', value= f'Игроки комманды 2: {list_com2}')
+                    new_embed.add_field(name='Не пикнутые игроки:', value='\n'.join([f'{i + 1} - {players[i]}' for i in range(len(players))]))
+                    new_embed.set_footer(text="что бы пикнуть игрока, кажмите на эмодзи его номера")
+                    new_embed.set_author(name="Dota Faceit")
+                    message = await target_channel.send(embed=new_embed)
+                    message.add_reaction(emoji)
+
+
+            elif kom == 2: 
+                await reaction.message.channel.send('Сейчас выбирает другой капитан')
+                pass
+        else:
+            await reaction.message.channel.send(f'{players[0].mention} уже выбран')
+            pass
+
+    if user.id == kapitan1.id:
+        if reaction.emoji == '\u0032\uFE0F\u20E3':
+            if kom == 1:
+                if players[1] in list_com2:  # Проверяем наличие players[0] в list_com2
+                    await reaction.message.channel.send(f'{players[1].mention} уже выбран в другой команде')
+                else:
+                    await reaction.message.channel.send(f'{kapitan1.mention} пикнул {players[1].mention}')
+                    removed_player1 = players.pop(1)
+                    list_com1.append(removed_player1)
+                    await reaction.message.remove_reaction(reaction.emoji, client.user)
+                    kom = 2
+                    new_embed = discord.Embed(title="Добро пожаловать на фейсит", description="Капитаны, пикайте игроков", color=discord.Color.purple())
+                    new_embed.set_thumbnail(url='https://icon-library.com/images/dota-icon/dota-icon-8.jpg')
+                    new_embed.add_field(name=f'Капитан 1 - {kapitan1}', value= f'Игроки комманды 1: {list_com1}')
+                    new_embed.add_field(name=f'Капитан 2 - {kapitan2}', value= f'Игроки комманды 2: {list_com2}')
+                    new_embed.add_field(name='Не пикнутые игроки:', value='\n'.join([f'{i + 1} - {players[i]}' for i in range(len(players))]))
+                    new_embed.set_footer(text="что бы пикнуть игрока, кажмите на эмодзи его номера")
+                    new_embed.set_author(name="Dota Faceit")
+                    message = await target_channel.send(embed=new_embed)
+                    message.add_reaction(emoji)
+            elif kom == 2: 
+                await reaction.message.channel.send('Сейчас выбирает другой капитан')
+                pass
+        else:
+            await reaction.message.channel.send(f'{players[0].mention} уже выбран')
+            pass
+
+    if user.id == kapitan1.id:
+        if reaction.emoji == '\u0033\uFE0F\u20E3':
+            if kom == 1:
+                if players[2] in list_com2:  # Проверяем наличие players[0] в list_com2
+                    await reaction.message.channel.send(f'{players[2].mention} уже выбран в другой команде')
+                else:
+                    await reaction.message.channel.send(f'{kapitan1.mention} пикнул {players[2].mention}')
+                    removed_player1 = players.pop(2)
+                    list_com1.append(removed_player1)
+                    await reaction.message.remove_reaction(reaction.emoji, client.user)
+                    kom = 2
+                    new_embed = discord.Embed(title="Добро пожаловать на фейсит", description="Капитаны, пикайте игроков", color=discord.Color.purple())
+                    new_embed.set_thumbnail(url='https://icon-library.com/images/dota-icon/dota-icon-8.jpg')
+                    new_embed.add_field(name=f'Капитан 1 - {kapitan1}', value= f'Игроки комманды 1: {list_com1}')
+                    new_embed.add_field(name=f'Капитан 2 - {kapitan2}', value= f'Игроки комманды 2: {list_com2}')
+                    new_embed.add_field(name='Не пикнутые игроки:', value='\n'.join([f'{i + 1} - {players[i]}' for i in range(len(players))]))
+                    new_embed.set_footer(text="что бы пикнуть игрока, кажмите на эмодзи его номера")
+                    new_embed.set_author(name="Dota Faceit")
+                    message = await target_channel.send(embed=new_embed)
+                    message.add_reaction(emoji)
+            elif kom == 2: 
+                await reaction.message.channel.send('Сейчас выбирает другой капитан')
+                pass
+        else:
+            await reaction.message.channel.send(f'{players[0].mention} уже выбран')
+            pass
+
+    if user.id == kapitan1.id:
+        if reaction.emoji == '\u0034\uFE0F\u20E3':
+            if kom == 1:
+                if players[3] in list_com2:  # Проверяем наличие players[0] в list_com2
+                    await reaction.message.channel.send(f'{players[3].mention} уже выбран в другой команде')
+                else:
+                    await reaction.message.channel.send(f'{kapitan1.mention} пикнул {players[3].mention}')
+                    removed_player1 = players.pop(3)
+                    list_com1.append(removed_player1)
+                    await reaction.message.remove_reaction(reaction.emoji, client.user)
+                    kom = 2
+                    new_embed = discord.Embed(title="Добро пожаловать на фейсит", description="Капитаны, пикайте игроков", color=discord.Color.purple())
+                    new_embed.set_thumbnail(url='https://icon-library.com/images/dota-icon/dota-icon-8.jpg')
+                    new_embed.add_field(name=f'Капитан 1 - {kapitan1}', value= f'Игроки комманды 1: {list_com1}')
+                    new_embed.add_field(name=f'Капитан 2 - {kapitan2}', value= f'Игроки комманды 2: {list_com2}')
+                    new_embed.add_field(name='Не пикнутые игроки:', value='\n'.join([f'{i + 1} - {players[i]}' for i in range(len(players))]))
+                    new_embed.set_footer(text="что бы пикнуть игрока, кажмите на эмодзи его номера")
+                    new_embed.set_author(name="Dota Faceit")
+                    message = await target_channel.send(embed=new_embed)
+                    message.add_reaction(emoji)
+            elif kom == 2: 
+                await reaction.message.channel.send('Сейчас выбирает другой капитан')
+                pass
+        else:
+            await reaction.message.channel.send(f'{players[0].mention} уже выбран')
+            pass
+
+    if user.id == kapitan1.id:
+        if reaction.emoji == '\u0035\uFE0F\u20E3':
+            if kom == 1:
+                if players[4] in list_com2:  # Проверяем наличие players[0] в list_com2
+                    await reaction.message.channel.send(f'{players[4].mention} уже выбран в другой команде')
+                else:
+                    await reaction.message.channel.send(f'{kapitan1.mention} пикнул {players[4].mention}')
+                    removed_player1 = players.pop(4)
+                    list_com1.append(removed_player1)
+                    await reaction.message.remove_reaction(reaction.emoji, client.user)
+                    kom = 2
+                    new_embed = discord.Embed(title="Добро пожаловать на фейсит", description="Капитаны, пикайте игроков", color=discord.Color.purple())
+                    new_embed.set_thumbnail(url='https://icon-library.com/images/dota-icon/dota-icon-8.jpg')
+                    new_embed.add_field(name=f'Капитан 1 - {kapitan1}', value= f'Игроки комманды 1: {list_com1}')
+                    new_embed.add_field(name=f'Капитан 2 - {kapitan2}', value= f'Игроки комманды 2: {list_com2}')
+                    new_embed.add_field(name='Не пикнутые игроки:', value='\n'.join([f'{i + 1} - {players[i]}' for i in range(len(players))]))
+                    new_embed.set_footer(text="что бы пикнуть игрока, кажмите на эмодзи его номера")
+                    new_embed.set_author(name="Dota Faceit")
+                    message = await target_channel.send(embed=new_embed)
+                    message.add_reaction(emoji)
+            elif kom == 2: 
+                await reaction.message.channel.send('Сейчас выбирает другой капитан')
+                pass
+        else:
+            await reaction.message.channel.send(f'{players[0].mention} уже выбран')
+            pass
+
+    if user.id == kapitan1.id:
+        if reaction.emoji == '\u0036\uFE0F\u20E3':
+            if kom == 1:
+                if players[5] in list_com2:  # Проверяем наличие players[0] в list_com2
+                    await reaction.message.channel.send(f'{players[5].mention} уже выбран в другой команде')
+                else:
+                    await reaction.message.channel.send(f'{kapitan1.mention} пикнул {players[5].mention}')
+                    removed_player1 = players.pop(5)
+                    list_com1.append(removed_player1)
+                    await reaction.message.remove_reaction(reaction.emoji, client.user)
+                    kom = 2
+                    new_embed = discord.Embed(title="Добро пожаловать на фейсит", description="Капитаны, пикайте игроков", color=discord.Color.purple())
+                    new_embed.set_thumbnail(url='https://icon-library.com/images/dota-icon/dota-icon-8.jpg')
+                    new_embed.add_field(name=f'Капитан 1 - {kapitan1}', value= f'Игроки комманды 1: {list_com1}')
+                    new_embed.add_field(name=f'Капитан 2 - {kapitan2}', value= f'Игроки комманды 2: {list_com2}')
+                    new_embed.add_field(name='Не пикнутые игроки:', value='\n'.join([f'{i + 1} - {players[i]}' for i in range(len(players))]))
+                    new_embed.set_footer(text="что бы пикнуть игрока, кажмите на эмодзи его номера")
+                    new_embed.set_author(name="Dota Faceit")
+                    message = await target_channel.send(embed=new_embed)
+                    message.add_reaction(emoji)
+            elif kom == 2: 
+                await reaction.message.channel.send('Сейчас выбирает другой капитан')
+                pass
+        else:
+            await reaction.message.channel.send(f'{players[0].mention} уже выбран')
+            pass
+
+    if user.id == kapitan1.id:
+        if reaction.emoji == '\u0037\uFE0F\u20E3':
+            if kom == 1:
+                if players[6] in list_com2:  # Проверяем наличие players[0] в list_com2
+                    await reaction.message.channel.send(f'{players[6].mention} уже выбран в другой команде')
+                else:
+                    await reaction.message.channel.send(f'{kapitan1.mention} пикнул {players[6].mention}')
+                    removed_player1 = players.pop(6)
+                    list_com1.append(removed_player1)
+                    await reaction.message.remove_reaction(reaction.emoji, client.user)
+                    kom = 2
+                    new_embed = discord.Embed(title="Добро пожаловать на фейсит", description="Капитаны, пикайте игроков", color=discord.Color.purple())
+                    new_embed.set_thumbnail(url='https://icon-library.com/images/dota-icon/dota-icon-8.jpg')
+                    new_embed.add_field(name=f'Капитан 1 - {kapitan1}', value= f'Игроки комманды 1: {list_com1}')
+                    new_embed.add_field(name=f'Капитан 2 - {kapitan2}', value= f'Игроки комманды 2: {list_com2}')
+                    new_embed.add_field(name='Не пикнутые игроки:', value='\n'.join([f'{i + 1} - {players[i]}' for i in range(len(players))]))
+                    new_embed.set_footer(text="что бы пикнуть игрока, кажмите на эмодзи его номера")
+                    new_embed.set_author(name="Dota Faceit")
+                    message = await target_channel.send(embed=new_embed)
+                    message.add_reaction(emoji)
+            elif kom == 2: 
+                await reaction.message.channel.send('Сейчас выбирает другой капитан')
+                pass
+        else:
+            await reaction.message.channel.send(f'{players[0].mention} уже выбран')
+            pass
+
+    if user.id == kapitan1.id:
+        if reaction.emoji == '\u0038\uFE0F\u20E3':
+            if kom == 1:
+                if players[7] in list_com2:  # Проверяем наличие players[0] в list_com2
+                    await reaction.message.channel.send(f'{players[7].mention} уже выбран в другой команде')
+                else:
+                    await reaction.message.channel.send(f'{kapitan1.mention} пикнул {players[7].mention}')
+                    removed_player1 = players.pop(7)
+                    list_com1.append(removed_player1)
+                    await reaction.message.remove_reaction(reaction.emoji, client.user)
+                    kom = 2
+                    new_embed = discord.Embed(title="Добро пожаловать на фейсит", description="Капитаны, пикайте игроков", color=discord.Color.purple())
+                    new_embed.set_thumbnail(url='https://icon-library.com/images/dota-icon/dota-icon-8.jpg')
+                    new_embed.add_field(name=f'Капитан 1 - {kapitan1}', value= f'Игроки комманды 1: {list_com1}')
+                    new_embed.add_field(name=f'Капитан 2 - {kapitan2}', value= f'Игроки комманды 2: {list_com2}')
+                    new_embed.add_field(name='Не пикнутые игроки:', value='\n'.join([f'{i + 1} - {players[i]}' for i in range(len(players))]))
+                    new_embed.set_footer(text="что бы пикнуть игрока, кажмите на эмодзи его номера")
+                    new_embed.set_author(name="Dota Faceit")
+                    message = await target_channel.send(embed=new_embed)
+                    message.add_reaction(emoji)
+            elif kom == 2: 
+                await reaction.message.channel.send('Сейчас выбирает другой капитан')
+                pass 
+        else:
+            await reaction.message.channel.send(f'{players[0].mention} уже выбран')
+            pass 
+
+    if user.id == kapitan1.id:
+        if reaction.emoji == '\u0036\uFE0F\u20E3':
+            if kom == 1:
+                if players[5] in list_com2:  # Проверяем наличие players[0] в list_com2
+                    await reaction.message.channel.send(f'{players[5].mention} уже выбран в другой команде')
+                else:
+                    await reaction.message.channel.send(f'{kapitan1.mention} пикнул {players[5].mention}')
+                    removed_player1 = players.pop(5)
+                    list_com1.append(removed_player1)
+                    await reaction.message.remove_reaction(reaction.emoji, client.user)
+                    kom = 2
+                    new_embed = discord.Embed(title="Добро пожаловать на фейсит", description="Капитаны, пикайте игроков", color=discord.Color.purple())
+                    new_embed.set_thumbnail(url='https://icon-library.com/images/dota-icon/dota-icon-8.jpg')
+                    new_embed.add_field(name=f'Капитан 1 - {kapitan1}', value= f'Игроки комманды 1: {list_com1}')
+                    new_embed.add_field(name=f'Капитан 2 - {kapitan2}', value= f'Игроки комманды 2: {list_com2}')
+                    new_embed.add_field(name='Не пикнутые игроки:', value='\n'.join([f'{i + 1} - {players[i]}' for i in range(len(players))]))
+                    new_embed.set_footer(text="что бы пикнуть игрока, кажмите на эмодзи его номера")
+                    new_embed.set_author(name="Dota Faceit")
+                    message = await target_channel.send(embed=new_embed)
+                    message.add_reaction(emoji)
+            elif kom == 2: 
+                await reaction.message.channel.send('Сейчас выбирает другой капитан')
+                pass
+        else:
+            await reaction.message.channel.send(f'{players[0].mention} уже выбран')
+            pass
+
+
+##########################################################################################
+    if user.id == kapitan2.id:
+        if reaction.emoji == '\u0031\uFE0F\u20E3':
+            if kom == 2:
+                if players[0] in list_com1:  # Проверяем наличие players[0] в list_com2
+                    await reaction.message.channel.send(f'{players[0].mention} уже выбран в другой команде')
+                else:
+                    await reaction.message.channel.send(f'{kapitan1.mention} пикнул {players[0].mention}')
+                    removed_player1 = players.pop(0)
+                    list_com2.append(removed_player1)
+                    await reaction.message.remove_reaction(reaction.emoji, client.user)
+                    kom = 1
+                    new_embed = discord.Embed(title="Добро пожаловать на фейсит", description="Капитаны, пикайте игроков", color=discord.Color.purple())
+                    new_embed.set_thumbnail(url='https://icon-library.com/images/dota-icon/dota-icon-8.jpg')
+                    new_embed.add_field(name=f'Капитан 1 - {kapitan1}', value= f'Игроки комманды 1: {list_com1}')
+                    new_embed.add_field(name=f'Капитан 2 - {kapitan2}', value= f'Игроки комманды 2: {list_com2}')
+                    new_embed.add_field(name='Не пикнутые игроки:', value='\n'.join([f'{i + 1} - {players[i]}' for i in range(len(players))]))
+                    new_embed.set_footer(text="что бы пикнуть игрока, кажмите на эмодзи его номера")
+                    new_embed.set_author(name="Dota Faceit")
+                    message = await target_channel.send(embed=new_embed)
+                    message.add_reaction(emoji)
+
+
+            elif kom == 1: 
+                await reaction.message.channel.send('Сейчас выбирает другой капитан')
+                pass
+        else:
+            await reaction.message.channel.send(f'{players[0].mention} уже выбран')
+            pass
+
+
+    if user.id == kapitan2.id:
+        if reaction.emoji == '\u0031\uFE0F\u20E3':
+            if kom == 2:
+                if players[0] in list_com1:  # Проверяем наличие players[0] в list_com2
+                    await reaction.message.channel.send(f'{players[0].mention} уже выбран в другой команде')
+                else:
+                    await reaction.message.channel.send(f'{kapitan1.mention} пикнул {players[0].mention}')
+                    removed_player1 = players.pop(0)
+                    list_com2.append(removed_player1)
+                    await reaction.message.remove_reaction(reaction.emoji, client.user)
+                    kom = 1
+                    new_embed = discord.Embed(title="Добро пожаловать на фейсит", description="Капитаны, пикайте игроков", color=discord.Color.purple())
+                    new_embed.set_thumbnail(url='https://icon-library.com/images/dota-icon/dota-icon-8.jpg')
+                    new_embed.add_field(name=f'Капитан 1 - {kapitan1}', value= f'Игроки комманды 1: {list_com1}')
+                    new_embed.add_field(name=f'Капитан 2 - {kapitan2}', value= f'Игроки комманды 2: {list_com2}')
+                    new_embed.add_field(name='Не пикнутые игроки:', value='\n'.join([f'{i + 1} - {players[i]}' for i in range(len(players))]))
+                    new_embed.set_footer(text="что бы пикнуть игрока, кажмите на эмодзи его номера")
+                    new_embed.set_author(name="Dota Faceit")
+                    message = await target_channel.send(embed=new_embed)
+                    message.add_reaction(emoji)
+
+
+            elif kom == 1: 
+                await reaction.message.channel.send('Сейчас выбирает другой капитан')
+                pass
+        else:
+            await reaction.message.channel.send(f'{players[0].mention} уже выбран')
+            pass
+
+
+    if user.id == kapitan2.id:
+        if reaction.emoji == '\u0031\uFE0F\u20E3':
+            if kom == 2:
+                if players[0] in list_com1:  # Проверяем наличие players[0] в list_com2
+                    await reaction.message.channel.send(f'{players[0].mention} уже выбран в другой команде')
+                else:
+                    await reaction.message.channel.send(f'{kapitan1.mention} пикнул {players[0].mention}')
+                    removed_player1 = players.pop(0)
+                    list_com2.append(removed_player1)
+                    await reaction.message.remove_reaction(reaction.emoji, client.user)
+                    kom = 1
+                    new_embed = discord.Embed(title="Добро пожаловать на фейсит", description="Капитаны, пикайте игроков", color=discord.Color.purple())
+                    new_embed.set_thumbnail(url='https://icon-library.com/images/dota-icon/dota-icon-8.jpg')
+                    new_embed.add_field(name=f'Капитан 1 - {kapitan1}', value= f'Игроки комманды 1: {list_com1}')
+                    new_embed.add_field(name=f'Капитан 2 - {kapitan2}', value= f'Игроки комманды 2: {list_com2}')
+                    new_embed.add_field(name='Не пикнутые игроки:', value='\n'.join([f'{i + 1} - {players[i]}' for i in range(len(players))]))
+                    new_embed.set_footer(text="что бы пикнуть игрока, кажмите на эмодзи его номера")
+                    new_embed.set_author(name="Dota Faceit")
+                    message = await target_channel.send(embed=new_embed)
+                    message.add_reaction(emoji)
+
+
+            elif kom == 1: 
+                await reaction.message.channel.send('Сейчас выбирает другой капитан')
+                pass
+        else:
+            await reaction.message.channel.send(f'{players[0].mention} уже выбран')
+            pass
+
+    if user.id == kapitan2.id:
+        if reaction.emoji == '\u0031\uFE0F\u20E3':
+            if kom == 2:
+                if players[0] in list_com1:  # Проверяем наличие players[0] в list_com2
+                    await reaction.message.channel.send(f'{players[0].mention} уже выбран в другой команде')
+                else:
+                    await reaction.message.channel.send(f'{kapitan1.mention} пикнул {players[0].mention}')
+                    removed_player1 = players.pop(0)
+                    list_com2.append(removed_player1)
+                    await reaction.message.remove_reaction(reaction.emoji, client.user)
+                    kom = 1
+                    new_embed = discord.Embed(title="Добро пожаловать на фейсит", description="Капитаны, пикайте игроков", color=discord.Color.purple())
+                    new_embed.set_thumbnail(url='https://icon-library.com/images/dota-icon/dota-icon-8.jpg')
+                    new_embed.add_field(name=f'Капитан 1 - {kapitan1}', value= f'Игроки комманды 1: {list_com1}')
+                    new_embed.add_field(name=f'Капитан 2 - {kapitan2}', value= f'Игроки комманды 2: {list_com2}')
+                    new_embed.add_field(name='Не пикнутые игроки:', value='\n'.join([f'{i + 1} - {players[i]}' for i in range(len(players))]))
+                    new_embed.set_footer(text="что бы пикнуть игрока, кажмите на эмодзи его номера")
+                    new_embed.set_author(name="Dota Faceit")
+                    message = await target_channel.send(embed=new_embed)
+                    message.add_reaction(emoji)
+
+
+            elif kom == 1: 
+                await reaction.message.channel.send('Сейчас выбирает другой капитан')
+                pass
+        else:
+            await reaction.message.channel.send(f'{players[0].mention} уже выбран')
+            pass
+
+    if user.id == kapitan2.id:
+        if reaction.emoji == '\u0031\uFE0F\u20E3':
+            if kom == 2:
+                if players[0] in list_com1:  # Проверяем наличие players[0] в list_com2
+                    await reaction.message.channel.send(f'{players[0].mention} уже выбран в другой команде')
+                else:
+                    await reaction.message.channel.send(f'{kapitan1.mention} пикнул {players[0].mention}')
+                    removed_player1 = players.pop(0)
+                    list_com2.append(removed_player1)
+                    await reaction.message.remove_reaction(reaction.emoji, client.user)
+                    kom = 1
+                    new_embed = discord.Embed(title="Добро пожаловать на фейсит", description="Капитаны, пикайте игроков", color=discord.Color.purple())
+                    new_embed.set_thumbnail(url='https://icon-library.com/images/dota-icon/dota-icon-8.jpg')
+                    new_embed.add_field(name=f'Капитан 1 - {kapitan1}', value= f'Игроки комманды 1: {list_com1}')
+                    new_embed.add_field(name=f'Капитан 2 - {kapitan2}', value= f'Игроки комманды 2: {list_com2}')
+                    new_embed.add_field(name='Не пикнутые игроки:', value='\n'.join([f'{i + 1} - {players[i]}' for i in range(len(players))]))
+                    new_embed.set_footer(text="что бы пикнуть игрока, кажмите на эмодзи его номера")
+                    new_embed.set_author(name="Dota Faceit")
+                    message = await target_channel.send(embed=new_embed)
+                    message.add_reaction(emoji)
+
+
+            elif kom == 1: 
+                await reaction.message.channel.send('Сейчас выбирает другой капитан')
+                pass
+        else:
+            await reaction.message.channel.send(f'{players[0].mention} уже выбран')
+            pass
+
+    if user.id == kapitan2.id:
+        if reaction.emoji == '\u0031\uFE0F\u20E3':
+            if kom == 2:
+                if players[0] in list_com1:  # Проверяем наличие players[0] в list_com2
+                    await reaction.message.channel.send(f'{players[0].mention} уже выбран в другой команде')
+                else:
+                    await reaction.message.channel.send(f'{kapitan1.mention} пикнул {players[0].mention}')
+                    removed_player1 = players.pop(0)
+                    list_com2.append(removed_player1)
+                    await reaction.message.remove_reaction(reaction.emoji, client.user)
+                    kom = 1
+                    new_embed = discord.Embed(title="Добро пожаловать на фейсит", description="Капитаны, пикайте игроков", color=discord.Color.purple())
+                    new_embed.set_thumbnail(url='https://icon-library.com/images/dota-icon/dota-icon-8.jpg')
+                    new_embed.add_field(name=f'Капитан 1 - {kapitan1}', value= f'Игроки комманды 1: {list_com1}')
+                    new_embed.add_field(name=f'Капитан 2 - {kapitan2}', value= f'Игроки комманды 2: {list_com2}')
+                    new_embed.add_field(name='Не пикнутые игроки:', value='\n'.join([f'{i + 1} - {players[i]}' for i in range(len(players))]))
+                    new_embed.set_footer(text="что бы пикнуть игрока, кажмите на эмодзи его номера")
+                    new_embed.set_author(name="Dota Faceit")
+                    message = await target_channel.send(embed=new_embed)
+                    message.add_reaction(emoji)
+
+
+            elif kom == 1: 
+                await reaction.message.channel.send('Сейчас выбирает другой капитан')
+                pass
+        else:
+            await reaction.message.channel.send(f'{players[0].mention} уже выбран')
+            pass

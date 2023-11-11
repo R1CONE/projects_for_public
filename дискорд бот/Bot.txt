@@ -1,0 +1,39 @@
+using System;
+using Discord;
+using System.Threading.Tasks;
+using Discord.WebSocket;
+
+public class Programm
+
+{
+    DiscordSocketClient client = new DiscordSocketClient();
+    public static void Main(string[] args)
+    => new Programm().MainAsync().GetAwaiter().GetResult();
+
+    private async Task MainAsync()
+    {
+        client = new DiscordSocketClient();
+        client.MessageReceived += CommandsHundler;
+
+        client.Log += Log;
+
+        var token = "MTA2ODYwODQ4MjQ1MTkxODk3OA.G3XnXp.KFohvQQFelwxLpK5W8YByFSlSErfIE3V4xvIUo";
+
+        await client.LoginAsync(TokenType.Bot, token);
+        await client.StartAsync();
+
+        Console.ReadLine();
+    }
+
+    private Task Log(LogMessage msg)
+    {
+        Console.WriteLine(msg.ToString());
+        return Task.CompletedTask;
+    }
+
+    private Task CommandsHundler(SocketMessage msg)
+    {
+        msg.Channel.SendMessageAsync(msg.Content);
+        return Task.CompletedTask;
+    }
+}

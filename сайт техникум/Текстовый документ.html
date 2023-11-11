@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Продажа чего-либо</title>
+    <style>
+body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .bold-line {
+      border: none;
+      /* Убираем стандартную границу элемента */
+      border-top: 3px solid #000;
+      /* Задаем толщину и цвет линии */
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    header img {
+      width: 190px;
+      height: 100px;
+    }
+
+    nav {
+      background-color: #444;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px;
+      margin: 0 10px;
+    }
+
+    .center-text {
+      text-align: center;
+    }
+
+    nav a:hover {
+      background-color: #555;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .employee-container {
+      display: flex;
+      align-items: center;
+      /* Выравнивание по вертикали */
+    }
+
+    .left-half {
+      flex: 1;
+      /* Расширение на всю доступную ширину */
+      padding: 20px;
+      /* Добавление отступов по желанию */
+    }
+
+    .right-half {
+      flex: 1;
+      /* Расширение на всю доступную ширину */
+      padding: 20px;
+      /* Добавление отступов по желанию */
+      text-align: center;
+      /* Выравнивание текста по центру (если нужно) */
+    }
+
+    .employee-container {
+      clear: both;
+      margin-bottom: 20px;
+    }
+
+    .employee-info {
+      margin-top: 20px;
+    }
+
+    .scrolling-panel-container {
+      width: 300px;
+      overflow-x: auto;
+    }
+
+    .scrolling-panel {
+      display: flex;
+
+    }
+
+    .left-image {
+      float: left;
+      /* Выравнивание изображения влево */
+    }
+
+    .right-image {
+      float: right;
+      /* Выравнивание изображения вправо */
+    }
+
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+
+    } 
+
+    .big-image-container {
+  position: relative;
+      display: flex;
+            justify-content: center;
+            align-items: center;
+      
+
+      
+  width: 1000px; /* Ширина и высота ваших изображений умноженная на 2 (500 * 2) */
+  height: 800px; /* Ширина и высота ваших изображений (400 * 2) */
+}
+
+.image {
+  position: absolute;
+  width: 500px;
+  height: 400px;
+}
+
+.image:nth-child(1) {
+  top: 0;
+  left: 0;
+}
+
+.image:nth-child(2) {
+  top: 0;
+  left: 500px;
+}
+
+.image:nth-child(3) {
+  top: 400px;
+  left: 0;
+}
+
+.image:nth-child(4) {
+  top: 400px;
+  left: 500px;
+}
+
+      .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        /* Стили для отдельного изображения */
+        .image-item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .image-item img {
+            max-width: 100%;
+            height: auto;
+        }
+
+      .services {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between; /* Распределение между ячейками */
+        align-items: center; /* Выравнивание по вертикали */
+    }
+
+    .service {
+        flex: 1; /* Равномерное распределение ячеек */
+        max-width: 300px; /* Максимальная ширина каждой ячейки */
+        margin: 10px; /* Внешние отступы для ячеек */
+        text-align: center; /* Выравнивание текста по центру */
+    }
+
+      
+    </style>
+</head>
+<body>
+    <header>
+    <img
+      src="https://i.ibb.co/6Dv4gtC/png-transparent-maid-service-cleaner-cleaning-cleanliness-computer-icons-others-miscellaneous-apartm.png"
+      height="80" width="400">
+    <h1>firma sprzątająca</h1>
+  </header>
+  <nav>
+    <a href="#">o naszej firmy </a>
+    <a href="#">Nasi pracownicy</a>
+    <a href="#">portfolio</a>
+    <a href="#">gdzie jesteśmy</a>
+  </nav>
+  <div class="content">
+    <h1 class="center-text">O naszej firmie</h1>
+    <h2 class="center-text">Zapraszamy!</h2>
+    <h3 class="center-text">"Nasza firma sprzątająca to ekspert w dziedzinie utrzymania czystości.<p> Zajmujemy się
+        kompleksowym sprzątaniem mieszkań,
+      <p> biur i innych przestrzeni. Nasza profesjonalna i
+      <p> doświadczona ekipa gwarantuje, że Twoje miejsce
+      <p> zawsze będzie błyszczeć. Pozwól nam zająć się brudem,
+      <p> a Ty ciesz się czystym i świeżym otoczeniem!"
+    </h3>
+  </div>
+
+  <h1 class="center-text"> Galeria </h1>
+
+  <hr class="bold-line">
+
+  <h2 class="center-text"> Jesteśmy mistrzami naszego rzemiosła </h2>
+
+  <hr class="bold-line">
+
+    
+
+      <div class="image-gallery">
+        <div class="image-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ327HTdvPn0y3Z02Lt5QX4Dl6HOvmROjsRYQ&usqp=CAU" alt="Изображение 1">
+        </div>
+        <div class="image-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbWfR5l9GGbundSCk1HWZCASOztyN9Am5jgQ&usqp=CAU" alt="Изображение 2">
+        </div>
+        <div class="image-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5Nkcnim1fFrmo1HK7BASnp6tGzkUfncHFm6vE1RER01BD4iIO1qLX4QtNw72vuUNgyg&usqp=CAU" alt="Изображение 3">
+        </div>
+        <div class="image-item">
+            <img src="https://super-cleaning-spb.ru/uploads/s/g/f/l/gflxywmvkvrh/img/full_dGzSJOob.jpg" alt="Изображение 4">
+        </div>
+    </div>
+
+               
+            
+      <div>
+        <h2>Услуги</h2>
+        <div class="services">
+            <div class="service">
+                <img src="https://th.bing.com/th/id/OIP.-4UYdZ4x_gESyHNUrFFOfAHaE8?w=300&h=200&c=7&r=0&o=5&pid=1.7" >
+                <p>Полная чиста квартиры</p>
+                <p>Стоимость: $50</p>
+            </div>
+            <div class="service">
+                <img src="https://th.bing.com/th/id/OIP.mIL17lpxHAOdJpDcGR_ITQHaEo?w=260&h=180&c=7&r=0&o=5&pid=1.7" >
+                <p>Хим чистка дивана</p>
+                <p>Стоимость: $75</p>
+            </div>
+
+          <div class="service">
+                <img src="https://www.autodela.ru/assets/images/912.jpg"  height="140" width="310">
+                <p>Очистка салона</p>
+                <p>Стоимость: $75</p>
+            </div>
+
+          <div class="service">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl-PQ-rdeVMAecSWXgzF6RgUKQnIbBq2HUxA&usqp=CAU" >
+                <p>Очистка полная дома</p>
+                <p>Стоимость: $100</p>
+            </div>
+            
+        </div>
+
+        <h2>Наши сотрудники</h2>
+        <div class="employees">
+            <div class="employee">
+                <img src="сотрудник1.jpg" alt="Сотрудник 1">
+                <p>Имя сотрудника 1</p>
+                <p>Телефон: +123456789</p>
+            </div>
+            <div class="employee">
+                <img src="сотрудник2.jpg" alt="Сотрудник 2">
+                <p>Имя сотрудника 2</p>
+                <p>Телефон: +987654321</p>
+            </div>
+            <!-- Добавьте информацию о других сотрудниках -->
+        </div>
+    </div>
+</body>
+</html>

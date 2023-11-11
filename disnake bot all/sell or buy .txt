@@ -1,0 +1,20 @@
+class Sell(disnake.ui.View):
+    def __init__(self):
+        super().__init__(timeout=20.0)
+
+    @disnake.ui.button(label='Продать', style=disnake.ButtonStyle.green)
+    async def confirm(self, button: disnake.ui.Button, inter: disnake.CommandInteraction):
+        await inter.response.send_message('Вы продали арт')
+        self.stop()
+
+    @disnake.ui.button(label='Отказаться', style=disnake.ButtonStyle.red)
+    async def cancel(self, button: disnake.ui.Button, inter: disnake.CommandInteraction):
+        await inter.response.send_message('Вы отказались продавать арт')
+        self.stop()
+
+
+@bot.command()
+async def sell(ctx, art):
+    view = Sell()
+
+    await ctx.send(f'Вы уверены, что хотите продать {art}?', view=view)

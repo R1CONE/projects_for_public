@@ -1,0 +1,48 @@
+import disnake
+
+from disnake.ext import commands
+
+intents = disnake.Intents.all()
+bot = commands.Bot(command_prefix = "!", intents=intents)
+
+@bot.event
+async def on_ready():
+    print("Bot is ready")
+@bot.command()
+async def ping(ctx):
+    await ctx.send("Pong!")
+
+
+  
+bot.run("MTEwNTU0MDcxMjIwMTcyODAyMg.G989Am.6aQ43Av3RAEBo-zg8Iyoc5A7yum8jLRNtDDHzs")
+
+
+
+
+import disnake
+
+from disnake.ext import commands
+import os 
+
+intents = disnake.Intents.all()
+bot = commands.Bot(command_prefix = "!", intents=intents, test_guilds = [1061658311658836069])
+
+@bot.event
+async def on_ready():
+    print("Bot is ready")
+@bot.command()
+async def ping(ctx):
+    await ctx.send("Pong!")
+
+@bot.slash_command()
+async def ping(intereaction):
+    
+    await intereaction.responce.send_message("Pong!")
+
+    for file in os.listdir("./cogs"):
+        if file.endswith(".py"):
+            bot.load_extension(f"cogs.{file[:-3]}")
+bot.run("MTEwNTU0MDcxMjIwMTcyODAyMg.G989Am.6aQ43Av3RAEBo-zg8Iyoc5A7yum8jLRNtDDHzs")
+
+
+

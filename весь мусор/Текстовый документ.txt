@@ -1,0 +1,314 @@
+import discord
+from discord.ext import commands
+
+TOKEN = 'MTEzNDU5NTc2Mzc5MjUxMDk4Ng.Gv8sVn.FiIb71KMX1SdaekBGrqJ2WeHhLa4QGPSvRI4BM'
+TARGET_VOICE_CHANNEL_ID = 1135157429433282561
+INDEPENDENT_TEXT_CHANNEL_ID = 1134900321341153330
+
+# IDs голосовых каналов, куда будут перемещаться команды
+TEAM_1_VOICE_CHANNEL_ID = 1135168139177496626
+TEAM_2_VOICE_CHANNEL_ID = 1135168175890247811
+
+intents = discord.Intents.all()
+intents.voice_states = True
+bot = commands.Bot(command_prefix='!', intents=intents)
+
+# Словарь для хранения выбранных капитанов и их команд
+captains = {}
+
+@bot.event
+async def on_ready():
+    print(f'Logged in as {bot.user.name}')
+
+@bot.event
+async def on_voice_state_update(member, before, after):
+    if after.channel and after.channel.id == TARGET_VOICE_CHANNEL_ID:
+        members = after.channel.members
+
+        if len(members) == 10:
+            # Формируем список участников, кроме капитанов
+            other_players = [m for m in members if m not in captains.values()]
+
+            # Создаем embed-сообщение для выбора команд
+            embed = discord.Embed(title="Выбор команд", description="Выберите капитанов и игроков:", color=0x00ff00)
+            for i, player in enumerate(other_players, start=1):
+                embed.add_field(name=f"Реакция :{i}: ", value=player.mention, inline=False)
+
+            text_channel = bot.get_channel(INDEPENDENT_TEXT_CHANNEL_ID)
+            if text_channel:
+                message = await text_channel.send(embed=embed)
+
+            # Добавляем реакции к сообщению
+            for i in range(1, len(other_players) + 1):
+                emoji = f"{i}\N{COMBINING ENCLOSING KEYCAP}"
+                await message.add_reaction(emoji)
+
+@bot.event
+async def on_raw_reaction_add(payload):
+    # Проверяем, что событие произошло в нужном текстовом канале
+    if payload.channel_id == INDEPENDENT_TEXT_CHANNEL_ID and payload.user_id != bot.user.id:
+        user = await bot.fetch_user(payload.user_id)
+        member = payload.member
+        emoji = payload.emoji.name
+
+        # Проверяем, что реакция принадлежит числам от 1 до 8
+        if emoji in [f"{i}\N{COMBINING ENCLOSING KEYCAP}" for i in range(1, 9)]:
+            # Если участник, который выбирает, еще не является капитаном
+            if user not in captains.keys():
+                # Находим соответствующего участника по реакции
+                players = [m for m in payload.member.voice.channel.members if m not in captains.values()]
+                player_index = int(emoji[0]) - 1
+
+                # Добавляем участника в качестве капитана
+                captains[user] = players[player_index]
+
+                # Отправляем сообщение о выборе капитана
+                text_channel = bot.get_channel(INDEPENDENT_TEXT_CHANNEL_ID)
+                if text_channel:
+                    await text_channel.send(f"{user.mention} выбран капитаном команды!")
+
+                # Если выбрано два капитана, разделяем команды
+                if len(captains) == 2:
+                    # Разделение игроков на две команды
+                    team1 = [captains[user] for user in captains.keys()]
+                    team2 = [m for m in payload.member.voice.channel.members if m not in team1]
+
+                    # Перемещаем команды в соответствующие голосовые каналы
+                    voice_channel_team1 = bot.get_channel(TEAM_1_VOICE_CHANNEL_ID)
+                    voice_channel_team2 = bot.get_channel(TEAM_2_VOICE_CHANNEL_ID)
+
+                    if voice_channel_team1:
+                        await move_members(team1, voice_channel_team1)
+                    if voice_channel_team2:
+                        await move_members(team2, voice_channel_team2)
+
+                    # Очищаем выбор капитанов
+                    captains.clear()
+
+def is_captain(user):
+    return user in captains.keys()
+
+async def move_members(members, voice_channel):
+    for member in members:
+        await member.move_to(voice_channel)
+
+bot.run(TOKEN)
+
+
+
+
+
+
+
+---------------------------------------------
+
+
+import discord 
+from discord import Embed
+from discord.ext import commands
+import random
+
+intents = discord.Intents.default()
+intents.voice_states = True
+client = discord.Client(intents=intents)
+
+@client.event
+async def on_ready():
+    print('Бот готов')
+    
+
+@client.event
+async def on_voice_state_update(member, before, after):
+    # Проверяем, если участник присоединился к голосовому каналу
+    target_channel_id2 = 1135157429433282561  # Замените на нужный ID канала
+
+    if after.channel and after.channel.id == target_channel_id2 and after.channel != before.channel:
+        if len(after.channel.members) == 10:
+            await list_members(after.channel)
+
+async def list_members(voice_channel):
+    
+    list_com1 = []
+    list_com2 = []
+
+    members = voice_channel.members
+    member_names = [member.name for member in members]
+    kapitan_players = random.sample(member_names, 2)
+    kapitan1 = kapitan_players[0]
+    kapitan2 = kapitan_players[1]
+
+    players = [player for player in member_names if player not in kapitan_players]
+
+    target_channel_id = 1134900321341153330  # Замените это на ID нужного вам канала 
+    target_channel = client.get_channel(target_channel_id)
+
+    embed = discord.Embed(title="Добро пожаловать на фейсит", description="Капитаны, пикайте игроков", color=discord.Color.purple())
+    embed.set_thumbnail(url='https://icon-library.com/images/dota-icon/dota-icon-8.jpg')
+
+    embed.add_field(name=f'Капитан 1 - {kapitan1}', value= f'Игроки комманды 1: {list_com1}')
+    embed.add_field(name=f'Капитан 2 - {kapitan2}', value= f'Игроки комманды 2: {list_com2}')
+
+    # Проверяем длину списка players перед добавлением в поле embed
+    if len(players) >= 8:
+        embed.add_field(name=f'Не пикнутые игроки: 1 - {players[0]} ,/n 2 - {players[1]},/n 3 - {players[2]},/n 4 - {players[3]},/n 5 - {players[4]},/n 6 - {players[5]},/n 7 - {players[6]} ,/n 8 - {players[7]}')
+    else:
+        embed.add_field(name=f'Не пикнутые игроки:', value=', '.join(players))
+
+    embed.set_footer(text="что бы пикнуть игрока, кажмите на эмодзи его номера")
+    embed.set_author(name="Dota Faceit")
+    
+    message = await target_channel.send(embed=embed)
+
+    emoji = ['\u0031\uFE0F\u20E3', '\u0032\uFE0F\u20E3', '\u0033\uFE0F\u20E3', '\u0034\uFE0F\u20E3', '\u0035\uFE0F\u20E3', '\u0036\uFE0F\u20E3', '\u0037\uFE0F\u20E3','\u0038\uFE0F\u20E3']
+    
+    await message.add_reaction(emoji[0])  
+    await message.add_reaction(emoji[1])
+    await message.add_reaction(emoji[2])
+    await message.add_reaction(emoji[3])
+    await message.add_reaction(emoji[4])
+    await message.add_reaction(emoji[5])
+    await message.add_reaction(emoji[6])
+    await message.add_reaction(emoji[7])
+
+
+
+
+
+
+@client.event
+async def on_reaction_add(reaction, user):
+    kapitan1_id = kapitan1.id
+    kapitan2_id = kapitan2.id
+
+    if user.bot:
+        return
+    
+
+    if user.id == kapitan1_id:
+        if emoji == '\u0031\uFE0F\u20E3':
+            await reaction.message.channel.send(f'{kapitan1} пикнул {players[0]}')
+            removed_player1 = players.pop(0)
+            list_com1.append(removed_player1)
+            message.remove_reaction(reaction.emoji, bot.user)
+
+        if emoji == '\u0032\uFE0F\u20E3':
+            await reaction.message.channel.send(f'{kapitan1} пикнул {players[1]}')
+            removed_player2 = players.pop(0)
+            list_com1.append(removed_player2)
+            message.remove_reaction(reaction.emoji, bot.user)
+
+        if emoji == '\u0033\uFE0F\u20E3':
+            await reaction.message.channel.send(f'{kapitan1} пикнул {players[2]}')
+            removed_player3 = players.pop(0)
+            list_com1.append(removed_player3)
+            message.remove_reaction(reaction.emoji, bot.user)
+
+
+        if emoji == '\u0034\uFE0F\u20E3':
+            await reaction.message.channel.send(f'{kapitan1} пикнул {players[3]}')
+            removed_player4 = players.pop(0)
+            list_com1.append(removed_player4)
+            message.remove_reaction(reaction.emoji, bot.user)
+
+        if emoji == '\u0035\uFE0F\u20E3':
+            await reaction.message.channel.send(f'{kapitan1} пикнул {players[4]}')
+            removed_player5 = players.pop(0)
+            list_com1.append(removed_player5)
+            message.remove_reaction(reaction.emoji, bot.user)
+
+        if emoji == '\u0036\uFE0F\u20E3':
+            await reaction.message.channel.send(f'{kapitan1} пикнул {players[5]}')
+            removed_player6 = players.pop(0)
+            list_com1.append(removed_player6)
+            message.remove_reaction(reaction.emoji, bot.user)
+
+        if emoji == '\u0037\uFE0F\u20E3':
+            await reaction.message.channel.send(f'{kapitan1} пикнул {players[6]}')
+            removed_player7 = players.pop(0)
+            list_com1.append(removed_player7)
+            message.remove_reaction(reaction.emoji, bot.user)
+
+        if emoji == '\u0037\uFE0F\u20E3':
+            await reaction.message.channel.send(f'{kapitan1} пикнул {players[7]}')
+            removed_player8 = players.pop(0)
+            list_com1.append(removed_player8)
+            message.remove_reaction(reaction.emoji, bot.user, user)
+        else: await reaction.message.channel.send('Ты уже выбрал игрока')
+
+
+    if user.id == kapitan2_id:
+        if emoji == '\u0031\uFE0F\u20E3':
+            await reaction.message.channel.send(f'{kapitan2} пикнул {players[0]}')
+            removed_player1 = players.pop(0)
+            list_com1.append(removed_player1)
+            message.remove_reaction(reaction.emoji, bot.user)
+
+        if emoji == '\u0032\uFE0F\u20E3':
+            await reaction.message.channel.send(f'{kapitan1} пикнул {players[1]}')
+            removed_player2 = players.pop(0)
+            list_com1.append(removed_player2)
+            message.remove_reaction(reaction.emoji, bot.user)
+
+        if emoji == '\u0033\uFE0F\u20E3':
+            await reaction.message.channel.send(f'{kapitan1} пикнул {players[2]}')
+            removed_player3 = players.pop(0)
+            list_com1.append(removed_player3)
+            message.remove_reaction(reaction.emoji, bot.user)
+
+        if emoji == '\u0034\uFE0F\u20E3':
+            await reaction.message.channel.send(f'{kapitan1} пикнул {players[3]}')
+            removed_player4 = players.pop(0)
+            list_com1.append(removed_player4)
+            message.remove_reaction(reaction.emoji, bot.user)
+
+        if emoji == '\u0035\uFE0F\u20E3':
+            await reaction.message.channel.send(f'{kapitan1} пикнул {players[4]}')
+            removed_player5 = players.pop(0)
+            list_com1.append(removed_player5)
+            message.remove_reaction(reaction.emoji, bot.user)
+
+        if emoji == '\u0036\uFE0F\u20E3':
+            await reaction.message.channel.send(f'{kapitan1} пикнул {players[5]}')
+            removed_player6 = players.pop(0)
+            list_com1.append(removed_player6)
+            message.remove_reaction(reaction.emoji, bot.user)
+
+        if emoji == '\u0037\uFE0F\u20E3':
+            await reaction.message.channel.send(f'{kapitan1} пикнул {players[6]}')
+            removed_player7 = players.pop(0)
+            list_com1.append(removed_player7)
+            message.remove_reaction(reaction.emoji, bot.user)
+
+        if emoji == '\u0038\uFE0F\u20E3':
+            await reaction.message.channel.send(f'{kapitan1} пикнул {players[7]}')
+            removed_player8 = players.pop(0)
+            list_com1.append(removed_player8)
+            message.remove_reaction(reaction.emoji, bot.user)
+
+        else: await reaction.message.channel.send('Ты уже выбрал игрока')
+
+client.run('MTExMjQxMjAyNDc1Mjg0NDkzMw.GYrBjf.H6vMMsnYE-J57Vfc1jSS2Etq53-668TDqXj8E8')
+
+
+------------------------------------------------
+
+@client.event
+async def on_reaction_add(reaction, user):
+    global kapitan1, kapitan2, list_com1, list_com2, players
+
+    if user.bot:
+        return
+
+    if reaction.message.channel.id == 1134900321341153330:
+        selected_index = emoji.index(str(reaction.emoji))
+        selected_player = players[selected_index]
+
+        if user == kapitan1:
+            list_com1.append(selected_player)
+            await reaction.message.channel.send(f'{kapitan1} пикнул {selected_player}')
+             
+        elif user == kapitan2:
+            list_com2.append(selected_player)
+            await reaction.message.channel.send(f'{kapitan2} пикнул {selected_player}')
+
+        await reaction.message.remove_reaction(reaction.emoji, user) 

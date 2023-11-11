@@ -1,0 +1,47 @@
+from disnake.ui import Button, View  # Correct the import statement for Button and View
+
+@bot.event
+async def on_member_join(member):
+    stalker = Button(label='STALKER', style=disnake.ButtonStyle.primary)  # Correct the ButtonStyle import
+    bandit = Button(label='BANDIT', style=disnake.ButtonStyle.primary)  # Correct the ButtonStyle import
+
+    view = View()
+    view.add_item(stalker)
+    view.add_item(bandit)
+
+    channel = member.guild.system_channel
+    guild = member.guild
+    role = guild.get_role(1134453464043356190)
+
+    await channel.send(f'Добро пожаловать к нам, {member}. \n'
+                       f'Расскажи о себе \n'
+                       f'пытання', view=view)  # Fix the formatting of the message string
+
+    stalker.callback = give_stalker
+    bandit.callback = give_bandit
+
+    await member.add_roles(role)
+
+
+@bot.event
+async def give_bandit(inter):  # Correct the async def spelling
+    await inter.response.send_message('Вам выдана роль бандита')
+
+    guild = bot.get_guild(inter.guild.id)
+
+    role = guild.get_role(1133492100961402891)
+    member = inter.user
+
+    await member.add_roles(role)
+
+
+@bot.event
+async def give_stalker(inter):  # Correct the async def spelling
+    await inter.response.send_message('Вам выдана роль сталкера')
+
+    guild = bot.get_guild(inter.guild.id)
+
+    role = guild.get_role(1134453464043356190)
+    member = inter.user
+
+    await member.add_roles(role)

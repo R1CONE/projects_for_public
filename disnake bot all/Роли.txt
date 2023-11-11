@@ -1,0 +1,104 @@
+import disnake
+from disnake.ext import commands
+
+
+class SelectGames(disnake.ui.Select):
+    def __init__(self):
+        options = [
+            disnake.SelectOption(label="Керри(poz 1)", value="1134596844115218514"),
+            disnake.SelectOption(label="Мидер(poz 2)", value="1134596899945578516"),
+            disnake.SelectOption(label="Оффлейнер(poz 3)", value="1134596930761142354"),
+            disnake.SelectOption(label="Роумер(poz 4)", value="1134596975547916340"),
+            disnake.SelectOption(label="Саппорт(poz 5)", value="1134597003435843594")]
+        super().__init__(placeholder="Select a position", options=options, custom_id="pos", min_values=1, max_values=5)
+
+    async def callback(self, interaction: disnake.MessageInteraction):
+        await interaction.response.defer()
+        all_roles = {1134596844115218514, 1134596899945578516, 1134596930761142354, 1134596975547916340, 1134597003435843594}
+        to_remove = []
+        to_add = []
+
+        if not interaction.values:
+
+            for role_id in all_roles:
+                role = interaction.guild.get_role(role_id)
+                to_remove.append(role)
+
+            await interaction.author.remove_roles(*to_remove, reason="Removed all roles")
+
+        else:
+            chosen_roles = {int(value) for value in interaction.values}
+            ids_to_remove = all_roles - chosen_roles
+
+            for role_id in ids_to_remove:
+                role = interaction.guild.get_role(role_id)
+                to_remove.append(role)
+
+            for role_id in chosen_roles:
+                role = interaction.guild.get_role(role_id)
+                to_add.append(role)
+
+            await interaction.author.remove_roles(*to_remove, reason="Removed roles")
+            await interaction.author.add_roles(*to_add, reason="Added roles")
+
+
+class GameRoles(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+        self.persistents_views_added = False
+
+    @commands.command()
+    async def games(self, ctx):
+        view = disnake.ui.View(timeout=None)
+        view.add_item(SelectGames())
+        embed = disnake.Embed(color=0x2F3136)
+        embed.set_author(name="Game roles:")
+        embed.description = "Under this post, you can choose your role by clicking on the appropriate"
+                            
+        embed.set_image(url="https://i.imgur.com/QzB7q9J.png")
+        await ctx.send(embed=embed, view=view)
+
+    @commands.Cog.listener()
+    async def on_connect(self):
+        if self.persistents_views_added:
+            return
+
+        view = disnake.ui.View(timeout=None)
+        view.add_item(SelectGames())
+        self.bot.add_view(view, message_id=1141784985351757975)
+
+
+def setup(bot):
+    bot.add_cog(GameRoles(bot))
+
+
+
+
+
+
+
+
+@bot.command()
+async def games(ctx):
+    # Создаем варианты выбора для Select Menu
+    options = [
+        disnake.SelectOption(label='Game 1', value='game1'),
+        disnake.SelectOption(label='Game 2', value='game2'),
+        disnake.SelectOption(label='Game 3', value='game3'),
+        disnake.SelectOption(label='Game 4', value='game4'),
+        disnake.SelectOption(label='Game 5', value='game5')
+    ]
+    
+    # Создаем Select Menu
+    select = disnake.ui.Select(
+        placeholder='Выберите игру',
+        options=options
+    )
+    
+    # Создаем сообщение с Select Menu
+    message = await ctx.send('Выберите игру:', components=[select])
+    
+    # Ожидаем выбора пользователя
+    interaction = await bot.wait_for('select_option', check=lambda i: i.component == select)
+    
+    await message.edit(content=f'Вы выбрали: {interaction.values[0]}')
