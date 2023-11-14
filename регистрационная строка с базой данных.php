@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация</title>
+    <title>Rejestracja</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -48,48 +48,44 @@
         }
     </style>
 </head>
-
-</html>
-
-
-
+<body>
 
 <?php
-$servername = "localhost"; // Название сервера базы данных
-$username = "root"; // Имя пользователя базы данных
-$password = ""; // Пароль пользователя базы данных
-$database = "try_bd"; // Название базы данных
+$servername = "localhost"; // Nazwa serwera bazy danych
+$username = "root"; // Nazwa użytkownika bazy danych
+$password = ""; // Hasło użytkownika bazy danych
+$database = "test_bd"; // Nazwa bazy danych
 
-// Подключение к базе данных
+// Połączenie z bazą danych
 $conn = new mysqli($servername, $username, $password, $database);
 
-// Проверка подключения
+// Sprawdzenie połączenia
 if ($conn->connect_error) {
-    die("Ошибка подключения к базе данных: " . $conn->connect_error);
+    die("Błąd połączenia: " . $conn->connect_error);
 } else {
 
-    // Проверяем, была ли отправлена форма
+    // Sprawdzamy, czy formularz został wysłany
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Получаем данные из формы
+        // Pobieramy dane z formularza
         $login = $_POST["login"];
-        $password = $_POST["password"];
+        $haslo = $_POST["password"];
 
-        // Проверяем уникальность логина
-        $check_query = "SELECT * FROM accounts WHERE login = '$login'";
-        $result = $conn->query($check_query);
+        // Sprawdzamy unikalność loginu
+        $query_sprawdz = "SELECT * FROM accounts WHERE login = '$login'";
+        $result = $conn->query($query_sprawdz);
 
         if ($result->num_rows > 0) {
-            echo "Ошибка: Логин '$login' уже существует. Пожалуйста, выберите другой логин.";
+            echo "Błąd: login '$login' już istnieje. Proszę wybrać inny login.";
         } else {
-            // Используем подготовленный запрос для предотвращения SQL-инъекций
+            // Używamy zapytania przygotowanego, aby zapobiec atakom SQL injection
             $stmt = $conn->prepare("INSERT INTO accounts (login, password) VALUES (?, ?)");
-            $stmt->bind_param("ss", $login, $password);
+            $stmt->bind_param("ss", $login, $haslo);
 
             if ($stmt->execute()) {
                 header("Location: main.html");
-                    exit();
+                exit();
             } else {
-                echo "Ошибка: " . $stmt->error;
+                echo "Błąd: " . $stmt->error;
             }
 
             $stmt->close();
@@ -98,20 +94,23 @@ if ($conn->connect_error) {
         $result->close();
     }
 
-    // Закрываем подключение
+    // Zamykamy połączenie
     $conn->close();
 }
 ?>
 
 <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
-    <label for="login">Логин:</label>
+    <label for="login">Login:</label>
     <input type="text" name="login" required>
 
-    <label for="password">Пароль:</label>
+    <label for="password">Hasło:</label>
     <input type="password" name="password" required>
 
-    <input type="submit" value="Войти">
+    <input type="submit" value="Zarejestruj się">
 </form>
+
+</body>
+</html>
 
 
 
