@@ -1,0 +1,61 @@
+var num;
+
+num = 7;
+
+console.log(num)
+
+document.write("Переменная:" + num + ".");
+
+var number; 
+
+number = "Words";
+
+var bool, bool2;
+
+bool = true;
+
+bool2 = "2";
+
+var n1 = 5;
+
+var n2 = 10;
+
+var n3;
+
+n3 = n2 + n1;
+
+document.write("Переменная:" + n3);
+
+document.write("Переменная2: " + (n2 - n1));
+
+num_rand = Math.random(1, 10);
+document.write(num_rand);
+
+var number = 15;
+
+if (number == 2) {
+
+} else if(){
+
+} else {
+
+}
+
+if (number == 2 || bool == true) {
+
+} else {
+
+}
+
+var strok = 'work';
+
+switch (strok) {
+    case "4": console.log('Переменная со значением 4');
+
+        break;
+
+    case "5": console.log('Переменная со значением 5');
+
+        break;
+
+}
