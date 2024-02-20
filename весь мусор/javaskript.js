@@ -77,3 +77,5 @@ switch(stroka){
 	comnsole.log('some text');
 	break;
 } 
+
+console.log(arr.length);
