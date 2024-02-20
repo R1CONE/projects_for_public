@@ -101,3 +101,9 @@ x = 100;
 do{
 	console.log('Text');
 } while(x < 50);
+
+for(var i = 10; i <= 20; i++){
+	if(i % 2 == 0)
+	continue;
+	console.log(i);
+}
