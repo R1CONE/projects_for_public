@@ -59,3 +59,6 @@ switch (strok) {
         break;
 
 }
+
+console.log("Math: " + Math.max(4, 67, -1, 0, -11))
+console.log("Math: " + Math.min(4, 67, -1, 0, -11))
