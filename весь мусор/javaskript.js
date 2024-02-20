@@ -34,7 +34,7 @@ document.write(num_rand);
 
 var number = 15;
 
-if (number == 0){
+if (number == 0 && numbers == 11){
     console.log('true');
 }
 else if(number == 15){
