@@ -66,3 +66,14 @@ switch (strok) {
 
 console.log("Math: " + Math.max(4, 67, -1, 0, -11))
 console.log("Math: " + Math.min(4, 67, -1, 0, -11))
+
+var stroka = 'some text';
+
+switch(stroka){
+	case "4":
+	comnsole.log('Значение с переменной 4');
+	break;
+	case "some text":
+	comnsole.log('some text');
+	break;
+} 
