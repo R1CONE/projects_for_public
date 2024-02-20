@@ -95,3 +95,9 @@ while(j < 10){
 	console.log(j);
 	j++;
 }
+//////////
+
+x = 100;
+do{
+	console.log('Text');
+} while(x < 50);
