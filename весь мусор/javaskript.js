@@ -79,3 +79,9 @@ switch(stroka){
 } 
 
 console.log(arr.length);
+
+var matrix = [
+	[4, 2, 1], ["lol", 'text', '5.1'], [0, 100]
+];
+
+matrix[1][0] = 90; //замена первого элемента во втором массиве в матрице 
