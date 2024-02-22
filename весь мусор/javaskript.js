@@ -151,6 +151,23 @@ function summa(a, b){
 	console.log(res);
 }
 summa(5, 7);
+///
+ПОДСЧЕТ КОЛЛИЧЕСВА ЭЛЕМЕНТОВ В ЛИСТЕ
+
+function(arr){
+	var sum = 0;
+	for(var i = 0; i < arr.length; i++)
+		sum += arr[i];
+
+	return sum;
+
+}
+
+var array = [6, 8, 1];
+
+var res = summa(array);
+
+//
 
 
 
