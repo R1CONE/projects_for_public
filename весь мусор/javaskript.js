@@ -107,3 +107,17 @@ for(var i = 10; i <= 20; i++){
 	continue;
 	console.log(i);
 }
+////////
+alert("какая хорошая погода!");
+
+var data = confirm("Вы сейчас дома?");
+
+if(data = True) {
+	alert("Вы солодец!");
+}
+
+var data = prompt("Сколько тебе лет");
+console.log(data);
+
+var var1 = null;
+
