@@ -120,4 +120,14 @@ var data = prompt("Сколько тебе лет");
 console.log(data);
 
 var var1 = null;
+////
+
+var person = null;
+if(consirm("Вы точно уверенны?")){
+	person = promt("Введите ваше имя");
+	alert("привет, " + person);
+}	
+else {
+	alert("Вы нажали на отмена");
+}
 
