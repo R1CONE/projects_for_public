@@ -131,3 +131,13 @@ else {
 	alert("Вы нажали на отмена");
 }
 
+////
+
+ion info(word){
+	console.log(word);
+}
+
+info("hello");
+
+
+
