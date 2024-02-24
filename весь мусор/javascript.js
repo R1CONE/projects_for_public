@@ -185,6 +185,12 @@ function onClickButton(){
 	console.log(counter);
 }
 ///
+var counter = 0;
 
+function onClickButton(el){
+	counter++;
+	el.innerHTML = ('click me' + counter);
+}
+///
 
 
