@@ -202,6 +202,36 @@ function OnInput(el){
 var text = document.getElementById('text');
 alert(text);
 //
+<body>
+    <form id="main-form" onsubmit="return checkForm(this)" method = "post">
+        <label for="name">name: </label>
+        <input type="text" name="name" placeholder="Имя">
+
+        <label for="surname">lastname: </label>
+        <input type="text" name="surname" placeholder="Фамилия">
+
+        <label for="height">height: </label>
+        <input type="text" name="height" placeholder="Рост">
+
+        <button type="sumbit" name="sumbit">Ready</button>
+    </form>
+</body> 
+function checkForm(el){
+	var name = el.name.value;
+	console.log(name);
+	return false;
+	//all correct 
+	
+	if (name = ""){
+		fail = "Enter all";
+	}
+	else{
+	alert('all correct');
+	window.location = "https://www.twitch.tv/serega_pirat"
+
+	}
+}
+/////
 
 
 
