@@ -197,5 +197,11 @@ function onClickButton(el){
 function OnInput(el){
 	console.log(el.value);
 }
+///
+<p id = "text">Text</p> 
+var text = document.getElementById('text');
+alert(text);
+//
+
 
 
