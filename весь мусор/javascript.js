@@ -192,5 +192,10 @@ function onClickButton(el){
 	el.innerHTML = ('click me' + counter);
 }
 ///
+<input oninput = "onInput(this)">
+
+function OnInput(el){
+	console.log(el.value);
+}
 
 
