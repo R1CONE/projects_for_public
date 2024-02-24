@@ -175,7 +175,16 @@ var res = summa(array);
 function onClickButton(){
 	alert('You pressed button');
 }
+///
+<button onclick = "onClickButton()"> click me</button>
 
+var counter = 0;
+
+function onClickButton(){
+	counter++;
+	console.log(counter);
+}
+///
 
 
 
