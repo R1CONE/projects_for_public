@@ -169,6 +169,12 @@ var res = summa(array);
 
 //
 <button onclick = "alert('Button has touched')"> Нажми на меня</button> 
+////
+<button onclick = "onClickButton()"> Нажми на меня</button>
+
+function onClickButton(){
+	alert('You pressed button');
+}
 
 
 
