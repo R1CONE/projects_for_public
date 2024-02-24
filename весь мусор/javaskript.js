@@ -168,7 +168,7 @@ var array = [6, 8, 1];
 var res = summa(array);
 
 //
-
+<button onclick = "alert('Button has touched')"> Нажми на меня</button> 
 
 
 
