@@ -240,6 +240,10 @@ function my_func(){
 	console.log(counter);
 
 }
+///
+setTimeout(function(){
+	console.log("Timer is working");
 
+}, 2000); //2sec for
 
 
