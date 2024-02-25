@@ -271,5 +271,25 @@ var stroka = arr.reverse().join(",");
 
 console.log(stroka.split(","));
 
+///
+
+class Person {
+	construktor(name, age){
+		this.name = name;
+		this.age = age;
+	}
+
+	info() {
+		console.log("Persone: " + this.name + "Age" + this.age);
+	}
+}
+var alex = new Person("Alex", 133);
+var nigga = new Person("Mikel Jordan", 200);
+console.log(nigga.age);
+console.log(alex.name);
+
+alex.info();
+///
+
 
 
