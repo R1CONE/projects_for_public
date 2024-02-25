@@ -245,5 +245,17 @@ setTimeout(function(){
 	console.log("Timer is working");
 
 }, 2000); //2sec for
+/////
+
+var date = new Date();
+
+//console.log(date.getFullYear());
+//console.log(date.getMounth() + 1);
+//console.log(date.getDate());
+
+date.setHours(11);
+date.setMinutes(11);
+
+console.log("Time: " + date.getMinutes() + ":" + date.getMinutes());
 
 
