@@ -257,5 +257,19 @@ date.setHours(11);
 date.setMinutes(11);
 
 console.log("Time: " + date.getMinutes() + ":" + date.getMinutes());
+////
+
+var arr = [0, 1, 2, 3, 4];
+
+console.log(arr.join("||"));     0||1||2||3||4
+
+console.log(arr.sort()); [0, 1, 2, 3, 4]
+
+console.log(arr.reverse()); [4, 3, 2, 1, 0]
+
+var stroka = arr.reverse().join(",");
+
+console.log(stroka.split(","));
+
 
 
