@@ -290,6 +290,10 @@ console.log(alex.name);
 
 alex.info();
 ///
+for (let i = 0; i < someArray.length; i++) {
+    // код, выполняемый внутри цикла
+}
+////
 
 
 
