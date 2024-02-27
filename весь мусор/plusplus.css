@@ -1,0 +1,45 @@
+
+#include <iostream>
+
+int main(){
+    //comment
+    setlocale(LC_ALL, "RU");
+
+    std::cout << "Hello World!\n" << std::endl;
+
+    std::cout << "sec sentenses";
+
+    return 0;
+}
+
+
+#include <iostream>
+
+int main(){
+
+    int num = -45;
+
+    std::cout <<"Num: " << num << std::endl;
+    int a, b, c;
+    std::cout << "Enter a: " << std::endl;
+    std::cin >> a;
+
+    //типы данных
+
+    short num1 = 7;
+    unsigned num2 = 100; //неотрицательное
+    long num3 = 15200;
+
+    float num7 = 5.3215632f;
+
+    double num8 = 543.136125f;
+    //символ
+    char sym = 'r'; //обязательно '';
+
+    bool isHappy = true;
+
+    str text = "HEllo wordl"; //???
+
+
+    return 0;
+}
