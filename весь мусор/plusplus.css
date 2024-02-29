@@ -54,8 +54,15 @@ int main() {
     if (num > 10) {
         std::cout << "Yes";
     }
-    else{
+    else if (num == 5) {
+        std::cout << "is 5";
+    }
+    else if (num == 6) {
+        std::cout << "is 5";
+    }
+    else {
         std::cout << "No";
     }
 }
+
 
