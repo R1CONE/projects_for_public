@@ -49,13 +49,15 @@ int main(){
 
 int main() {
     int num;
+    bool is_happy = true;
     std::cout << "Enter your num: ";
     std::cin >> num;
-    if (num > 10) {
+
+    if (num > 5 || is_happy == true) {  //или 
         std::cout << "Yes";
     }
-    else if (num == 5) {
-        std::cout << "is 5";
+    else if (is_happy = true && num < 5 ) { //и
+        std::cout << "les 5";
     }
     else if (num == 6) {
         std::cout << "is 5";
