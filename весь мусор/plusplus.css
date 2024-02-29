@@ -67,4 +67,24 @@ int main() {
     }
 }
 
+/////
+
+#include <iostream>
+
+int main() {
+    int num;
+    std::cin >> num;
+    
+    switch(num){
+        case 5: std::cout << "Num is 5"; break;
+        
+        case 10: std::cout << "Num is 10"; break;
+        
+        default:
+        std::cout << "Def";
+        
+    }
+    
+}
+
 
