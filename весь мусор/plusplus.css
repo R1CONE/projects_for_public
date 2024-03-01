@@ -86,5 +86,46 @@ int main() {
     }
     
 }
+///
+#include <iostream>
+
+int main()
+{
+    float num1, num2;
+    std::cout << "Enter num1: ";
+    std::cin >> num1;
+    std::cout << "Enter num2: ";
+    std::cin >> num2;
+
+    char math;
+
+    std::cout << "Enter math symbol: ";
+    std::cin >> math;
+
+    switch (math) {
+    case '+':
+        std::cout << num1 + num2;
+        break;
+    case '-':
+        std::cout << num1 - num2;
+        break;
+    case '*':
+        std::cout << num1 * num2;
+        break;
+    case '/':
+        if (num2 != 0) {
+            std::cout << num1 / num2;
+        }
+        else {
+            std::cout << "Division by zero!";
+        }
+        break;
+    default:
+        std::cout << "Invalid operation";
+        break;
+    }
+
+    return 0;
+}
 
 
