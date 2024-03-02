@@ -127,5 +127,30 @@ int main()
 
     return 0;
 }
+///
 
+#include <iostream>
+
+int main()
+{
+    int num1, num2;
+    float res;
+
+    std::cout << "Ent num1: ";
+    std::cin >> num1;
+
+    std::cout << "Ent num2: ";
+    std::cin >> num2;
+
+    res = num1 % num2;
+
+    std::cout << res;
+
+    num1 += 5;
+    num1 -= 5;
+    num1++;
+
+
+    return 0;
+}
 
