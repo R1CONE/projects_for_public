@@ -171,3 +171,30 @@ int main()
     return 0;
 }
 
+////
+
+#include <iostream>
+#include <time.h>
+using namespace std;
+int main()
+{
+    for (int i = 0; i < 10; i++) {
+        cout << "El: " << i << endl;
+    }
+
+    int a = 0;
+
+    while (a < 10) {
+        a++;
+        cout << "A: " << a;
+    }
+
+    int k = 100;
+    do {
+        cout << "k: " << k << endl;
+        k -= 10;
+
+    } while (k < 10);
+
+    return 0;
+}
