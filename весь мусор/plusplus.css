@@ -246,3 +246,21 @@ int main()
 }
 
 ///
+
+int main()
+{
+    float nums_2[3]; 
+    float a = 0; 
+    for (int i = 0; i < 3; i++) {
+        cout << "Enter " << i << ": ";
+        cin >> nums_2[i];
+
+        a += nums_2[i];
+
+        cout << "a: " << a << endl; 
+    }
+
+    return 0; 
+}
+
+///
