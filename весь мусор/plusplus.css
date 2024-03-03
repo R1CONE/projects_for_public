@@ -220,3 +220,25 @@ int main()
     
     return 0;
 }
+
+////
+
+int main()
+{
+    int nums[3];
+
+    nums[0] = 56;
+    nums[1] = 36;
+    nums[2] = 43;
+
+    //cout << nums[2];
+    
+
+    float nums_2[5] = { 0, 1, 2, 3 };
+
+    cout << nums_2[3];
+    
+    return 0;
+}
+
+///
