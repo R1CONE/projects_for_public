@@ -279,3 +279,18 @@ int main()
         }
     }
 }
+
+////
+
+int main()
+{
+    char word[] = { 'H', 'i' };
+
+    for (int i = 0; i < 3; i++) {
+        cout << word[i];
+    }
+
+    string text = "Hello worldаааааааа";
+    text[0] = 'T';
+    cout << text;
+}
