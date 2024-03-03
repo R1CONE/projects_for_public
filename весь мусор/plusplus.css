@@ -264,3 +264,18 @@ int main()
 }
 
 ///
+
+int main()
+{
+    int matrix[3][2] = {
+        {12, 5},
+        {4, 2},
+        {-2, 0}
+    };
+    
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 2; j++) {
+            cout << matrix[i][j] << endl;
+        }
+    }
+}
