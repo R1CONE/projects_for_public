@@ -1,4 +1,18 @@
 <?php
+
+$a = 5; 
+$asil = 1; 
+
+while($a > 0){ 
+    $asil = $a * $asil;
+    $a--;
+    
+}
+echo $asil;
+?>
+///
+
+<?php
 $servername = "localhost"; // Nazwa serwera bazy danych
 $username = "root"; // Nazwa użytkownika bazy danych
 $password = ""; // Hasło użytkownika
