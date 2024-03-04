@@ -1,4 +1,44 @@
+<?php
+$servername = "localhost"; // Nazwa serwera bazy danych
+$username = "root"; // Nazwa użytkownika bazy danych
+$password = ""; // Hasło użytkownika
+$database = "podlaczanie"; // Nazwa bazy danych
 
+// Połączenie z bazą danych
+$conn = new mysqli($servername, $username, $password, $database);
+
+// Sprawdzenie połączenia
+if ($conn->connect_error) {
+    die("Błąd połączenia z bazą danych: " . $conn->connect_error);
+} else {
+    echo "Połączenie z bazą danych powiodło się!";
+    echo " login, siema";
+    
+    // Wykonanie zapytania SQL w celu pobrania danych z tabeli "accounts"
+    $sql = "SELECT id, login, pass FROM log WHERE id= 2"; //id, login, password - to co macie w bd  // accounts - nazwa tabeli
+    $result = $conn->query($sql);
+
+    // Sprawdzenie dostępności danych i ich wyświetlenie
+    if ($result->num_rows > 0) {
+        echo "<h2>Zawartość tabeli accounts:</h2>";
+        echo "<table>";
+        echo "<tr><th>ID</th><th>Login</th><th>Hasło</th></tr>";
+
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr><td>" . $row["id"] . "</td><td>" . $row["login"] . "</td><td>" . $row["pass"] . "</td></tr>";
+        }
+
+        echo "</table>";
+    } else {
+        echo "Brak danych w tabeli.";
+    }
+
+    // Zamykamy połączenie
+    $conn->close();
+}
+?>
+
+///
 <?php
 
 
