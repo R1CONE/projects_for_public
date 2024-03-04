@@ -1,6 +1,6 @@
 <?php
 
-$a = 5; 
+$a = $_GET['a'];
 $asil = 1; 
 
 while($a > 0){ 
