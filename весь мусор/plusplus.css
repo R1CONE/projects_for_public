@@ -297,15 +297,17 @@ int main()
 
 ///
 
-int print(int a, int b) {
-
-    return a + b;
-
-}
+int print(int a, int b);
 
 int main()
 {
     int result = print(13, 3);
     cout << "Result: " << result << endl;
     return 0;
+}
+
+int print(int a, int b) {
+
+    return a + b;
+
 }
