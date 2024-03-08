@@ -311,3 +311,24 @@ int print(int a, int b) {
     return a + b;
 
 }
+
+////
+
+void print(string word);
+void print(int num);
+
+int main()
+{
+    print("Hello");
+    print(12);
+
+    return 0;
+}
+
+void print(string word) {
+    cout << word << endl;
+}
+
+void print(int num) {
+    cout << num << endl;
+}
