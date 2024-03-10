@@ -332,3 +332,16 @@ void print(string word) {
 void print(int num) {
     cout << num << endl;
 }
+
+////
+
+int main()
+{
+   
+    int val = 12;
+    int *ptrval = &val;
+
+    cout << "*ptr: " << ptrval << "val" << *ptrval;
+         
+    return 0;
+}
