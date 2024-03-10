@@ -345,3 +345,28 @@ int main()
          
     return 0;
 }
+////
+
+void minimal(int* arr, int len) {
+    int min = *arr;
+    for (int i = 0; i < len; i++) {
+        if (min > *(arr + i)) {
+            min = *(arr + i);
+        }
+    }
+    cout << "Min: " << min << endl;
+
+}
+
+
+int main()
+{
+   
+    int arr[] = { 5, 1 ,3, -1, 0 };
+
+    minimal(arr, 5);
+
+    return 0;
+}
+
+
