@@ -1,4 +1,23 @@
 <?php
+    $png = imagecreatetruecolor(800, 600);
+    imagesavealpha($png, true);
+
+    $blue = imagecolorallocate($png, 255, 255, 255);
+
+
+    $x = 0;
+    while ($x <= 20) { 
+        $y = $x * $x;
+        imagefilledellipse($png, $x + 400, -$y + 300, 3, 3, $blue);
+        $x = $x + 0.1; 
+    }
+
+    header("Content-type: image/png");
+    imagepng($png);
+?>
+
+
+<?php
 
 $a = $_GET['a'];
 $asil = 1; 
