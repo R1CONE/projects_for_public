@@ -1,20 +1,40 @@
-<?php
-    $png = imagecreatetruecolor(800, 600);
+$png = imagecreatetruecolor(800, 600);
+
     imagesavealpha($png, true);
 
-    $blue = imagecolorallocate($png, 255, 255, 255);
+
+    $white = imagecolorallocate($png, 255, 255, 255);
+    $blue = imagecolorallocate($png, 0, 0, 255);
+    $gridColor = imagecolorallocatealpha($png, 200, 200, 200, 80);
+
+    imagefill($png, 0, 0, $white);
 
 
-    $x = 0;
+
+    imageline($png, 0, 300, 800, 300, $blue); 
+    imageline($png, 400, 0, 400, 600, $blue); 
+
+   
+    for ($i = 0; $i < 800; $i += 40) {
+        imageline($png, $i, 0, $i, 600, $gridColor); 
+    }
+    for ($i = 0; $i < 600; $i += 40) {
+        imageline($png, 0, $i, 800, $i, $gridColor); 
+    }
+
+
+    $x = -20;
     while ($x <= 20) { 
-        $y = $x * $x;
-        imagefilledellipse($png, $x + 400, -$y + 300, 3, 3, $blue);
-        $x = $x + 0.1; 
+        $y = $x * $x * $x  -3 * $x - 2;
+        imagesetpixel($png, $x * 20 + 400, -$y * 20 + 300, $blue);
+        $x = $x + 0.001; 
     }
 
     header("Content-type: image/png");
+
     imagepng($png);
-?>
+
+    imagedestroy($png);
 
 
 <?php
