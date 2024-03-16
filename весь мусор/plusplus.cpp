@@ -429,4 +429,32 @@ int main() {
 
 }
 
+///
+
+enum Options {
+	open = 12, 
+	close, //13
+	wait, //14
+	del //15
+};
+
+struct File {
+	int weight;
+	string name;
+	Options options;
+
+};
+
+int main() {
+	File my_file;
+	my_file.name = "test.txt";
+	my_file.options = Options::close;
+
+	//cout << my_file.options;
+
+	if (my_file.options == Options::close) {
+		cout << "File closed";
+	}
+}
+
 
