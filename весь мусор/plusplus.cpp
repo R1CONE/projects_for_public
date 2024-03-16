@@ -397,4 +397,36 @@ int main() {
 	}
 };
 
+////
+
+struct Point {
+	int x, y;
+
+};
+
+struct Tree {
+	string name;
+	int ages;
+	bool is_alive;
+	float hright;
+	Point plase;
+
+	void get_info() {
+		cout << "Name: " << name << "Age: " << ages << "place: " << plase.x << plase.y;
+	}
+};
+
+int main() {
+	Tree dub;
+	dub.plase.x = 2;
+	dub.plase.y = 11;
+	dub.name = "dub";
+	dub.ages = 24;
+	
+	cout << "name: " << dub.name;
+
+	dub.get_info();
+
+}
+
 
