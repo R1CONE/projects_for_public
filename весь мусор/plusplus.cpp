@@ -498,5 +498,28 @@ int main() {
 	floor(1.99f); //округление к меньшему //1
 	round(2.5f); //нормальное округление
 }
+////
+
+class Building {
+protected:
+private:
+public:
+	int Year;
+	string type;
+	void get_info() {
+		cout << "Type: " << type << ". Year" << Year;
+	}
+	void get_data(int a, string text) {
+		Year = a;
+		type = text;
+	}
+};
+
+int main() {
+	Building school;
+	//school.type = "public";
+	cout << get_data(1, "school");
+	school.get_info();
+}
 
 
