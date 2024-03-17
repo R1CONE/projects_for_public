@@ -457,4 +457,20 @@ int main() {
 	}
 }
 
+//
+
+void divide(float a, float b) {
+	if (b == 0) throw("Divide");
+	else cout << (a / b);
+}
+
+int main() {
+	try {
+		divide(5.2f, 0.0f);
+	}
+	catch(string err){
+		if (err == "Devide") cout << 'cant';
+	}
+}
+
 
