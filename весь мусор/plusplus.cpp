@@ -473,4 +473,30 @@ int main() {
 	}
 }
 
+//
+
+int main() {
+	//#include <cstring>
+	string str1 = "hello";
+	string str2 = "world";
+
+	str1.append(str2);
+	cout << str1;
+	cout << str1 + str2;
+
+	str1.pop_back(); //удаление последнего символа 
+	str1.push_back('!'); //добавление
+	str1.length(); // длинна сторки
+	str1.resize(5); // установление длинны строки
+	#include <cmath>;
+	pow(5, 2); //степень
+	abs(-3); //модуль + на -
+	sin(90);
+	cos(90); //пиздец
+	sqrt(16); //корень
+	ceil(1.01f); //округление к большему //2
+	floor(1.99f); //округление к меньшему //1
+	round(2.5f); //нормальное округление
+}
+
 
