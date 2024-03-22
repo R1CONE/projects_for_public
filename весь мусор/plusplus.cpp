@@ -524,3 +524,38 @@ int main() {
 	school.get_data(1, "school"); // Вызываем метод get_data() на объекте school
 	school.get_info();
 }
+
+////
+
+class Car; // Объявляем класс Car, чтобы его можно было использовать в классе Person
+
+class Person {
+public:
+    int age;
+    string name;
+
+    Person(string name, int age) : name(name), age(age) {} // Конструктор класса Person
+
+    friend void get_info(Car& car, Person& person);
+};
+
+class Car {
+public:
+    string name;
+    int year; 
+
+    Car(string name, int year) : name(name), year(year) {} // Конструктор класса Car
+};
+
+void get_info(Car& car, Person& person) {
+    cout << "Human with name: " << person.name << " has car: " << car.name << endl;
+}
+
+int main() {
+    Car bmw("BMW", 2022); // Создаем объект класса Car
+    Person john("John", 43); // Создаем объект класса Person
+
+    get_info(bmw, john); // Вызываем функцию get_info
+
+    return 0;
+}
