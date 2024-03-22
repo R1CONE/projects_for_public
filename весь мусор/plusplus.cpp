@@ -513,6 +513,10 @@ public:
 		Year = a;
 		type = text;
 	}
+
+	~Building() {
+	cout << "Delete object" << endl; //уничтожение класса
+}
 };
 
 int main() {
