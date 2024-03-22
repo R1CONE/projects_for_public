@@ -502,21 +502,20 @@ int main() {
 
 class Building {
 protected:
-private:
 public:
-	int Year;
+	int year;
 	string type;
 	void get_info() {
-		cout << "Type: " << type << ". Year" << Year;
+		cout << "Type: " << type << ". Year" << year;
 	}
-	void get_data(int a, string text) {
-		Year = a;
-		type = text;
+	void get_data(int year, string type) {
+		this->year = year;
+		this->type = type;
 	}
 
 	~Building() {
-	cout << "Delete object" << endl; //уничтожение класса
-}
+		cout << "Delete object" << endl;
+	}
 };
 
 int main() {
@@ -525,4 +524,3 @@ int main() {
 	school.get_data(1, "school"); // Вызываем метод get_data() на объекте school
 	school.get_info();
 }
-
