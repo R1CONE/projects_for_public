@@ -517,9 +517,8 @@ public:
 
 int main() {
 	Building school;
-	//school.type = "public";
-	cout << get_data(1, "school");
+	// school.type = "public";
+	school.get_data(1, "school"); // Вызываем метод get_data() на объекте school
 	school.get_info();
 }
-
 
