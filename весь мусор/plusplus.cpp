@@ -595,3 +595,37 @@ int main() {
 
     return 0;
 }
+
+////
+//наследники 
+
+class PC {
+private:
+	int diagonal;
+	string os;
+
+public:
+	PC(int diagonal, string os) {
+		this->diagonal = diagonal;
+		this->os = os;
+	}
+
+	void get_info() {
+		cout << "OS: " << os << "Diagonal: " << diagonal << endl;
+	}
+};
+
+class Laptop: public PC {
+private:
+	float weight;
+public:
+	Laptop(int diagonal, string os, float weight) : PC(diagonal, os) {
+		//this->diagonal = 12;
+		this->weight = weight;
+	};
+};
+
+int main() {
+	Laptop mac(16, "Mac", 1.5f);
+	mac.get_info();
+}
