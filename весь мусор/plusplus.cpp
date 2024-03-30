@@ -629,3 +629,24 @@ int main() {
 	Laptop mac(16, "Mac", 1.5f);
 	mac.get_info();
 }
+
+//
+
+using namespace std;
+
+template<typename T, typename T2> //создание шаблона 
+void print_arr(T* arr, int len) {
+    for (int i = 0; i < len; i++)
+        cout << arr[i] << " ";
+    cout << endl;
+}
+
+int main() {
+    int arr1[] = { 5, 6, 7, 8, 2, -4 };
+    print_arr<int, int>(arr1, 6); //t и t2
+
+    float arr2[] = { 5.11f, 6.47f, 7 };
+    print_arr<float, int>(arr2, 3); 
+
+    return 0;
+}
