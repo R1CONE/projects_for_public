@@ -600,7 +600,7 @@ int main() {
 //наследники 
 
 class PC {
-private:
+private: //protected: 
 	int diagonal;
 	string os;
 
