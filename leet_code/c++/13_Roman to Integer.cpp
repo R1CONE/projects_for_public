@@ -1,7 +1,7 @@
 class Solution {
 public:
     int romanToInt(string s) {
-        unordered_map<char, int> value;
+        unordered_map<char, int> value; // делаем типо листа с индексами буквами;
 
         value['I'] = 1;
         value['V'] = 5;
