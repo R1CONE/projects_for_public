@@ -12,6 +12,16 @@
 ?>
 
 <?php
+    function potenga($podstawa, $wykladnik) {
+        if ($wykladnik == 0){
+            return 1;
+        }
+        return $podstawa*potenga($podstawa, $wykladnik-1);
+    }
+    echo potenga(5, 2);
+?>
+
+<?php
 $servername = "localhost";
 $username = "root";
 $dbPassword = "";
