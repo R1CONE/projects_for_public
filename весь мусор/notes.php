@@ -32,3 +32,19 @@ $conn = new mysqli($servername, $username, $dbPassword, $database);
 if ($conn->connect_error) {
     die("Błąd połączenia: " . $conn->connect_error);
 }
+
+<?php
+$klasa = array(0 => "Bartosz", 1 => "Kajetan", 2 => "Michail", 3 => "Elvira");
+$ind = 0;
+$znaleziono = 0;
+
+while($znaleziono < count($klasa)){
+    if (isset($klasa[$ind])){
+        echo $klasa[$ind]."<br>";
+        $znaleziono++;
+    }
+    $ind++;
+}
+
+echo implode('<br>', $klasa);
+?>
