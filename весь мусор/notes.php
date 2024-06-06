@@ -33,18 +33,37 @@ if ($conn->connect_error) {
     die("Błąd połączenia: " . $conn->connect_error);
 }
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
 <?php
-$klasa = array(0 => "Bartosz", 1 => "Kajetan", 2 => "Michail", 3 => "Elvira");
-$ind = 0;
-$znaleziono = 0;
-
-while($znaleziono < count($klasa)){
-    if (isset($klasa[$ind])){
-        echo $klasa[$ind]."<br>";
-        $znaleziono++;
+    $samorzad = array('przewodniczacy'=>'Jakub','wice'=>'Michał','skarbnik'=>'Antoni','pkn'=>'Filip');
+    if (isset($_GET['funkcja']) && isset($_GET['ile_razy'])) {
+        $f = $_GET['funkcja'];
+        $ile = $_GET['ile_razy']; 
+        if (isset($samorzad[$f])) {
+            for ($i = 0; $i < $ile; $i++) {
+                echo $samorzad[$f] . "<br>";
+            }
+        } 
     }
-    $ind++;
-}
 
-echo implode('<br>', $klasa);
-?>
+    ?>
+
+    <form action = "mikhail_siruts.php" metod="get">
+        <select name = "funkcja">
+            <option>przewodniczacy</option>
+            <option>wice</option>
+            <option>skarbnik</option>
+            <option>kierowca</option>
+
+        <input type="number" name="ile_razy">
+        <input type="submit" value="Wyslij"> 
+</body>
+</html>
