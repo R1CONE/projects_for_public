@@ -47,3 +47,9 @@ Każda tablica danych jest samodzielnym dokumentem i nie może współpracować 
 Przykładem kartotekowej bazy danych są np.: spisy danych osobowych lub spis książek czy płyt.
 
 Kartotekowe bazy danych można tworzyć w dowolnym programie zarządzającym bazami danych czy w arkuszach kalkulacyjnych, a nawet w prostych edytorach tekstów (plik z wartościami oddzielanymi przecinkami -CSV, lub tabulatorami - TSV). Specjalne programy do tworzenia tego rodzaju baz są też dołączane do pakietów zintegrowanych, jak Microsoft Office.
+
+Hierarchiczny model bazy danych
+
+W modelu hierarchicznym dane są przechowywane na zasadzie rekordów nadrzędnych-podrzędnych, tzn. rekordy przypominają strukturę drzewa. Każdy rekord (z wyjątkiem głównego) jest związany z dokładnie jednym rekordem nadrzędnym.
+
+Dane w takim modelu są znajdowane na zasadzie wyszukiwania rekordów podrzędnych względem rekordu nadrzędnego. Przykładem takiego modelu może być struktura katalogów na dysku twardym komputera.
