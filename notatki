@@ -53,3 +53,15 @@ Hierarchiczny model bazy danych
 W modelu hierarchicznym dane są przechowywane na zasadzie rekordów nadrzędnych-podrzędnych, tzn. rekordy przypominają strukturę drzewa. Każdy rekord (z wyjątkiem głównego) jest związany z dokładnie jednym rekordem nadrzędnym.
 
 Dane w takim modelu są znajdowane na zasadzie wyszukiwania rekordów podrzędnych względem rekordu nadrzędnego. Przykładem takiego modelu może być struktura katalogów na dysku twardym komputera.
+
+Model relacyjny - model organizacji danych bazujący na matematycznym pojęciu relacji.
+
+Na takim modelu oparta jest relacyjna baza danych, w której dane są przedstawione w postaci relacyjnej.
+
+W najprostszym ujęciu w modelu relacyjnym dane grupowane są w relacje, które reprezentowane są przez tablice.
+
+Relacje są pewnym zbiorem rekordów o identycznej strukturze wewnętrznie powiązanych za pomocą związków zachodzących pomiędzy danymi. Relacje zgrupowane są w tzw. schematy bazy
+
+danych. Relacją może być tabela zawierająca dane teleadresowe pracowników, zaś schemat może zawierać wszystkie dane dotyczące
+
+firmy. Takie podejście w porównaniu do innych modeli danych ułatwia wprowadzanie zmian, zmniejsza możliwość pomyłek, ale dzieje się to
