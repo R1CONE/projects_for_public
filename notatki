@@ -13,3 +13,29 @@ zdarzeń oraz związków zachodzących między nimi. Można go opisać jako kons
 części manipulacyjnej - określającej, które operacje (transakcje) aktualizacji, pobierania i zmiany struktury można wykonywać na danych,
 
 części zawierającej reguły integralności - gwarantującej stabilność działania systemu.
+
+BAZY DANYCH
+
+Modele i rodzaje baz danych
+
+Bazy danych można również podzielić według organizacji danych:
+
+bazy proste:
+
+kartotekowa (jednorodna)
+
+hierarchiczne
+
+bazy złożone:
+
+relacyjne
+
+obiektowe
+
+relacyjno-obiektowe
+
+strumieniowe
+
+temporalne
+
+nierelacyjne (NoSQL)
