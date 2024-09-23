@@ -39,3 +39,11 @@ strumieniowe
 temporalne
 
 nierelacyjne (NoSQL)
+
+Kartotekowa baza danych lub prosta baza danych - baza danych złożona z jednej tablicy, która zawiera identyczną strukturę pól.
+
+Każda tablica danych jest samodzielnym dokumentem i nie może współpracować z innymi tablicami, w przeciwieństwie do relacyjnej bazy danych.
+
+Przykładem kartotekowej bazy danych są np.: spisy danych osobowych lub spis książek czy płyt.
+
+Kartotekowe bazy danych można tworzyć w dowolnym programie zarządzającym bazami danych czy w arkuszach kalkulacyjnych, a nawet w prostych edytorach tekstów (plik z wartościami oddzielanymi przecinkami -CSV, lub tabulatorami - TSV). Specjalne programy do tworzenia tego rodzaju baz są też dołączane do pakietów zintegrowanych, jak Microsoft Office.
