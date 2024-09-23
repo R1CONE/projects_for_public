@@ -1,0 +1,15 @@
+BAZY DANYCH
+
+Modele i rodzaje baz danych
+
+Model danych to zintegrowany zbiór zasad opisujących dane, relacje, powiązania (stosunki) pomiędzy danymi, dozwolone operacje i ograniczenia nakładane na dane i operacje.
+
+Model danych jest próbą reprezentacji świata realnego i występujących w nim obiektów,
+
+zdarzeń oraz związków zachodzących między nimi. Można go opisać jako konstrukcję składającą się z trzech komponentów:
+
+⚫części strukturalnej - składającej się z reguł określających budowę bazy danych;
+
+części manipulacyjnej - określającej, które operacje (transakcje) aktualizacji, pobierania i zmiany struktury można wykonywać na danych,
+
+części zawierającej reguły integralności - gwarantującej stabilność działania systemu.
