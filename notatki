@@ -77,3 +77,11 @@ Bazy relacyjno-obiektowe pozwalają na manipulowanie danymi jako zestawem obiekt
 Strumieniowa baza danych
 są to bazy danych, w której dane są przestawione w postaci zbioru strumieni danych. System zarządzania taką bazą nazywany jest strumieniowym systemem zarządzania danymi (DSMS)
 
+Temporainy model bazy danych
+
+Temporalna baza danych-model bazy danych posiadająca informację o czasie wprowadzenia lub czasie ważności zawartych w niej danych. Temporaine bazy danych są często administrowane automatycznie, poprzez usuwanie nieaktualnych danych lub ich archiwizowanie.
+
+Nierelacyjne bazy danych
+
+Pod pojęciem bazy nierelacyjnej (np.: NoSQL, database) najczęściej rozumie się przechowywanie danych w formie listy par obiektów klucz-wartość, w których nie występują powiązania relacyjne między przechowywanymi obiektami. W bazie NoSQL najczęściej nie ma wymagania aby obiekty były jednorodne pod względem struktury. Niekiedy pojęcie to używane jest szerzej, do określenia wszelkich struktur danych (niekoniecznie o postaci klucz-wartość) w których nie występują tabele i relacje.
+
