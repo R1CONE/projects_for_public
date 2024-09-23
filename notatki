@@ -68,4 +68,12 @@ firmy. Takie podejście w porównaniu do innych modeli danych ułatwia wprowadza
 
 Jest to zbiór obiektów, których zachowanie się, stan oraz związki są określone zgodnie z obiektowym modelem danych. Obiektowy system zarządzania bazą danych jest systemem wspomagającym definiowanie, zarządzanie, utrzymywanie, zabezpieczanie i udostępnianie obiektowej bazy danych.
 
-Obiektowe systemy zarządzania bazą danych zapewniają tradycyjną funkcjonalność baz danych, lecz bazują na modelu obiektowym. Ich atutem jest udostępnianie danych w postaci obiektowej, czyli takiej samej w jakiej dane są przechowywane w programach napisanych w obiektowych językach programowania (np.;: php + postgreSQL) Znika konieczność mapowania między modelem obiektowym a modelem relacyjnym jak to ma miejsce w przypadku użycia relacyjnej bazy danych.
+Obiektowe systemy zarządzania bazą danych zapewniają tradycyjną funkcjonalność baz danych, lecz bazują na modelu obiektowym. 
+Ich atutem jest udostępnianie danych w postaci obiektowej, czyli takiej samej w jakiej dane są przechowywane w programach napisanych w obiektowych 
+językach programowania (np.;: php + postgreSQL) Znika konieczność mapowania między modelem obiektowym a modelem relacyjnym jak to ma miejsce w przypadku użycia relacyjnej bazy danych.
+ Relacyjno-obiektowe bazy danych 
+Bazy relacyjno-obiektowe pozwalają na manipulowanie danymi jako zestawem obiektów, posiadają jednak bazę relacyjną jako wewnętrzny mechanizm przechowywania danych.
+
+Strumieniowa baza danych
+są to bazy danych, w której dane są przestawione w postaci zbioru strumieni danych. System zarządzania taką bazą nazywany jest strumieniowym systemem zarządzania danymi (DSMS)
+
