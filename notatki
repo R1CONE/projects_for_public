@@ -91,3 +91,10 @@ Typy baz danych (generacje)
 Doktadne poznanie sposobu administrowania, uzytkowania i projektowania systemów baz danych przy użyciu MySOL, MariaDB czy PostgreSQL będzie bardzo pomocne w wypadku, gdy z rozwiązań darmowych wyniknie potrzeba migracji do rozwiązań komercyjnych takich jak Microsoft SQL czy SZBD Oracle.
 
 Microsoft SQL Express to również darmowy serwer firmy Microsoft, ale posiada on spore ograniczenia dotyczące Ilości rdzeni procesora (wersja Express 1 procesor-max. 4 rdzenie/wersja Standard: 4 procesory lub 24 rdzenie))
+
+Co to jest access -  system obsługi relacyjnych baz danych[1], wchodzący w skład pakietu biurowego Microsoft Office dla środowiska Windows. Od wersji 2.0 dostępny w wersji polskiej[2].
+
+Bazy danych Access są zapisywane w pojedynczych plikach (rozszerzenie ACCDB). Jest to wygodne w przypadku prostych zastosowań, jednak kosztem wydajności, wielodostępności oraz bezpieczeństwa danych. Aby uniknąć takich problemów Access
+można podłączyć do zewnętrznych źródeł danych (do dowolnego źródła obsługującego popularne oprogramowanie pośredniczące, np. do serwera Microsoft SQL Server, PostgreSQL lub innej bazy MS Access). W takim przypadku Access spełnia rolę
+graficznego interfejsu dla zewnętrznych źródeł danych, a nie całego systemu obsługi baz danych.
+
