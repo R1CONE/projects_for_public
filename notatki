@@ -85,3 +85,9 @@ Nierelacyjne bazy danych
 
 Pod pojęciem bazy nierelacyjnej (np.: NoSQL, database) najczęściej rozumie się przechowywanie danych w formie listy par obiektów klucz-wartość, w których nie występują powiązania relacyjne między przechowywanymi obiektami. W bazie NoSQL najczęściej nie ma wymagania aby obiekty były jednorodne pod względem struktury. Niekiedy pojęcie to używane jest szerzej, do określenia wszelkich struktur danych (niekoniecznie o postaci klucz-wartość) w których nie występują tabele i relacje.
 
+
+Typy baz danych (generacje)
+
+Doktadne poznanie sposobu administrowania, uzytkowania i projektowania systemów baz danych przy użyciu MySOL, MariaDB czy PostgreSQL będzie bardzo pomocne w wypadku, gdy z rozwiązań darmowych wyniknie potrzeba migracji do rozwiązań komercyjnych takich jak Microsoft SQL czy SZBD Oracle.
+
+Microsoft SQL Express to również darmowy serwer firmy Microsoft, ale posiada on spore ograniczenia dotyczące Ilości rdzeni procesora (wersja Express 1 procesor-max. 4 rdzenie/wersja Standard: 4 procesory lub 24 rdzenie))
