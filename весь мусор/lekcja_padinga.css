@@ -1,0 +1,47 @@
+#gora{
+    padding: 2%;
+    min-height: 100px;
+    box-sizing: border-box;
+    background-color: orange;
+    
+}
+
+#lewy{
+    padding: 2%;
+    min-height: 400px;
+    box-sizing: border-box;
+    float:left;
+    background-color: green;
+    width: 20%;
+
+    
+}
+
+#srodek{
+    padding: 2%;
+    min-height: 400px;
+    box-sizing: border-box;
+    float:left;
+    background-color: red;
+    width: 65%;
+
+    
+}
+#prawy{
+    padding: 2%;
+    min-height: 400px;
+    box-sizing: border-box;
+    float:left;
+    background-color: purple;
+    width: 15%;
+    
+}
+#stopka{
+    padding: 2%;
+    min-height: 100px;
+    box-sizing: border-box;
+    clear: both;
+    background-color: blue;
+
+    
+}
