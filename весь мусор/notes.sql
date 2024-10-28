@@ -18,4 +18,5 @@ CREATE TABLE dane (
 
 SELECT * FROM dane;
 SELECT * FROM dane WHERE nazwisko = 'Grant';
+SELECT * FROM dane WHERE imie = 'Igor' AND wiek = 52;
 
