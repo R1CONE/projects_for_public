@@ -17,3 +17,5 @@ CREATE TABLE dane (
 );
 
 SELECT * FROM dane;
+SELECT * FROM dane WHERE nazwisko = 'Grant';
+
