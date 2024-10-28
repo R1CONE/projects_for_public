@@ -15,3 +15,5 @@ CREATE TABLE dane (
     email VARCHAR(50) NOT NULL,
     PRIMARY KEY (nazwisko)
 );
+
+SELECT * FROM dane;
