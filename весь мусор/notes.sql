@@ -27,3 +27,5 @@ CREATE TABLE osoby (
     wiek int,
     CONSTRAINT PK_osoby PRIMARY KEY (osobaID, nazwisko)
 );
+
+DESCRIBE osoby; - opisywanie struktury bazy danych
