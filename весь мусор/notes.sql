@@ -20,3 +20,10 @@ SELECT * FROM dane;
 SELECT * FROM dane WHERE nazwisko = 'Grant';
 SELECT * FROM dane WHERE imie = 'Igor' AND wiek = 52;
 
+CREATE TABLE osoby (
+    osobaID int NOT NULL,
+    imie varchar(255) NOT NULL,
+    nazwisko varchar(255),
+    wiek int,
+    CONSTRAINT PK_osoby PRIMARY KEY (osobaID, nazwisko)
+);
