@@ -13,6 +13,41 @@ int main(){
 }
 
 
+
+#include <iostream>
+using std::cin, std::cout, std::endl;
+/*Napisz funkcję, która bedzie przyjmowała prędkość
+wyrażoną w m/s i zamieniała ją na predkość wyrażoną w k/h
+*/
+//Deklaracja funcji:
+float zmien_predkosc_ms_na_km_h(float);
+void zmien_predkosc_ms_na_km_h(float, float);
+
+int main()
+{
+    float vms=0.0, vkmh=0.0;
+    cout<<"Podaj prędkość w m/s:"<<endl;
+    cin>>vms;
+    cout<<"\nPodałeś następującą wartość: "<<vms<<" m/s"<<endl;
+    cout<<vms<<" m/s to: "<<zmien_predkosc_ms_na_km_h(vms)
+    <<" km/h.";
+    
+    zmien_predkosc_ms_na_km_h(vms,vkmh);
+    cout<<"\nSposób drugi: "<<vms<<" m/s to: "<<vkmh<<" km/h."<<endl;
+
+    return 0;
+}
+//Definicja funckji:
+float zmien_predkosc_ms_na_km_h(float v_ms){
+    return v_ms*3.6;
+}
+
+void zmien_predkosc_ms_na_km_h(float vms, float vkmh){
+    vkmh=vms*3.6; 
+}
+
+
+
 #include <iostream>
 
 int main(){
