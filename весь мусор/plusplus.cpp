@@ -12,6 +12,25 @@ int main(){
     return 0;
 }
 
+#include <iostream>
+#include <cmath>
+
+int main()
+{
+    int a, i;
+    std::cout << "insert a" << std::endl;
+    std::cin >> a;
+    
+    std::cout << "insert i" << std::endl;
+    std::cin >> i;
+    
+   
+    int result = std::pow(a, i); 
+    std::cout << "a^i = " << result << std::endl;
+    
+    return 0;
+}
+
 
 
 #include <iostream>
