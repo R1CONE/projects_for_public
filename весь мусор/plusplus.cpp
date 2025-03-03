@@ -776,3 +776,33 @@ int wyznaczNWD(int l1, int l2){
     }
     return NWD;
 }
+
+#include <iostream>
+using namespace std;
+//deklaracja funkcji:
+int wyznaczNWD(int, int);
+int main()
+{
+    int a=0,b=0;
+    cout<<"Uruchomiłeś program który odnajduje NWD dwóch liczb.\n";
+    cout<<"Podaj pierwszą liczbę: ";
+    cin>>a;
+    cout<<"Podaj drugą liczbę: ";
+    cin>>b;
+    cout<<"NWD liczb "<<a<<" i "<<b<<" to: "<<wyznaczNWD(a,b)<<endl;
+    return 0;
+}
+//definicje funkcji:
+int wyznaczNWD(int l1, int l2){
+    int NWD=1;
+    while(l1!=l2){
+        if(l1>l2){
+            l1=l1-l2;
+        } else if (l2>l1){
+            l2=l2-l1;
+        } 
+        if (l1==l2)
+            NWD=l1;
+    }
+    return NWD;
+}
