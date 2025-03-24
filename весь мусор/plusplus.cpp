@@ -814,44 +814,44 @@ Oto kod w języku C++ realizujący zadanie opisane na tablicy:
 
 using namespace std;
 
+
+
 int main() {
     const int ROZMIAR = 20;
-    int tab[ROZMIAR];
+    int wylosowane_liczby[ROZMIAR];
 
-    // Inicjalizacja generatora liczb losowych
+   
     srand(time(NULL));
 
-    // Wypełnienie tablicy losowymi liczbami z zakresu 1-1000
+ 
     for (int i = 0; i < ROZMIAR; i++) {
-        tab[i] = rand() % 1000 + 1; // Losuje liczbę z zakresu 1-1000
+        wylosowane_liczby[i] = rand() % 1000 + 1; 
     }
 
-    // Wyświetlenie tablicy
+
     cout << "Wygenerowane liczby: ";
     for (int i = 0; i < ROZMIAR; i++) {
-        cout << tab[i] << " ";
+        cout << wylosowane_liczby[i] << " ";
     }
     cout << endl;
 
-    // Znalezienie wartości minimalnej i maksymalnej
-    int min = tab[0];
-    int max = tab[0];
+
+    int min = wylosowane_liczby[0];
+    int max = wylosowane_liczby[0];
 
     for (int i = 1; i < ROZMIAR; i++) {
-        if (tab[i] < min) {
-            min = tab[i];
+        if (wylosowane_liczby[i] < min) {
+            min = wylosowane_liczby[i];
         }
-        if (tab[i] > max) {
-            max = tab[i];
+        if (wylosowane_liczby[i] > max) {
+            max = wylosowane_liczby[i];
         }
     }
 
-    // Wyświetlenie wyników
     cout << "Najmniejsza wartosc: " << min << endl;
     cout << "Najwieksza wartosc: " << max << endl;
 
     return 0;
 }
-
 
 
