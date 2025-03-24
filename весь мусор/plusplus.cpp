@@ -853,27 +853,5 @@ int main() {
     return 0;
 }
 
-Jak działa kod?
-
-1. Tworzy statyczną tablicę o rozmiarze 20.
-
-
-2. Inicjalizuje generator liczb losowych (srand(time(NULL))).
-
-
-3. Wypełnia tablicę losowymi liczbami z zakresu 1–1000.
-
-
-4. Wyświetla wylosowane liczby.
-
-
-5. Szuka najmniejszej i największej liczby w tablicy.
-
-
-6. Wyświetla wartości minimalne i maksymalne.
-
-
-
-Daj znać, jeśli chcesz jakieś modyfikacje!
 
 
