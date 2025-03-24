@@ -806,3 +806,74 @@ int wyznaczNWD(int l1, int l2){
     }
     return NWD;
 }
+
+Oto kod w języku C++ realizujący zadanie opisane na tablicy:
+
+#include <iostream>
+#include <ctime>
+
+using namespace std;
+
+int main() {
+    const int ROZMIAR = 20;
+    int tab[ROZMIAR];
+
+    // Inicjalizacja generatora liczb losowych
+    srand(time(NULL));
+
+    // Wypełnienie tablicy losowymi liczbami z zakresu 1-1000
+    for (int i = 0; i < ROZMIAR; i++) {
+        tab[i] = rand() % 1000 + 1; // Losuje liczbę z zakresu 1-1000
+    }
+
+    // Wyświetlenie tablicy
+    cout << "Wygenerowane liczby: ";
+    for (int i = 0; i < ROZMIAR; i++) {
+        cout << tab[i] << " ";
+    }
+    cout << endl;
+
+    // Znalezienie wartości minimalnej i maksymalnej
+    int min = tab[0];
+    int max = tab[0];
+
+    for (int i = 1; i < ROZMIAR; i++) {
+        if (tab[i] < min) {
+            min = tab[i];
+        }
+        if (tab[i] > max) {
+            max = tab[i];
+        }
+    }
+
+    // Wyświetlenie wyników
+    cout << "Najmniejsza wartosc: " << min << endl;
+    cout << "Najwieksza wartosc: " << max << endl;
+
+    return 0;
+}
+
+Jak działa kod?
+
+1. Tworzy statyczną tablicę o rozmiarze 20.
+
+
+2. Inicjalizuje generator liczb losowych (srand(time(NULL))).
+
+
+3. Wypełnia tablicę losowymi liczbami z zakresu 1–1000.
+
+
+4. Wyświetla wylosowane liczby.
+
+
+5. Szuka najmniejszej i największej liczby w tablicy.
+
+
+6. Wyświetla wartości minimalne i maksymalne.
+
+
+
+Daj znać, jeśli chcesz jakieś modyfikacje!
+
+
