@@ -72,3 +72,8 @@ select
 from Employee order by salary desc #desc делает фильтрование по убыванию
 limit 1 offset 1 # limit 1 строка offset 2 пропускает 2
 ) as SecondHighestSalary;
+
+
+
+# Write your MySQL query statement below
+Select name as Customers FROM Customers WHERE id NOT IN ( Select customerID FROM Orders);
