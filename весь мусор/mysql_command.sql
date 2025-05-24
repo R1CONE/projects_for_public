@@ -77,3 +77,9 @@ limit 1 offset 1 # limit 1 строка offset 2 пропускает 2
 
 # Write your MySQL query statement below
 Select name as Customers FROM Customers WHERE id NOT IN ( Select customerID FROM Orders);
+
+
+# Write your MySQL query statement below
+SELECT w1.id FROM Weather w1 JOIN Weather w2 On DATEDIFF(w1.recordDate, w2.recordDate) = 1
+Where w1.temperature > w2.temperature; #ну тут задачка что должна вывести id для если было жарче чем вчера
+
