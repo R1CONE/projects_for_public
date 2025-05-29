@@ -83,3 +83,7 @@ Select name as Customers FROM Customers WHERE id NOT IN ( Select customerID FROM
 SELECT w1.id FROM Weather w1 JOIN Weather w2 On DATEDIFF(w1.recordDate, w2.recordDate) = 1
 Where w1.temperature > w2.temperature; #ну тут задачка что должна вывести id для если было жарче чем вчера
 
+
+# Write your MySQL query statement below
+SELECT distinct player_id, MIN(event_date) as first_login FROM Activity GROUP BY player_id;
+
