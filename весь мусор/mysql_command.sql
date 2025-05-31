@@ -93,3 +93,7 @@ FROM Employee e
 LEFT JOIN Bonus b ON e.empId = b.empId
 WHERE b.bonus < 1000 OR b.bonus IS NULL;
 
+
+# Write your MySQL query statement below
+Select name from Customer WHERE referee_id != 2 or referee_id IS NULL;
+
