@@ -87,3 +87,9 @@ Where w1.temperature > w2.temperature; #ну тут задачка что дол
 # Write your MySQL query statement below
 SELECT distinct player_id, MIN(event_date) as first_login FROM Activity GROUP BY player_id;
 
+##
+SELECT e.name, b.bonus
+FROM Employee e
+LEFT JOIN Bonus b ON e.empId = b.empId
+WHERE b.bonus < 1000 OR b.bonus IS NULL;
+
