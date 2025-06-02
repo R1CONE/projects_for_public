@@ -855,3 +855,44 @@ int main() {
 }
 
 
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    const int N = 7;
+    int tab[N][N];
+
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+          
+            if (i == 0 || i == N - 1 || j == 0 || j == N - 1) {
+                tab[i][j] = 4;
+            }
+      
+            else if (i == j) {
+                tab[i][j] = 2;
+            }
+         
+            else if (i + j == N - 1) {
+                tab[i][j] = 2;
+            }
+            else {
+                tab[i][j] = 0;
+            }
+        }
+    }
+
+
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            cout << tab[i][j];
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+
+
+
