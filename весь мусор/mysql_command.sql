@@ -97,3 +97,6 @@ WHERE b.bonus < 1000 OR b.bonus IS NULL;
 # Write your MySQL query statement below
 Select name from Customer WHERE referee_id != 2 or referee_id IS NULL;
 
+# Write your MySQL query statement below
+SELECT name, population, area FROM World WHERE population >= 25000000 OR area >= 3000000;
+
