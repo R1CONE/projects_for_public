@@ -108,4 +108,10 @@ SELECT MAX(num) AS num FROM (SELECT num FROM MyNumbers GROUP BY num HAVING COUNT
 SELECT * FROM Cinema WHERE id % 2 = 1 and description != "boring" ORDER BY rating desc;
 самая понятная задача?
 
+UPDATE Salary 
+SET sex = CASE 
+            WHEN sex = 'f' THEN 'm' 
+            ELSE 'f' 
+          END;
+
 
