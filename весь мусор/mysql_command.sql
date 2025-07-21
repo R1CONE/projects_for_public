@@ -120,3 +120,10 @@ FROM ActorDirector
 GROUP BY actor_id, director_id
 HAVING COUNT(*) >= 3;
 
+
+
+
+SELECT s.price, s.year, p.product_name   
+FROM Sales s
+JOIN Product p ON s.product_id = p.product_id --кайф задача
+
