@@ -59,14 +59,35 @@ class MainActivity : ComponentActivity() {
         setContent {
             Row(
                 modifier = Modifier
-                    .background(Color.Green)
-                    .fillMaxSize(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+                    .background(Color.Gray)
+                    .fillMaxSize(), // растягиваем весь Row
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "Hello")
-                Text(text = "World")
-                Text(text = "!")
+                Column(
+                    modifier = Modifier
+                        .weight(1f) // половина ширины
+                        .fillMaxHeight()
+                        .background(Color.Red),
+                    verticalArrangement = Arrangement.SpaceAround,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(text = "Hello")
+                    Text(text = "Girona")
+                    Text(text = "Madrid")
+                }
+
+                Column(
+                    modifier = Modifier
+                        .weight(1f) // вторая половина ширины
+                        .fillMaxHeight(0.85f)
+                        .background(Color.Green),
+                    verticalArrangement = Arrangement.SpaceAround,
+                    horizontalAlignment = Alignment.End
+                ) {
+                    Text(text = "Hello")
+                    Text(text = "Girona")
+                    Text(text = "Madrid")
+                }
             }
         }
     }
