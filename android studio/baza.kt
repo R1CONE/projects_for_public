@@ -92,3 +92,53 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+
+
+
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            ListItem("Имя", "Профессия")
+        }
+    }
+}
+
+@Composable
+private fun ListItem(name: String, prof: String) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp),
+        shape = RoundedCornerShape(15.dp),
+        elevation = CardDefaults.cardElevation(5.dp)
+    ) {
+        Box() {
+            Row() {
+                Image(
+                    painter = painterResource(id = R.drawable.durov_insta_grazhdanstvo_2021),
+                    contentDescription = "image",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .padding(3.dp)
+                        .size(64.dp)
+                        .clip(CircleShape)
+
+                    )
+
+                Column {
+                    Text(text = name)
+                    Text(text = prof)
+                }
+
+
+
+
+
+            }
+        }
+    }
+}
+
