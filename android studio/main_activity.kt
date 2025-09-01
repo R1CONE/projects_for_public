@@ -104,3 +104,42 @@ fun GreetingPreview() {
         Greeting("Android")
     }
 }
+
+
+/////
+
+
+var counter = remember {
+        mutableStateOf(0)
+    }
+    
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable{
+                counter.value++
+                Log.d("MyLog", "Item Clicked $counter")
+            }
+            .padding(10.dp).offset(40.dp), //отступ по вертикали слева
+        shape = RoundedCornerShape(15.dp),
+        elevation = CardDefaults.cardElevation(5.dp)
+    ) {
+        Box(modifier = Modifier.background(Color.Green)) {
+            Row(
+                modifier = Modifier.padding(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.durov_insta_grazhdanstvo_2021),
+                    contentDescription = "image",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(64.dp)
+                        .clip(CircleShape)
+                )
+
+                Spacer(modifier = Modifier.width(12.dp))
+
+                Column(modifier = Modifier.background(Color.Red)) {
+
+                    Text(text = counter.value.toString())
