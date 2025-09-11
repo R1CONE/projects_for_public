@@ -894,5 +894,62 @@ int main() {
     return 0;
 }
 
+#include <iostream>
+using namespace std;
+
+int main() {
+    // wskaźnik do liczb statycznych
+    double liczba1 = 100.00;
+    double liczba2 = 200.00;
+    double* wsk;  
+
+    /* typy na ktory bedzie wskazywal wskaznik
+       symbol wskaznika czyli *
+       nazwa wskaznika np wsk i srednik na końcu
+    */
+
+    wsk = &liczba1; // & - operator pobierania adresu
+    // czyli nasz wskaznik zawiera adres zmiennej liczba1
+    // (jest on do niego przypisany)
+    // wsk = liczba1; ŹLE!! BO wsk nie jest liczbą
+
+    cout << "adres na ktory wskazuje (ktory zawiera) wskaznik to: " << wsk << endl;
+    cout << "wartosc kryjaca sie pod tym adresem to: " << *wsk << endl;
+    cout << "\n z kolei adres jego to " << &wsk << endl;
+
+    wsk = &liczba2;
+    cout << "adres na ktory wskazuje (ktory zawiera) wskaznik to: " << wsk << endl;
+    cout << "wartosc kryjaca sie pod tym adresem to: " << *wsk << endl;
+    cout << "\n z kolei adres jego to " << &wsk << endl;
+
+    wsk = nullptr;
+
+    if (wsk == nullptr) {
+        cout << "wskaznik wskazuje na puste" << endl;
+    }
+
+    double tab[] = {1, 4, 5, 2, 1, 4, 6, 8, 0};
+    wsk = &tab[4];
+
+    cout << "adres na ktory wskazuje wsk to: " << wsk << endl;
+    cout << "adres czwartego elementu tab to: " << &tab[4] << endl;
+    cout << "\n pod tym adresem znajduje sie liczba: " << *wsk << endl;
+    cout << "\n pod tym adresem znajduje sie liczba: " << tab[4] << endl;
+    cout << "adres pierwszego elementu tablicy to: " << &tab[0] << endl;
+    cout << "adres drugiego elementu tablicy to: " << &tab[0] + 1 << endl;
+
+    // wskaźnik do zmiennych tworzonych dynamicznie
+    float* a = new float; // przydzielimy miejsce statyczne na które bedzie wskazywał wskaźnik, czyli a bedzie wskazywać na float
+    *a = 300.0f; // przypisujemy wartość do tego miejsca
+    return 0;
+    cout << "adres na który wskazuje a to: " << a << endl;
+    cout << "wartosc pod tym adresem to: " << *a << endl;       
+    delete a; // zwalniamy pamięć
+    a = nullptr; // zabezpieczenie'
+
+
+}
+
+
 
 
