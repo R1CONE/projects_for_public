@@ -134,3 +134,12 @@ FROM Project p
 JOIN Employee e ON p.employee_id = e.employee_id
 GROUP BY p.project_id;
 
+
+
+# Write your MySQL query statement bel
+SELECT DISTINCT p.product_id, p.product_name
+FROM Product p
+LEFT JOIN Sales s ON p.product_id = s.product_id -- просто лефт джоин хзывщазывх
+WHERE s.sale_date > '2019-01-01' AND s.sale_date < '2019-03-31'
+and (p.product_id) 
+not in(select product_id from Sales where sale_date>'2019-03-31' or sale_date<'2019-01-01') ; -- самое ублюдское удаление случая что я видел ну да ладно
