@@ -127,3 +127,10 @@ SELECT s.price, s.year, p.product_name
 FROM Sales s
 JOIN Product p ON s.product_id = p.product_id --кайф задача
 
+
+
+SELECT p.project_id, ROUND(AVG(e.experience_years), 2) AS average_years -- ну тут просто надо выбрать аверагу опыта округленную и все
+FROM Project p 
+JOIN Employee e ON p.employee_id = e.employee_id
+GROUP BY p.project_id;
+
