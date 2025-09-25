@@ -1063,6 +1063,151 @@ int main()
     return 0;
 }
 
+/******************************************************************************
 
+Welcome to GDB Online.
+  GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+  C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, COBOL, HTML, CSS, JS
+  Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <iostream>
+using namespace std;
+
+class Osoba{ //nazwy klas zapisujemy z dużej litery
+    /*
+    SPECYFIKATORY DOSTĘPU DO SKŁADNIKÓW KLASY
+    public - dostęp do składników klasy jest publiczny (możliwy z
+         zewnatrz)
+    private - dostęp do składników klasy jest prywatny
+    (tylko wewnątrz danej klasy mamy dostęp do składników z taką 
+    etykietą)
+    protected - dostęp do składników klasy jest możliwy wewnątrz
+    danej klasy oraz przy dziedziczeniu - dla klasy pochodnej
+    domyślnym specyfikatorem dostępu jest private
+    */
+    //private:
+    public:
+    short sprawdz_wiek(short wiek);
+    //gettery:
+    string pobierz_imie(){
+        return imie;
+    }
+    string pobierz_nazwisko(){
+        return nazwisko;
+    }
+    int pobierz_wiek(){
+        return wiek;
+    }
+    string pobierz_pesel(){
+        return pesel;
+    }
+    string pobierz_kolor_skory(){
+        return kolor_skory;
+    }
+
+    string pobierz_dane_osoby(){
+        return imie+" "+nazwisko+", lat "+to_string(wiek)+"\n"
+        "PESEL: "+pesel+", kolor skóry: "+kolor_skory;
+    }
+
+
+
+    //settery:
+    void ustaw_imie(string imie){
+        this->imie=imie;
+    }
+    void ustaw_nazwisko(string nazwisko){
+        this->nazwisko=nazwisko;
+    }
+    void ustaw_wiek(short wiek){
+        this->wiek=wiek;
+    }
+    void ustaw_pesel(string pesel){
+        this->pesel=pesel;
+    }
+    void ustaw_kolor_skory(string kolor_skory){
+        this->kolor_skory=kolor_skory;
+    }   
+    
+
+
+    private: //ale nie jest to konieczne, bo taki jest domyślny spec.
+    string imie;
+    string nazwisko;
+    short wiek;
+    string pesel; //sprawdź czy kobieta
+    string kolor_skory;
+
+};
+
+int main()
+{   
+    //Tworzenie obiektu klasy osoba:
+    Osoba person1; //nazwa_typu nazwa_zmiennej
+
+    /*
+    person1.imie="Matylda";
+    person1.nazwisko="Szczęśniak";
+    person1.wiek=30;
+    person1.pesel="94070708214";
+    person1.kolor_skory="biały";
+
+    
+    cout<<"Cechy osoby:"<<endl;
+    cout<<"imię: "<<person1.imie<<endl;
+    cout<<"nazwisko: "<<person1.nazwisko<<endl;
+    cout<<"wiek: "<<person1.wiek<<", pesel: "<<person1.pesel
+    <<", kolor skóry: "<<person1.kolor_skory<<endl;
+    */
+    
+    //Wywołanie setterów na obiekcie:
+    person1.ustaw_imie("Matylda");
+    person1.ustaw_nazwisko("Szczęśniak");
+    person1.ustaw_wiek(130);
+    person1.ustaw_pesel("08212415274");
+    person1.ustaw_kolor_skory("biały");
+    
+    //Wywołanie geterów - wywołujemy je na obiekcie:
+    cout<<"Cechy osoby:"<<endl;
+    cout<<"imię: "<<person1.pobierz_imie()<<endl;
+    cout<<"nazwisko: "<<person1.pobierz_nazwisko()<<endl;
+    cout<<"wiek: "<<person1.pobierz_wiek()<<", pesel: "
+    
+    
+    
+    <<person1.pobierz_pesel()<<", kolor skóry: "
+    <<person1.pobierz_kolor_skory()<<endl;
+
+    cout<<"\nA teraz to samo z użyciem jedenj funkcji: "<<endl;
+    cout<<person1.pobierz_dane_osoby();
+    
+    string pesel_sprw = person1.pobierz_pesel();
+
+    // Sprawdzenie długości
+    if(pesel_sprw.length() != 11){
+        cout << "Nieprawidłowa długość PESEL" << endl;
+        return 0;
+    }
+
+    int wagi[10] = {1,3,7,9,1,3,7,9,1,3};
+    int suma = 0;
+
+    for(int i=0; i<10; i++){
+        int cyfra = pesel_sprw[i] - '0'; // zamiana znaku na cyfrę
+        suma += cyfra * wagi[i];
+    }
+
+    int cyfra_kontrolna = (10 - (suma % 10)) % 10;
+    int ostatnia_cyfra = pesel_sprw[10] - '0'; // ← poprawka
+
+    cout << "Suma kontrolna: " << suma << endl;
+
+    if(cyfra_kontrolna == ostatnia_cyfra){
+        cout << "PESEL jest poprawny ✅" << endl;
+    } else {
+        cout << "PESEL jest niepoprawny ❌" << endl;
+    }
+}
 
 
