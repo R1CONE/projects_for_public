@@ -952,4 +952,117 @@ int main() {
 
 
 
+#include <iostream>
+using namespace std;
+
+class Osoba{ //nazwy klas zapisujemy z dużej litery
+    /*
+    SPECYFIKATORY DOSTĘPU DO SKŁADNIKÓW KLASY
+    public - dostęp do składników klasy jest publiczny (możliwy z
+         zewnatrz)
+    private - dostęp do składników klasy jest prywatny
+    (tylko wewnątrz danej klasy mamy dostęp do składników z taką 
+    etykietą)
+    protected - dostęp do składników klasy jest możliwy wewnątrz
+    danej klasy oraz przy dziedziczeniu - dla klasy pochodnej
+    domyślnym specyfikatorem dostępu jest private
+    */
+    //private:
+    public:
+    short sprawdz_wiek(short wiek);
+    //gettery:
+    string pobierz_imie(){
+        return imie;
+    }
+    string pobierz_nazwisko(){
+        return nazwisko;
+    }
+    int pobierz_wiek(){
+        return wiek;
+    }
+    string pobierz_pesel(){
+        return pesel;
+    }
+    string pobierz_kolor_skory(){
+        return kolor_skory;
+    }
+
+    string pobierz_dane_osoby(){
+        return imie+" "+nazwisko+", lat "+to_string(wiek)+"\n"
+        "PESEL: "+pesel+", kolor skóry: "+kolor_skory;
+    }
+
+
+
+    //settery:
+    void ustaw_imie(string imie){
+        this->imie=imie;
+    }
+    void ustaw_nazwisko(string nazwisko){
+        this->nazwisko=nazwisko;
+    }
+    void ustaw_wiek(short wiek){
+        this->wiek=wiek;
+    }
+    void ustaw_pesel(string pesel){
+        this->pesel=pesel;
+    }
+    void ustaw_kolor_skory(string kolor_skory){
+        this->kolor_skory=kolor_skory;
+    }   
+    
+
+
+    private: //ale nie jest to konieczne, bo taki jest domyślny spec.
+    string imie;
+    string nazwisko;
+    short wiek;
+    string pesel; //sprawdź czy kobieta
+    string kolor_skory;
+
+};
+
+int main()
+{   
+    //Tworzenie obiektu klasy osoba:
+    Osoba person1; //nazwa_typu nazwa_zmiennej
+
+    /*
+    person1.imie="Matylda";
+    person1.nazwisko="Szczęśniak";
+    person1.wiek=30;
+    person1.pesel="94070708214";
+    person1.kolor_skory="biały";
+
+    
+    cout<<"Cechy osoby:"<<endl;
+    cout<<"imię: "<<person1.imie<<endl;
+    cout<<"nazwisko: "<<person1.nazwisko<<endl;
+    cout<<"wiek: "<<person1.wiek<<", pesel: "<<person1.pesel
+    <<", kolor skóry: "<<person1.kolor_skory<<endl;
+    */
+    
+    //Wywołanie setterów na obiekcie:
+    person1.ustaw_imie("Matylda");
+    person1.ustaw_nazwisko("Szczęśniak");
+    person1.ustaw_wiek(130);
+    person1.ustaw_pesel("94070708214");
+    person1.ustaw_kolor_skory("biały");
+    
+    //Wywołanie geterów - wywołujemy je na obiekcie:
+    cout<<"Cechy osoby:"<<endl;
+    cout<<"imię: "<<person1.pobierz_imie()<<endl;
+    cout<<"nazwisko: "<<person1.pobierz_nazwisko()<<endl;
+    cout<<"wiek: "<<person1.pobierz_wiek()<<", pesel: "
+    <<person1.pobierz_pesel()<<", kolor skóry: "
+    <<person1.pobierz_kolor_skory()<<endl;
+
+    cout<<"\nA teraz to samo z użyciem jedenj funkcji: "<<endl;
+    cout<<person1.pobierz_dane_osoby();
+
+    return 0;
+}
+
+
+
 
