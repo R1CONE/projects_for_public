@@ -143,3 +143,5 @@ LEFT JOIN Sales s ON p.product_id = s.product_id -- просто лефт джо
 WHERE s.sale_date > '2019-01-01' AND s.sale_date < '2019-03-31'
 and (p.product_id) 
 not in(select product_id from Sales where sale_date>'2019-03-31' or sale_date<'2019-01-01') ; -- самое ублюдское удаление случая что я видел ну да ладно
+
+
