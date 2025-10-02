@@ -1211,3 +1211,76 @@ int main()
 }
 
 
+#include <iostream>
+#include <string>
+#include <cmath> 
+
+using namespace std;
+
+class Pracownik
+{
+public:
+
+    Pracownik(string imie, string nazwisko, int wiek, string stanowisko, float wynagrodzenie, float premia) {
+        this->imie = imie;
+        this->nazwisko = nazwisko;
+        this->wiek = wiek;
+        this->stanowisko = stanowisko;
+        this->wynagrodzenie = wynagrodzenie;
+        this->premia = premia;
+    }
+
+
+    string wyswietl() {
+        return imie + " " + nazwisko + "\n" +
+               "wiek: " + to_string(wiek) + "\n" +
+               "stanowisko: " + stanowisko + "\n" +
+               "wynagrodzenie: " + to_string((int)round(wynagrodzenie)) +
+               " zł (do pełnych złotych)\n" +
+               "premia: " + to_string((int)round(premia)) +
+               " zł (do pełnych złotych)\n";
+    }
+
+
+    void zmien_wynagrodzenie() {
+        float dodatek;
+        cout << "Podaj kwotę, o którą chcesz zwiększyć wynagrodzenie: ";
+        cin >> dodatek;
+
+        wynagrodzenie += dodatek;
+    }
+
+    void zmien_nazwisko() {
+        string dodatek;
+        cout << "Podaj nowe nazwisko: ";
+        cin >> dodatek;
+
+        nazwisko = dodatek;
+    }
+
+private:
+    string imie;
+    string nazwisko;
+    int wiek;
+    string stanowisko;
+    float wynagrodzenie;
+    float premia;
+};
+
+
+int main() { 
+
+    Pracownik p1("Kasia", "Kowalska", 52, "Dyrektor", 7800.50, 1200.75);
+
+    cout << "== Dane pracownika ==" << endl;
+    cout << p1.wyswietl() << endl;
+
+    p1.zmien_wynagrodzenie();
+    p1.zmien_nazwisko();
+
+    cout << "== Po zmianie wynagrodzenia i nazwiska ==" << endl;
+    cout << p1.wyswietl() << endl;
+
+    return 0;
+}
+
