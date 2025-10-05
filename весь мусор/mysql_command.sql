@@ -144,39 +144,10 @@ WHERE s.sale_date > '2019-01-01' AND s.sale_date < '2019-03-31'
 and (p.product_id) 
 not in(select product_id from Sales where sale_date>'2019-03-31' or sale_date<'2019-01-01') ; -- самое ублюдское удаление случая что я видел ну да ладно
 
-#include <iostream>
-using namespace std;
 
-int main() {
-    int j, i;
-    cout << "liczba 1: ";
-    cin >> j;
-    cout << "liczba 2: ";
-    cin >> i;
-    int** tab = new int*[j];
-    for (int a = 0; a < j; a++) {
-        tab[a] = new int[i];
-    }
-
-    for (int a = 0; a < j; a++) {
-        for (int b = 0; b < i; b++) {
-            tab[a][b] = a * b; 
-        }
-    }
-
-
-    for (int a = 0; a < j; a++) {
-        for (int b = 0; b < i; b++) {
-            cout << tab[a][b] << "\k";
-        }
-        cout << endl;
-    }
-
-    for (int a = 0; a < j; a++) {
-        delete[] tab[a];
-    }
-    delete[] tab;
-
-    return 0;
-}
+SELECT p.product_id, IFNULL(ROUND(SUM(p.price * u.units) / SUM(u.units), 2) ,0) AS average_price FROM Prices p
+LEFT JOIN UnitsSold u
+    On p.product_id = u.product_id
+    AND u.purchase_date BETWEEN p.start_date AND p.end_date
+    GROUP BY p.product_id;
 
