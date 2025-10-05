@@ -1284,3 +1284,42 @@ int main() {
     return 0;
 }
 
+
+
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int j, i;
+    cout << "liczba 1: ";
+    cin >> j;
+    cout << "liczba 2: ";
+    cin >> i;
+    int** tab = new int*[j];
+    for (int a = 0; a < j; a++) {
+        tab[a] = new int[i];
+    }
+
+    for (int a = 0; a < j; a++) {
+        for (int b = 0; b < i; b++) {
+            tab[a][b] = a * b; 
+        }
+    }
+
+
+    for (int a = 0; a < j; a++) {
+        for (int b = 0; b < i; b++) {
+            cout << tab[a][b] << "\k";
+        }
+        cout << endl;
+    }
+
+    for (int a = 0; a < j; a++) {
+        delete[] tab[a];
+    }
+    delete[] tab;
+
+    return 0;
+}
+
