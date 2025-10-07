@@ -1323,3 +1323,32 @@ int main() {
     return 0;
 }
 
+
+#include <iostream>
+#include <vector> 
+
+using namespace std;
+
+int main() {
+    float l, a;
+
+    cout << "Wpisz dlugosc: ";
+    cin >> l;
+
+    cout << "Wpisz wysokosc: ";
+    cin >> a;
+
+    vector<vector<float>> tab(a, vector<float>(l));
+
+
+    for (float i = 1.0; i < l; i++) {
+        for (int j = 0; j < a; j++) {
+            float** tab[i][j] = (i * j) / 10; 
+            cout << tab[i][j] << " ";
+        }
+        cout << endl;  
+    }
+
+    return 0;
+}
+
