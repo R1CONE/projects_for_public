@@ -1352,3 +1352,42 @@ int main() {
     return 0;
 }
 
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    vector<vector<float>> tab(5, vector<float>(5));
+                                                    
+    float tab_2[25];
+    int index = 0;
+
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            tab[i][j] = (i * j) / 10.0f;   // dlugosc * szerokosz / 10 
+            cout << tab[i][j] << " ";
+
+            tab_2[index] = tab[i][j];
+            index++;
+
+
+
+        cout << endl;
+    }
+
+    for (int k = 0; k < 25; k++) {
+        cout << "Jednowymiarowa tablica: ";
+        cout << tab_2[k] << " ";
+
+        cout << "Jednowymiarowa tablica największa: " << tab_2[24];
+        cout << "Jednowymiarowa tablica najmniejsza: " << tab_2[0];
+        cout << "Jednowymiarowa tablica: przedostatnia: " << tab_2[23];
+        cout << "Jednowymiarowa tablica: druga: " << tab_2[1];
+    }
+
+    return 0;
+}
+
+
