@@ -1429,6 +1429,98 @@ int main() {
 
     return 0;
 }
-s
+
+
+
+#include <iostream>
+using namespace std;
+
+class Player {
+public:
+    int id_gracza;
+    string nazwa;
+    int hp;
+    int armor;
+    int sila_ataku;
+    float skutecznosc;
+
+    
+    Player(int id, string n, int h, int a, int sa, float s)
+        : id_gracza(id), nazwa(n), hp(h), armor(a), sila_ataku(sa), skutecznosc(s) {}
+
+  
+    void dodaj_hp() {
+        int dodac_hp;
+        cout << "Dodaj HP: ";
+        cin >> dodac_hp;
+        hp += dodac_hp;
+    }
+
+    void odejmij_hp() {
+        int odejmij;
+        cout << "Odejmij HP: ";
+        cin >> odejmij;
+        hp -= odejmij;
+    }
+
+    void dodaj_armor() {
+        int dodaj;
+        cout << "Dodaj armor: ";
+        cin >> dodaj;
+        armor += dodaj;
+    }
+
+    void odejmij_armor() {
+        int odejmij;
+        cout << "Odejmij armor: ";
+        cin >> odejmij;
+        armor -= odejmij;
+    }
+
+    void wprowadz_atak() {
+        int atak;
+        cout << "Wprowadz atak: ";
+        cin >> atak;
+        sila_ataku = atak;
+    }
+
+    void przyjmij_atak() {
+        int atak;
+        cout << "Przyjmij atak: ";
+        cin >> atak;
+        hp -= atak;
+    }
+
+    void znaleziono_apteczke() {
+        int leczenie;
+        cout << "Znaleziono apteczke: ";
+        cin >> leczenie;
+        hp += leczenie;
+    }
+
+    void full_opis_gracza() {
+        cout << "ID gracza: " << id_gracza << endl;
+        cout << "Nazwa: " << nazwa << endl;
+        cout << "HP: " << hp << endl;
+        cout << "Armor: " << armor << endl;
+        cout << "Sila ataku: " << sila_ataku << endl;
+        cout << "Skutecznosc: " << skutecznosc << endl;
+    }
+};
+
+int main() {
+    Player gracz1(123123123, "Wojownik", 100, 50, 0, 0.80);
+
+    gracz1.full_opis_gracza();
+
+    gracz1.dodaj_hp();
+    gracz1.znaleziono_apteczke();
+    gracz1.odejmij_hp();
+
+    gracz1.full_opis_gracza();
+
+    return 0;
+}
+
 
 
