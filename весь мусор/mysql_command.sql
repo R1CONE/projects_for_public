@@ -167,3 +167,8 @@ select p.product_name, sum(o.unit) as unit from
 where o.order_date between "2020-02-01" and "2020-02-29" 
 group by p.product_id 
 having unit>=100; -- задача кажется сложно но много неучетов
+
+
+select 
+eu.unique_id as unique_id, e.name as name
+from Employees e left join EmployeeUNI eu on e.id = eu.id -- тут мем в том что можно делать через обычный left join но если у типа нету id то пишется null автоматом
