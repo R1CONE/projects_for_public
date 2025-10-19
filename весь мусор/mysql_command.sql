@@ -159,3 +159,11 @@ SU.subject_name = E.subject_name
 
 GROUP BY S.student_id, S.student_name, SU.subject_name
 ORDER BY S.student_id, S.student_name, SU.subject_name;
+
+
+select p.product_name, sum(o.unit) as unit from 
+    products p join orders o 
+    on p.product_id = o.product_id 
+where o.order_date between "2020-02-01" and "2020-02-29" 
+group by p.product_id 
+having unit>=100; -- задача кажется сложно но много неучетов
