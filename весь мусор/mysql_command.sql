@@ -184,3 +184,13 @@ ORDER BY travelled_distance DESC, name ASC; и формирование
 
 
 
+SELECT 
+    sell_date,
+    COUNT(DISTINCT product) AS num_sold,
+    GROUP_CONCAT(DISTINCT product ORDER BY product ASC SEPARATOR ',') AS products --познакомимся с новой функцией чтопринитает столбец и собирает данные в одну стоку используя сепаратор
+FROM Activities
+GROUP BY sell_date
+ORDER BY sell_date ASC; 
+
+
+
