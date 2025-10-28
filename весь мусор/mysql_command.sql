@@ -172,3 +172,15 @@ having unit>=100; -- задача кажется сложно но много н
 select 
 eu.unique_id as unique_id, e.name as name
 from Employees e left join EmployeeUNI eu on e.id = eu.id -- тут мем в том что можно делать через обычный left join но если у типа нету id то пишется null автоматом
+
+
+SELECT u.name as name, 
+IFNULL(SUM(r.distance),0) --это простой пример проверки на ноль 
+as travelled_distance 
+FROM Users u LEFT JOIN Rides r 
+ON u.id = r.user_id 
+GROUP BY r.user_id -- группировка является главной фигней что помогает группировать по отдельности каждую строку
+ORDER BY travelled_distance DESC, name ASC; и формирование 
+
+
+
