@@ -1524,3 +1524,65 @@ int main() {
 
 
 
+#include <iostream>
+using namespace std;
+
+int main() {
+    // --- CZĘŚĆ 1: Tablica statyczna ---
+    const int WIERSZE = 2;
+    const int KOLUMNY = 3;
+    int tablicaStatyczna[WIERSZE][KOLUMNY];
+
+    cout << "Wprowadz dane do tablicy statycznej (" << WIERSZE << "x" << KOLUMNY << "):" << endl;
+    for (int i = 0; i < WIERSZE; i++) {
+        for (int j = 0; j < KOLUMNY; j++) {
+            cout << "Element [" << i << "][" << j << "]: ";
+            cin >> tablicaStatyczna[i][j];
+        }
+    }
+
+    cout << "\nZawartosc tablicy statycznej:" << endl;
+    for (int i = 0; i < WIERSZE; i++) {
+        for (int j = 0; j < KOLUMNY; j++) {
+            cout << tablicaStatyczna[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    // --- CZĘŚĆ 2: Tablica dynamiczna ---
+    int wiersze, kolumny;
+    cout << "\nPodaj liczbe wierszy i kolumn tablicy dynamicznej: ";
+    cin >> wiersze >> kolumny;
+
+    // Tworzenie tablicy dynamicznej
+    int** tablicaDynamiczna = new int*[wiersze];
+    for (int i = 0; i < wiersze; i++) {
+        tablicaDynamiczna[i] = new int[kolumny];
+    }
+
+    cout << "Wprowadz dane do tablicy dynamicznej (" << wiersze << "x" << kolumny << "):" << endl;
+    for (int i = 0; i < wiersze; i++) {
+        for (int j = 0; j < kolumny; j++) {
+            cout << "Element [" << i << "][" << j << "]: ";
+            cin >> tablicaDynamiczna[i][j];
+        }
+    }
+
+    cout << "\nZawartosc tablicy dynamicznej:" << endl;
+    for (int i = 0; i < wiersze; i++) {
+        for (int j = 0; j < kolumny; j++) {
+            cout << tablicaDynamiczna[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    // Zwolnienie pamięci po tablicy dynamicznej
+    for (int i = 0; i < wiersze; i++) {
+        delete[] tablicaDynamiczna[i];
+    }
+    delete[] tablicaDynamiczna;
+
+    return 0;
+}
+
+
