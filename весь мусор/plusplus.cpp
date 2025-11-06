@@ -1727,3 +1727,102 @@ int main() {
 #		dl
 #
 ##########
+
+
+
+	#include <iostream>
+#include <string>
+
+using namespace std;
+
+
+
+char* fillCharArray(char* tab, unsigned int size) {
+    for (int i = 0; i < size; i++) {
+        tab[i] = char((i % 26) + 65);
+    }
+
+    return tab;
+}
+
+double arrayAverage(double* tab, unsigned int size) {
+    double sum = 0;
+    for (int i = 0; i < size; i++) {
+        sum = sum + tab[i];
+    }
+
+    return sum / size;
+}
+double arrayMin(double* tab, unsigned int size) {
+    double min = 1e+300;
+    for (int i = 0; i < size; i++) {
+        if (tab[i] < min) {
+            min = tab[i];
+        }
+    }
+
+    return min;
+}
+double arrayMax(double* tab, unsigned int size) {
+    double max = -1e+300;
+    for (int i = 0; i < size; i++) {
+        if (tab[i] > max) {
+            max = tab[i];
+        }
+    }
+    return max;
+}
+
+void displayArray(char* tab, unsigned int size) {
+    for (int i = 0; i < size; i++) {
+        cout << tab[i];
+        if (i < size-1) {
+            cout << "; ";
+        } else {
+            cout << "\n";
+        }
+    }
+}
+void displayArray(double* tab, unsigned int size) {
+    for (int i = 0; i < size; i++) {
+        cout << tab[i];
+        if (i < size-1) {
+            cout << "; ";
+        } else {
+            cout << "\n";
+        }
+    }
+}
+
+int main()
+{
+    const unsigned int CHAR_TAB_SIZE = 52;
+    char tab[CHAR_TAB_SIZE];
+
+    fillCharArray(tab, CHAR_TAB_SIZE);
+    displayArray(tab, CHAR_TAB_SIZE);
+
+
+    int dyn_size = 0;
+    while (dyn_size < 1) {
+        cout << "Input array size: ";
+        cin >> dyn_size;
+    }
+    double* dyn_tab = new double[dyn_size];
+
+    for (int i = 0; i < dyn_size; i++) {
+        cout << "Input element #" + to_string(i) + ": ";
+        cin >> dyn_tab[i];
+    }
+    displayArray(dyn_tab, dyn_size);
+
+    double average = arrayAverage(dyn_tab, dyn_size);
+    double smallest = arrayMin(dyn_tab, dyn_size);
+    double largest = arrayMax(dyn_tab, dyn_size);
+    cout << "Average: " + to_string(average) << "; Smallest: " << to_string(smallest) << "; Largest: " << to_string(largest) << "\n";
+
+
+    delete [] dyn_tab;
+
+    return 0;
+}
