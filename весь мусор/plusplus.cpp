@@ -1653,4 +1653,77 @@ int main() {
     return 0;
 }
 
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <ctime>
 
+using namespace std;
+
+int main() {
+
+    int SZEROKOSC, WYSOKOSC;
+
+    cout << "Wrowadz dane szerokosci" << endl;
+    cin >> SZEROKOSC;
+
+    cout << "Wrowadz dane wysokosci" << endl;
+    cin >> WYSOKOSC;
+
+
+    char** tablica = new char*[WYSOKOSC];
+    for (int i = 0; i < WYSOKOSC; i++) {
+        tablica[i] = new char[SZEROKOSC];
+    }
+
+ 
+    srand(time(nullptr));
+
+
+    for (int i = 0; i < SZEROKOSC; i++) {
+        tablica[0][i] = '#';
+        tablica[WYSOKOSC - 1][i] = '#';
+    }
+
+
+    for (int i = 0; i < WYSOKOSC; i++) {
+        tablica[i][0] = '#';
+        tablica[i][SZEROKOSC - 1] = '#';
+    }
+
+
+    for (int i = 1; i < WYSOKOSC - 1; i++) {
+        for (int j = 1; j < SZEROKOSC - 1; j++) {
+            int random = rand() % 2;
+            if (random == 0) {
+                tablica[i][j] = '.';
+            } else {
+                tablica[i][j] = '$';
+            }
+        }
+    }
+
+
+    for (int i = 0; i < WYSOKOSC; i++) {
+        for (int j = 0; j < SZEROKOSC; j++) {
+            cout << tablica[i][j];
+        }
+        cout << endl;
+    }
+
+
+    for (int i = 0; i < WYSOKOSC; i++) {
+        delete[] tablica[i];
+    }
+    delete[] tablica;
+
+    return 0;
+}
+
+0     	sz
+0##########
+#	 #
+#
+#		dl
+#
+##########
