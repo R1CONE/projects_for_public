@@ -1825,4 +1825,65 @@ int main()
     delete [] dyn_tab;
 
     return 0;
+}\
+
+
+
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main() {
+    int SZEROKOSC, WYSOKOSC;
+
+    cout << "Podaj szerokosc: "; cin >> SZEROKOSC;
+    cout << "Podaj wysokosc: "; cin >> WYSOKOSC;
+
+    srand(time(NULL));
+
+    int** tablica = new int*[WYSOKOSC];
+    for (int i = 0; i < WYSOKOSC; i++) {
+        tablica[i] = new int[SZEROKOSC];
+    }
+
+    for (int i = 0; i < WYSOKOSC - 1; i++) {
+        for (int j = 0; j < SZEROKOSC - 1; j++) {
+            tablica[i][j] = rand() % 100;
+        }
+    }
+
+
+    for (int i = 0; i < WYSOKOSC - 1; i++) {
+        int suma = 0;
+        for (int j = 0; j < SZEROKOSC - 1; j++) {
+            suma += tablica[i][j];
+        }
+        tablica[i][SZEROKOSC - 1] = suma;
+    }
+
+
+    for (int j = 0; j < SZEROKOSC; j++) {
+        int suma = 0;
+        for (int i = 0; i < WYSOKOSC - 1; i++) {
+            suma += tablica[i][j];
+        }
+        tablica[WYSOKOSC - 1][j] = suma;
+    }
+
+    cout << "\nWynik:\n";
+    for (int i = 0; i < WYSOKOSC; i++) {
+        for (int j = 0; j < SZEROKOSC; j++) {
+            cout << tablica[i][j] << "\t";
+        }
+        cout << endl;
+    }
+
+    
+    for (int i = 0; i < WYSOKOSC; i++) {
+        delete[] tablica[i];
+    }
+    delete[] tablica;
+
+    return 0;
 }
