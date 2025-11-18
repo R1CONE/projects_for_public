@@ -1887,3 +1887,54 @@ int main() {
 
     return 0;
 }
+
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+
+class Connection{
+private:
+    static int count;
+
+    static int max_connection;
+    bool is_active = true;
+
+public:
+    static void New_max_connection(int new_max_connection) {
+        new_max_connection = max_connection;
+        cout << "Maksymalna liczba polaczen: " << new_max_connection << endl;
+    
+    }
+
+    static void Status_of_connection() {
+        cout << "Aktualna liczba polaczen: " << count << endl;
+    }
+
+    Connection() {
+        if (count < max_connection) {
+            is_active = true;
+            count++;
+        } else {
+            is_active = false;
+            cout << "Osiagnieto limit polaczen! Tworze nieaktywne polaczenie." << endl;
+        }
+    }
+};
+ int Connection::count = 0; 
+ int Connection::max_connection = 100; 
+
+int main() {
+    vector<Connection> connections;
+    for (int i = 0; i < 120; ++i) {
+        connections.emplace_back();
+    }
+    Connection::New_max_connection(150);
+    Connection::Status_of_connection();
+
+    return 0;
+
+
+}
+
