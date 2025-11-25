@@ -1937,8 +1937,6 @@ int main() {
 
 
 }
-
-
 #include <iostream>
 #include <vector>
 #include <string>
@@ -2061,26 +2059,24 @@ int Pacjent::max_connection = 10;
 bool Pacjent::is_active = true;
 
 int main() {
-    vector<Pacjent> pacjenci;
-    string imie, nazwisko, poradnia;
+    vector<Pacjent*> pacjenci = {
+        new Pacjent ("Fred" "asdasd" "kardiologia"),
+        new Pacjent ("Fred" "asdasd" "kardiologia"),
+        new Pacjent ("Fred" "asdasd" "kardiologia"),
+        new Pacjent ("Fred" "asdasd" "kardiologia"),
+        new Pacjent ("Fred" "asdasd" "kardiologia"),
 
-    for (int i = 0; i < 10; i++) {
-        cout << "Podaj imie: ";
-        cin >> imie;
+        new Pacjent ("Fred" "asdasd" "neurologia"),
+        new Pacjent ("Fred" "asdasd" "neurologia"),
+        new Pacjent ("Fred" "asdasd" "neurologia"),
+        new Pacjent ("Fred" "asdasd" "neurologia"),
+        new Pacjent ("Fred" "asdasd" "neurologia"),
+        new Pacjent ("Fred" "asdasd" "neurologia"),
 
-        cout << "Podaj nazwisko: ";
-        cin >> nazwisko;
-
-        cout << "Podaj poradnie (kardiologia / neurologia): ";
-        cin >> poradnia;
-
-        Pacjent p(imie, nazwisko, poradnia);
-        pacjenci.push_back(p);
-
-        p.pokazDane();
-        Pacjent::pokazLiczbePacjentowSzpitala();
     }
+    
 
+    
     Pacjent p1(imie, nazwisko, poradnia, true);
 
     Pacjent::pokazLiczbePacjentowSzpitala();
@@ -2094,4 +2090,3 @@ int main() {
 
     Pacjent::pokaz_Dane();
 }
-
