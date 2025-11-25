@@ -1938,3 +1938,130 @@ int main() {
 
 }
 
+
+
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+class Pacjent {
+private:
+    static int id;
+    static string imie;
+    static string nazwisko;
+    static string do_poradni;
+    static int nr_w_kolejce;
+    static bool czy_w_kolejce;
+    static int ostatnie_id;
+    static int liczba_kardiologia;
+    static int liczba_neurologia;
+    static int max_connection;
+    static bool is_active;
+
+public:
+
+    static void pokaz_Dane() {
+        cout << "id" << id << endl;
+        cout << "imie" << imie << endl;
+        cout << "nazwisko" << nazwisko << endl;
+    }
+
+public:
+
+    Pacjent(string imie, string nazwisko, string poradnia, bool is_active = true, int id = 0, int nr_w_kolejce = 0) {
+        Pacjent::imie = imie;
+        Pacjent::nazwisko = nazwisko;
+        Pacjent::do_poradni = poradnia;
+        Pacjent::is_active = is_active;
+        Pacjent::id = id;
+
+        ostatnie_id++;
+        Pacjent::id = ostatnie_id;
+
+        if (poradnia == "kardiologia") {
+            if (liczba_kardiologia > 0) {
+                liczba_kardiologia--;
+                czy_w_kolejce = true;
+                Pacjent::nr_w_kolejce = 5 - liczba_kardiologia;
+            } else {
+                cout << "Limit pacjentów do kardiologii wyczerpany!" << endl;
+                czy_w_kolejce = false;
+                Pacjent::nr_w_kolejce = -1;
+            }
+        }
+        else if (poradnia == "neurologia") {
+            if (liczba_neurologia > 0) {
+                liczba_neurologia--;
+                czy_w_kolejce = true;
+                Pacjent::nr_w_kolejce = 5 - liczba_neurologia;
+            } else {
+                cout << "Limit pacjentów do neurologii wyczerpany!" << endl;
+                czy_w_kolejce = false;
+                Pacjent::nr_w_kolejce = -1;
+            }
+        }
+        else {
+            cout << "Nie ma takiej poradni!" << endl;
+            czy_w_kolejce = false;
+            Pacjent::nr_w_kolejce = -1;
+        }
+    }
+
+    void pokazDane() {
+        cout << "ID: " << id << endl;
+        cout << "Imię: " << imie << endl;
+        cout << "Nazwisko: " << nazwisko << endl;
+        cout << "Poradnia: " << do_poradni << endl;
+
+        if (czy_w_kolejce)
+            cout << "Numer w kolejce: " << nr_w_kolejce << endl;
+        else
+            cout << "Pacjent nie został dodany do kolejki." << endl;
+    }
+
+    static void pokazLiczbePacjentowSzpitala() {
+        cout << endl;
+        cout << "Pozostało miejsc w kardiologii: " << liczba_kardiologia << endl;
+        cout << "Pozostało miejsc w neurologii: " << liczba_neurologia << endl;
+    }
+};
+
+int Pacjent::id = 0;
+string Pacjent::imie = "";
+string Pacjent::nazwisko = "";
+string Pacjent::do_poradni = "";
+int Pacjent::nr_w_kolejce = 1;
+bool Pacjent::czy_w_kolejce = false;
+int Pacjent::ostatnie_id = 10;
+int Pacjent::liczba_kardiologia = 5;
+int Pacjent::liczba_neurologia = 5;
+int Pacjent::max_connection = 10;
+bool Pacjent::is_active = true;
+
+int main() {
+    vector<Pacjent> pacjenci;
+    string imie, nazwisko, poradnia;
+
+    for (int i = 0; i < 10; i++) {
+        cout << "Podaj imie: ";
+        cin >> imie;
+
+        cout << "Podaj nazwisko: ";
+        cin >> nazwisko;
+
+        cout << "Podaj poradnie (kardiologia / neurologia): ";
+        cin >> poradnia;
+
+        Pacjent p(imie, nazwisko, poradnia);
+        pacjenci.push_back(p);
+
+        p.pokazDane();
+        Pacjent::pokazLiczbePacjentowSzpitala();
+    }
+
+    Pacjent p1(imie, nazwisko, poradnia, true);
+
+    Pacjent::pokazLiczbePacjentowSzpitala();
+}
+
