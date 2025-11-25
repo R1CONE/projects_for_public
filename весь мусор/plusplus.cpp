@@ -1939,7 +1939,6 @@ int main() {
 }
 
 
-
 #include <iostream>
 #include <vector>
 #include <string>
@@ -2006,6 +2005,10 @@ public:
             czy_w_kolejce = false;
             Pacjent::nr_w_kolejce = -1;
         }
+
+
+
+    
     }
 
     void pokazDane() {
@@ -2024,6 +2027,24 @@ public:
         cout << endl;
         cout << "Pozostało miejsc w kardiologii: " << liczba_kardiologia << endl;
         cout << "Pozostało miejsc w neurologii: " << liczba_neurologia << endl;
+    }
+
+    static void usun_pacjenta_z_kolejki(vector<Pacjent>& pacjenci, string imie_poszukiwane, string nazwisko_poszukiwane) {
+
+        for(int i = 0; i < pacjenci.size(); i++) {
+            if(pacjenci[i].imie == imie_poszukiwane && pacjenci[i].nazwisko == nazwisko_poszukiwane) {
+                if(pacjenci[i].do_poradni == "kardiologia") {
+                    liczba_kardiologia++;
+                } else if(pacjenci[i].do_poradni == "neurologia") {
+                    liczba_neurologia++;
+                }
+                pacjenci.erase(pacjenci.begin() + i);
+                cout << "Pacjent " << imie_poszukiwane << " " << nazwisko_poszukiwane << " został usunięty z kolejki." << endl;
+                return;
+            }
+        }
+
+        
     }
 };
 
@@ -2063,5 +2084,14 @@ int main() {
     Pacjent p1(imie, nazwisko, poradnia, true);
 
     Pacjent::pokazLiczbePacjentowSzpitala();
+
+    cout << "Podaj imie pacjenta do usunięcia z kolejki: ";
+    cin >> imie;
+    cout << "Podaj nazwisko pacjenta do usunięcia z kolejki: ";
+    cin >> nazwisko;
+
+    Pacjent::usun_pacjenta_z_kolejki(pacjenci, imie, nazwisko);
+
+    Pacjent::pokaz_Dane();
 }
 
