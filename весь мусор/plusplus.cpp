@@ -2119,11 +2119,12 @@ class Przedmiot {
             return w;
         }
 
-        int walidujWage(double wg){
+        double walidujWage(double wg){
             if (wg < 0.0){
                 return 0.0;
 
             }
+            return wg;
         }
 
 
@@ -2141,18 +2142,19 @@ class Przedmiot {
     double getWaga() {
         return waga;
     }
-
-    Przedmiot(string n, int w, double wg) : 
-    nazwa(n), wartosc(w), waga(wg) {}
-
-    Przedmiot (){
-        if(nazwa.empty()){
-            nazwa = "Nieznany";
-            wartosc = 0;
-            waga = 0.0;
-        }
+    Przedmiot() {
+        nazwa = "Brak";
+        waga = 0;
+        wartosc = 0.0;
     }
 
+    Przedmiot(string nazwa, int wartosc, double waga){
+    this->nazwa = walidujNazwe(nazwa);
+    this->wartosc = walidujWartosc(wartosc);
+    this->waga = walidujWage(waga);
+}
+
+    
     ~Przedmiot() {
         cout << "Destruktor dla przedmiotu: " << nazwa << endl;
     }
@@ -2183,31 +2185,22 @@ class Przedmiot {
         return waga;
     }
 
-    void ustawWartosc(int nowaWartosc) {
-        if(nowaWartosc < 0) {
-            nowaWartosc = 0;
-        }
+    
 
-        int wartosc = nowaWartosc;
-        cout << "Wartosc przedmiotu to: " << wartosc << endl;
+void ustawWartosc(int nowaWartosc) {
+    if(nowaWartosc < 0) nowaWartosc = 0;
+    this->wartosc = nowaWartosc;
+}
 
-    }
-
-    void ustawWage(double nowaWaga) {
-        if(nowaWaga < 0) {
-            nowaWaga = 0.0;
-        }
-
-        int waga = nowaWaga;
-
-        cout << "Waga przedmiotu to: " << waga << endl;
-        
-    }
+void ustawWage(double nowaWaga) {
+    if(nowaWaga < 0) nowaWaga = 0.0;
+    this->waga = nowaWaga;
+}
 
 
         
     string wyswietlInformacje(){
-        return "Nazwa: " + nazwa + ", Wartosc: " + to_string(wartosc) + ", Waga: " + to_string(waga);
+        return  "Nazwa: " + nazwa + ", Wartosc: " + to_string(wartosc) + ", Waga: " + to_string(waga);
     }
 
 };
@@ -2233,10 +2226,16 @@ int main() {
     cout << "Aktualna wartość przedmiotu po zmianach: " << Magiczny_Miecz->getWatrosc() << endl;
 
 
-    delete Magiczny_Miecz;
-    return 0;
-
     
+
+    Przedmiot* nieprawidlowy = new Przedmiot("", -20, -3.5);
+
+    cout << nieprawidlowy->wyswietlInformacje() << endl;
+
+
+    delete Magiczny_Miecz;
+
+    return 0;
 
 
 }
