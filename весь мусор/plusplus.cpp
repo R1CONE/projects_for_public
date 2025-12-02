@@ -2090,3 +2090,153 @@ int main() {
 
     Pacjent::pokaz_Dane();
 }
+
+
+
+ /// 
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Przedmiot {
+    private:
+        string nazwa;
+        int wartosc;
+        double waga;
+
+        string walidujNazwe(string n) {
+            if(n.empty()) {
+                return "Nieznany";
+            }
+            return n;
+        }
+
+        int walidujWartosc(int w){
+            if(w < 0) {
+                return 0;
+            }
+            return w;
+        }
+
+        int walidujWage(double wg){
+            if (wg < 0.0){
+                return 0.0;
+
+            }
+        }
+
+
+    
+    public:
+
+    string getNazwa() {
+        return nazwa;
+    }
+
+    int getWatrosc() {
+        return wartosc;
+    }
+
+    double getWaga() {
+        return waga;
+    }
+
+    Przedmiot(string n, int w, double wg) : 
+    nazwa(n), wartosc(w), waga(wg) {}
+
+    Przedmiot (){
+        if(nazwa.empty()){
+            nazwa = "Nieznany";
+            wartosc = 0;
+            waga = 0.0;
+        }
+    }
+
+    ~Przedmiot() {
+        cout << "Destruktor dla przedmiotu: " << nazwa << endl;
+    }
+
+    string pobierzNazwe() {
+        cout << "Nazwa przedmiotu: ";
+        string nazwa;
+        cin >> nazwa;
+        cout << "Podana nazwa to: " << nazwa << endl;
+        return nazwa;
+        
+    }
+
+    int pobierzWartosc() {
+        cout << "Wartosc przedmiotu: ";
+        int wartosc;
+        cin >> wartosc;
+        cout << "Podana wartosc to: " << wartosc << endl;
+        return wartosc;
+    }
+
+    double pobierzWage() {
+        cout << "Waga przedmiotu: ";
+        double waga;
+        cin >> waga;
+        cout << "Podana waga to: " << waga << endl;
+
+        return waga;
+    }
+
+    void ustawWartosc(int nowaWartosc) {
+        if(nowaWartosc < 0) {
+            nowaWartosc = 0;
+        }
+
+        int wartosc = nowaWartosc;
+        cout << "Wartosc przedmiotu to: " << wartosc << endl;
+
+    }
+
+    void ustawWage(double nowaWaga) {
+        if(nowaWaga < 0) {
+            nowaWaga = 0.0;
+        }
+
+        int waga = nowaWaga;
+
+        cout << "Waga przedmiotu to: " << waga << endl;
+        
+    }
+
+
+        
+    string wyswietlInformacje(){
+        return "Nazwa: " + nazwa + ", Wartosc: " + to_string(wartosc) + ", Waga: " + to_string(waga);
+    }
+
+};
+
+    
+
+int main() {
+
+    Przedmiot* Magiczny_Miecz = new Przedmiot("Magiczny Miecz", 150, 12.5);
+    
+    cout << Magiczny_Miecz->wyswietlInformacje() << endl;
+
+    cout << "Podaj nowe wartosc przedmiotu: ";
+    int nowaWartosc;
+    cin >> nowaWartosc;
+    Magiczny_Miecz->ustawWartosc(nowaWartosc);
+    cout << "Podaj nowa wage przedmiotu: ";
+    double nowaWaga;
+    cin >> nowaWaga;
+
+    Magiczny_Miecz->ustawWage(nowaWaga);
+
+    cout << "Aktualna wartość przedmiotu po zmianach: " << Magiczny_Miecz->getWatrosc() << endl;
+
+
+    delete Magiczny_Miecz;
+    return 0;
+
+    
+
+
+}
