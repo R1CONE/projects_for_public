@@ -2094,7 +2094,6 @@ int main() {
 
 
  /// 
-
 #include <iostream>
 #include <string>
 using namespace std;
@@ -2104,37 +2103,12 @@ class Przedmiot {
         string nazwa;
         int wartosc;
         double waga;
-
-        string walidujNazwe(string n) {
-            if(n.empty()) {
-                return "Nieznany";
-            }
-            return n;
-        }
-
-        int walidujWartosc(int w){
-            if(w < 0) {
-                return 0;
-            }
-            return w;
-        }
-
-        double walidujWage(double wg){
-            if (wg < 0.0){
-                return 0.0;
-
-            }
-            return wg;
-        }
-
-
     
     public:
 
     string getNazwa() {
         return nazwa;
     }
-
     int getWatrosc() {
         return wartosc;
     }
@@ -2142,21 +2116,16 @@ class Przedmiot {
     double getWaga() {
         return waga;
     }
-    Przedmiot() {
-        nazwa = "Brak";
-        waga = 0;
-        wartosc = 0.0;
-    }
 
-    Przedmiot(string nazwa, int wartosc, double waga){
-    this->nazwa = walidujNazwe(nazwa);
-    this->wartosc = walidujWartosc(wartosc);
-    this->waga = walidujWage(waga);
-}
+    Przedmiot(string n, int w, double wg) : 
+    nazwa(n), wartosc(w), waga(wg) {}
 
-    
-    ~Przedmiot() {
-        cout << "Destruktor dla przedmiotu: " << nazwa << endl;
+    Przedmiot (){
+        if(nazwa.empty()){
+            nazwa = "Nieznany";
+            wartosc = 0;
+            waga = 0.0;
+        }
     }
 
     string pobierzNazwe() {
@@ -2185,22 +2154,31 @@ class Przedmiot {
         return waga;
     }
 
-    
+    static void ustawWartosc(int nowaWartosc) {
+        if(nowaWartosc < 0) {
+            nowaWartosc = 0;
+        }
 
-void ustawWartosc(int nowaWartosc) {
-    if(nowaWartosc < 0) nowaWartosc = 0;
-    this->wartosc = nowaWartosc;
-}
+        int wartosc = nowaWartosc;
+        cout << "Wartosc przedmiotu to: " << wartosc << endl;
 
-void ustawWage(double nowaWaga) {
-    if(nowaWaga < 0) nowaWaga = 0.0;
-    this->waga = nowaWaga;
-}
+    }
+
+    static void ustawWage(double nowaWaga) {
+        if(nowaWaga < 0) {
+            nowaWaga = 0.0;
+        }
+
+        int waga = nowaWaga;
+
+        cout << "Waga przedmiotu to: " << waga << endl;
+        
+    }
 
 
         
     string wyswietlInformacje(){
-        return  "Nazwa: " + nazwa + ", Wartosc: " + to_string(wartosc) + ", Waga: " + to_string(waga);
+        return "Nazwa: " + nazwa + ", Wartosc: " + to_string(wartosc) + ", Waga: " + to_string(waga);
     }
 
 };
@@ -2216,26 +2194,20 @@ int main() {
     cout << "Podaj nowe wartosc przedmiotu: ";
     int nowaWartosc;
     cin >> nowaWartosc;
-    Magiczny_Miecz->ustawWartosc(nowaWartosc);
+    Magiczny_Miecz.ustawWartosc(nowaWartosc);
     cout << "Podaj nowa wage przedmiotu: ";
     double nowaWaga;
     cin >> nowaWaga;
 
-    Magiczny_Miecz->ustawWage(nowaWaga);
+    Magiczny_Miecz.ustawWage(nowaWaga);
 
-    cout << "Aktualna wartość przedmiotu po zmianach: " << Magiczny_Miecz->getWatrosc() << endl;
-
-
-    
-
-    Przedmiot* nieprawidlowy = new Przedmiot("", -20, -3.5);
-
-    cout << nieprawidlowy->wyswietlInformacje() << endl;
+    cout << "Aktualna wartość przedmiotu po zmianach: " << Magiczny_Miecz.getWartosc() << endl;
 
 
     delete Magiczny_Miecz;
-
     return 0;
+
+    
 
 
 }
