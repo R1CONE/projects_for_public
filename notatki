@@ -1,104 +1,73 @@
-BAZY DANYCH
-
-Modele i rodzaje baz danych
-
-Model danych to zintegrowany zbiór zasad opisujących dane, relacje, powiązania (stosunki) pomiędzy danymi, dozwolone operacje i ograniczenia nakładane na dane i operacje.
-
-Model danych jest próbą reprezentacji świata realnego i występujących w nim obiektów,
-
-zdarzeń oraz związków zachodzących między nimi. Można go opisać jako konstrukcję składającą się z trzech komponentów:
-
-⚫części strukturalnej - składającej się z reguł określających budowę bazy danych;
-
-części manipulacyjnej - określającej, które operacje (transakcje) aktualizacji, pobierania i zmiany struktury można wykonywać na danych,
-
-części zawierającej reguły integralności - gwarantującej stabilność działania systemu.
-
-BAZY DANYCH
-
-Modele i rodzaje baz danych
-
-Bazy danych można również podzielić według organizacji danych:
-
-bazy proste:
-
-kartotekowa (jednorodna)
-
-hierarchiczne
-
-bazy złożone:
-
-relacyjne
-
-obiektowe
-
-relacyjno-obiektowe
-
-strumieniowe
-
-temporalne
-
-nierelacyjne (NoSQL)
-
-Kartotekowa baza danych lub prosta baza danych - baza danych złożona z jednej tablicy, która zawiera identyczną strukturę pól.
-
-Każda tablica danych jest samodzielnym dokumentem i nie może współpracować z innymi tablicami, w przeciwieństwie do relacyjnej bazy danych.
-
-Przykładem kartotekowej bazy danych są np.: spisy danych osobowych lub spis książek czy płyt.
-
-Kartotekowe bazy danych można tworzyć w dowolnym programie zarządzającym bazami danych czy w arkuszach kalkulacyjnych, a nawet w prostych edytorach tekstów (plik z wartościami oddzielanymi przecinkami -CSV, lub tabulatorami - TSV). Specjalne programy do tworzenia tego rodzaju baz są też dołączane do pakietów zintegrowanych, jak Microsoft Office.
-
-Hierarchiczny model bazy danych
-
-W modelu hierarchicznym dane są przechowywane na zasadzie rekordów nadrzędnych-podrzędnych, tzn. rekordy przypominają strukturę drzewa. Każdy rekord (z wyjątkiem głównego) jest związany z dokładnie jednym rekordem nadrzędnym.
-
-Dane w takim modelu są znajdowane na zasadzie wyszukiwania rekordów podrzędnych względem rekordu nadrzędnego. Przykładem takiego modelu może być struktura katalogów na dysku twardym komputera.
-
-Model relacyjny - model organizacji danych bazujący na matematycznym pojęciu relacji.
-
-Na takim modelu oparta jest relacyjna baza danych, w której dane są przedstawione w postaci relacyjnej.
-
-W najprostszym ujęciu w modelu relacyjnym dane grupowane są w relacje, które reprezentowane są przez tablice.
-
-Relacje są pewnym zbiorem rekordów o identycznej strukturze wewnętrznie powiązanych za pomocą związków zachodzących pomiędzy danymi. Relacje zgrupowane są w tzw. schematy bazy
-
-danych. Relacją może być tabela zawierająca dane teleadresowe pracowników, zaś schemat może zawierać wszystkie dane dotyczące
-
-firmy. Takie podejście w porównaniu do innych modeli danych ułatwia wprowadzanie zmian, zmniejsza możliwość pomyłek, ale dzieje się to
-
-Jest to zbiór obiektów, których zachowanie się, stan oraz związki są określone zgodnie z obiektowym modelem danych. Obiektowy system zarządzania bazą danych jest systemem wspomagającym definiowanie, zarządzanie, utrzymywanie, zabezpieczanie i udostępnianie obiektowej bazy danych.
-
-Obiektowe systemy zarządzania bazą danych zapewniają tradycyjną funkcjonalność baz danych, lecz bazują na modelu obiektowym. 
-Ich atutem jest udostępnianie danych w postaci obiektowej, czyli takiej samej w jakiej dane są przechowywane w programach napisanych w obiektowych 
-językach programowania (np.;: php + postgreSQL) Znika konieczność mapowania między modelem obiektowym a modelem relacyjnym jak to ma miejsce w przypadku użycia relacyjnej bazy danych.
- Relacyjno-obiektowe bazy danych 
-Bazy relacyjno-obiektowe pozwalają na manipulowanie danymi jako zestawem obiektów, posiadają jednak bazę relacyjną jako wewnętrzny mechanizm przechowywania danych.
-
-Strumieniowa baza danych
-są to bazy danych, w której dane są przestawione w postaci zbioru strumieni danych. System zarządzania taką bazą nazywany jest strumieniowym systemem zarządzania danymi (DSMS)
-
-Temporainy model bazy danych
-
-Temporalna baza danych-model bazy danych posiadająca informację o czasie wprowadzenia lub czasie ważności zawartych w niej danych. Temporaine bazy danych są często administrowane automatycznie, poprzez usuwanie nieaktualnych danych lub ich archiwizowanie.
-
-Nierelacyjne bazy danych
-
-Pod pojęciem bazy nierelacyjnej (np.: NoSQL, database) najczęściej rozumie się przechowywanie danych w formie listy par obiektów klucz-wartość, w których nie występują powiązania relacyjne między przechowywanymi obiektami. W bazie NoSQL najczęściej nie ma wymagania aby obiekty były jednorodne pod względem struktury. Niekiedy pojęcie to używane jest szerzej, do określenia wszelkich struktur danych (niekoniecznie o postaci klucz-wartość) w których nie występują tabele i relacje.
+#include <iostream>
+#include <string>
+#include <iomanip> 
+#include <ctime> 
+#include <cstdlib> 
+#include <vector>
+using namespace std;
 
 
-Typy baz danych (generacje)
+int** utworz_tablice(int stroki) {
+    int kolumn = 6;
+    srand(time(nullptr));
+    int** tablica = new int*[stroki];
+    for (int i = 0; i < stroki; i++) {
+        tablica[i] = new int[kolumn];
+        for (int j = 0; j < kolumn; j++) {
+            int random = rand() % 49 + 1;
+            tablica[i][j] = random;
+            
+        }
+    }
 
-Doktadne poznanie sposobu administrowania, uzytkowania i projektowania systemów baz danych przy użyciu MySOL, MariaDB czy PostgreSQL będzie bardzo pomocne w wypadku, gdy z rozwiązań darmowych wyniknie potrzeba migracji do rozwiązań komercyjnych takich jak Microsoft SQL czy SZBD Oracle.
-
-Microsoft SQL Express to również darmowy serwer firmy Microsoft, ale posiada on spore ograniczenia dotyczące Ilości rdzeni procesora (wersja Express 1 procesor-max. 4 rdzenie/wersja Standard: 4 procesory lub 24 rdzenie))
-
-Co to jest access -  system obsługi relacyjnych baz danych[1], wchodzący w skład pakietu biurowego Microsoft Office dla środowiska Windows. Od wersji 2.0 dostępny w wersji polskiej[2].
-
-Bazy danych Access są zapisywane w pojedynczych plikach (rozszerzenie ACCDB). Jest to wygodne w przypadku prostych zastosowań, jednak kosztem wydajności, wielodostępności oraz bezpieczeństwa danych. Aby uniknąć takich problemów Access
-można podłączyć do zewnętrznych źródeł danych (do dowolnego źródła obsługującego popularne oprogramowanie pośredniczące, np. do serwera Microsoft SQL Server, PostgreSQL lub innej bazy MS Access). W takim przypadku Access spełnia rolę
-graficznego interfejsu dla zewnętrznych źródeł danych, a nie całego systemu obsługi baz danych.
-
-draw chat/dczymyntucfivcZt9z.nd@Grupa&Paidfabfbfebac4d664b11e8a4#p1-5022765001864691.427.8594850901277.0.30.39489243207105906.tool=colorpicker
 
 
-https://draw.chat/dc2zvvrrcynt4uc5vac2sltki9z1nd@Grupa3P4Pba:29bd17c993d46dc17b9b0d8bd9d666fd#p1,0,0,r0,s1,tool=pen
+    return tablica;
+}
+
+void filtracja_tablicy(int** Tablica, int kolumn, int stroki){
+    vector<int> used_nums;
+    vector<int>full_nums;
+    for(int a = 1; a < 50; a++){
+        full_nums.push_back(a);
+    
+    }
+
+
+    for (int i = 0; i < stroki; i++) {
+        for (int j = 0; j < kolumn; j++) {
+            used_nums.push_back(Tablica[i][j]);
+            full_nums.erase(remove(full_nums.begin(), full_nums.end(), used_nums[i][j]), v.end()); //неиспользованные числа
+            
+        }
+    }
+    
+
+
+}
+
+
+void wypis_tablicy(int** Tablica, int kolumn, int stroki){
+    for(int i = 0; i < stroki; i++){
+        cout << "\n " << endl;
+        for(int j = 0; j < kolumn; j++){
+            cout << "n1: " << Tablica[i][j] << " ";
+        }
+    }
+}   
+
+
+
+int main() {
+    srand(time(nullptr));
+    int strok;
+    cout << "napisz ilosc strok";
+    cin >> strok;
+
+    int** Tablica = utworz_tablice(strok);
+
+    int kolumn = 6;
+    wypis_tablicy(Tablica,  kolumn, strok);
+
+
+}
