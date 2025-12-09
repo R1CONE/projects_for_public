@@ -2316,8 +2316,92 @@ int main() {
 
     int kolumn = 6;
     wypis_tablicy(Tablica_bez_powtarzen, kolumn, strok);
-    
 
 
+}
+
+////////////////
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    //Ogólna deklaracja: vector<typ_danych_w_wektorze>nazwa_wektora;
+    vector <int> wLiczb; //deklaracja wektora liczb całkowitych;
+    vector <string> marki_aut = {"Volvo","BMW","Mercedes","Peugeot","Mazda"}; 
+    //deklaracja wektora stringów i inicjalizacja wartościami
+    vector <char> wZnakow(10,'K'); //utworzenie 10 elementowego wektora znaków 'K'
+    vector <bool> wLogiczne(40); //utworzenie 40 elementowego wektora wartości log.
+
+    /*
+    Sprawdzanie liczby elementów wektora - użyj funkcji size() wywołanej na obiekcie
+    typu wektor.
+    */
+    cout<<"Wektor marek aut liczy: "<<marki_aut.size()<<" elementów."<<endl;
+    cout<<"Wektor znaków liczy: "<<wZnakow.size()<<" elementów."<<endl;
+    cout<<"Wektor wartości logicznych liczy: "<<wLogiczne.size()<<" elementów."<<endl;
+    cout<<"Wektor liczb całkowitych: "<<wLiczb.size()<<" elementów."<<endl<<endl;
+
+    //Sprawdzanie czy wektor jest pusty: 1 - pusty, 0 - nie jest pusty
+    cout<<"Czy wektor marek aut jest pusty? "<<marki_aut.empty()<<endl;
+    string odpowiedz = wLiczb.empty()?"Tak, jest pusty.":"Nie, nie jest pusty.";
+    cout<<"Czy wektor liczb jest pusty? "<<odpowiedz<<endl;
+
+    /*
+    Jak dodać elementy na koniec wektora? 
+    Używamy funkcji push_back("wartość") na obiekcie typu wektor.
+    */
+    wLiczb.push_back(10); //funkcja push_back('x') dodaje element na koniec wektora
+    wLiczb.push_back(13);
+    wLiczb.push_back(15);
+    wLiczb.push_back(18);
+
+    //Wyświetlenie zawartości wektora - z użyciem pętli (1):
+    cout<<"Wyświetlam zawartość wektora liczb: "<<endl;
+    for(int i=0; i<wLiczb.size(); i++){
+        if(i+1==wLiczb.size())
+            cout<<wLiczb[i]<<"."; //użycie operatora tablicowego []
+        else 
+            cout<<wLiczb[i]<<" ";    
+        }
+    cout<<endl;
+
+    for(size_t i=0; i<wLiczb.size(); i++){ //typ size_t to wbudowany typ liczbowy 
+        if(i+1==wLiczb.size())             //bez znaku (możemy tym typem zastapić int)
+            cout<<wLiczb.at(i)<<"."; //z użyciem funkcji at(), która jednocześnie
+                                    //zapobiega wyjściu poza wektor.
+        else 
+            cout<<wLiczb.at(i)<<" ";    
+    }
+    cout<<endl;
+    cout<<"Wektor liczb ma "<<wLiczb.size()<<" elementów."<<endl;
+    //cout<<wLiczb[10]<<endl; //proszę przetestować
+    //cout<<wLiczb.at(10)<<endl; //proszę przetestować
+    cout<<wLiczb[2]<<"; "<<wLiczb.at(2)<<endl;
+    cout<<wLiczb[wLiczb.size()-1]<<endl;
+    cout<<wLiczb.at(wLiczb.size()-1)<<endl;
+
+////////////////////////////////////////////////////////////////
+    int x;
+    cout << "wpisz x elementow";
+    cin >> x;
+    int a = x;
+    srand(time(nullptr));
+    vector<int> Tablica;
+    for(int a = 0; a < x; a++){
+        Tablica.push_back(rand() % 9 + 1);
+        cout << "element tablicy :" << Tablica[a] << "\n";
+    }
+
+    for(int x; x > 0; x--){
+        Tablica.pop_back();
+        for(int i = 0; i < a; i++){
+        cout << "wartosc tablicy: " << Tablica[i] << "\n";
+    }
+}
+
+    return 0;
 }
 
