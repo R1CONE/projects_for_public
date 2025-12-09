@@ -2207,7 +2207,117 @@ int main() {
     delete Magiczny_Miecz;
     return 0;
 
+
+}
+
+
+
+//////////////////////////
+
+
+#include <iostream>
+#include <string>
+#include <iomanip> 
+#include <ctime> 
+#include <cstdlib> 
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+
+int** utworz_tablice(int stroki) {
+    int kolumn = 6;
+    srand(time(nullptr));
+    int** tablica = new int*[stroki];
+    for (int i = 0; i < stroki; i++) {
+        tablica[i] = new int[kolumn];
+        for (int j = 0; j < kolumn; j++) {
+            int random = rand() % 49 + 1;
+            tablica[i][j] = random;
+            
+        }
+    }
+
+
+
+    return tablica;
+}
+
+int** filtracja_tablicy(int** Tablica, int kolumn, int stroki) {
+
+    vector<int> used_nums;
+    vector<int> full_nums;
+
+    for (int a = 1; a < 50; a++) {
+        full_nums.push_back(a);
+    }
+
+    for (int i = 0; i < stroki; i++) {
+        for (int j = 0; j < kolumn; j++) {
+
+            used_nums.push_back(Tablica[i][j]);
+
+            // УБИРАЕМ значение из full_nums
+            full_nums.erase(
+                remove(full_nums.begin(), full_nums.end(), Tablica[i][j]),
+                full_nums.end()
+            );
+        }
+    }
+
+    
+    for (int i = 0; i < stroki; i++) {
+        for (int j = 0; j < kolumn; j++) {
+
+            for (int x = 0; x < stroki; x++) {
+                for (int y = 0; y < kolumn; y++) {
+
+                    if (i == x && j == y) continue;
+
+                    if (Tablica[i][j] == Tablica[x][y]) {
+
+                        cout << "Powtorzenie: " << Tablica[i][j] << endl;
+
+                        if (!full_nums.empty()) {
+                            Tablica[i][j] = full_nums[rand() % full_nums.size()];
+                        }
+
+                        
+                    }
+                }
+            }
+        
+        }
+    }
+
+    return Tablica;
+}
+
+void wypis_tablicy(int** Tablica, int kolumn, int stroki){
+    for(int i = 0; i < stroki; i++){
+        cout << "\n " << endl;
+        for(int j = 0; j < kolumn; j++){
+            cout << "n1: " << Tablica[i][j] << " ";
+        }
+    }
+}   
+
+
+
+int main() {
+    srand(time(nullptr));
+    int strok;
+    cout << "napisz ilosc strok";
+    cin >> strok;
+
+    int** Tablica = utworz_tablice(strok);
+    int** Tablica_bez_powtarzen = filtracja_tablicy(Tablica, 6, strok);
+
+
+    int kolumn = 6;
+    wypis_tablicy(Tablica_bez_powtarzen, kolumn, strok);
     
 
 
 }
+
