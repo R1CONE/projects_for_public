@@ -2437,3 +2437,54 @@ int main() {
     return 0;
 }
 
+
+#include<iostream>
+#include <fstream>
+ 
+using namespace std;
+
+int main(){
+
+    ifstream plik("dane2.txt", ios::in | ios::out); //tworzę strumień do odczytu pliku
+    //"C://Users//Karol//OneDrive//Pulpit//IV rok - technika//Kody biezace//dane.txt";
+
+    if(!plik.is_open())
+    {   cout<<"Nie udało się otworzyć pliku dane.txt, program zostanie zamknięty"<<endl;
+        return 1;
+    }
+
+    int x;
+    double suma=0.0;
+    while(plik>>x){ //domyślnym separatorem przy wczytywaniu jest spacja
+        cout<<"Wczytałem: "<<x<<endl;
+        suma+=x;
+        //cout<<suma<<endl;
+    }
+    cout<<"Suma wartości liczbowych w wczytanym pliku to: "<<suma<<endl;
+    
+    //A co zrobić aby wczytać ten sam plik ponownie?
+    plik.clear(); //żeby usnąć ustawioną flagę końca pliku
+    plik.seekg(0,plik.beg); //żeby przejść na początek pliku 
+    /*
+    argument 0 oznacza przesunięcie o 0 bajtów względem punktu odniesienia, 
+    którym w tym przypadku jest początek pliku (is.beg).
+    Przetestuj: 987654321
+    seekg(pos, dir) ustawia pozycję kursora odczytu w strumieniu.
+    dir określa punkt odniesienia:
+    is.beg → początek pliku
+    is.cur → bieżąca pozycja
+    is.end → koniec pliku
+    pos to liczba bajtów, o które przesuwasz się od tego punktu odniesienia.
+    */
+    
+    string y; //do double można wczytać dane z kropką! Jeżeli mamy inne znaki to
+    //korzystamy ze string
+    while(plik>>y){
+        cout<<"Wczytałem: "<<y<<" ";
+    }
+    plik.close(); //zamykam strumień
+
+
+
+    return 0;
+}
