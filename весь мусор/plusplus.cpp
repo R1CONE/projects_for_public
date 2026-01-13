@@ -2405,3 +2405,35 @@ int main()
     return 0;
 }
 
+
+#include <iostream> 
+#include <fstream> 
+#include <string>   
+
+using namespace std;
+
+int main() {
+ 
+    string myText;
+
+    string filePath = "C:\\myprogs\\text_dla_pobierania.txt"; 
+
+    ifstream MyReadFile(filePath);
+
+    if (!MyReadFile.is_open()) {
+        cerr << "Error: Could not open file " << filePath << endl;
+        return 1; 
+    }
+
+
+    while (getline(MyReadFile, myText)) {
+
+        cout << myText << endl;
+    }
+
+
+    MyReadFile.close();
+
+    return 0;
+}
+
