@@ -2488,3 +2488,119 @@ int main(){
 
     return 0;
 }
+
+
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+int main() {
+
+    // ===============================
+    // 1️⃣ ЧТЕНИЕ ТЕКСТОВОГО ФАЙЛА ПО СТРОКАМ
+    // ===============================
+
+    ifstream readText("input.txt");   // файл для чтения
+
+    if (!readText.is_open()) {
+        cout << "Nie udało się otworzyć pliku input.txt" << endl;
+        return 1;
+    }
+
+    cout << "=== Odczyt liniami ===" << endl;
+
+    string line;
+    while (getline(readText, line)) {
+        cout << line << endl;
+    }
+
+    // ===============================
+    // 2️⃣ ПОВТОРНОЕ ЧТЕНИЕ ТОГО ЖЕ ФАЙЛА
+    // ===============================
+
+    readText.clear();                  // czyszczenie flag EOF
+    readText.seekg(0, readText.beg);   // powrót na początek pliku
+
+    cout << "\n=== Odczyt jako pojedyncze elementy (string) ===" << endl;
+
+    string word;
+    while (readText >> word) {         // domyślny separator: spacja
+        cout << word << " ";
+    }
+    cout << endl;
+
+    readText.close(); // zamykamy plik wejściowy
+
+
+    // ===============================
+    // 3️⃣ ЧТЕНИЕ ЧИСЕЛ И СУММИРОВАНИЕ
+    // ===============================
+
+    ifstream readNumbers("numbers.txt");
+
+    if (!readNumbers.is_open()) {
+        cout << "Nie udało się otworzyć pliku numbers.txt" << endl;
+        return 1;
+    }
+
+    cout << "\n=== Odczyt liczb ===" << endl;
+
+    int x;
+    double suma = 0.0;
+
+    while (readNumbers >> x) {
+        cout << "Wczytałem: " << x << endl;
+        suma += x;
+    }
+
+    cout << "Suma: " << suma << endl;
+    readNumbers.close();
+
+
+    // ===============================
+    // 4️⃣ ZAPIS DO NOWEGO PLIKU
+    // ===============================
+
+    ofstream saveFile("output.txt");   // tworzy plik lub nadpisuje
+
+    saveFile << "To jest plik wynikowy" << endl;
+    saveFile << "Suma z pliku numbers.txt: " << suma << endl;
+
+    saveFile.close();
+
+
+    // ===============================
+    // 5️⃣ DOPISYWANIE DO ISTNIEJĄCEGO PLIKU (append)
+    // ===============================
+
+    ofstream appendFile("output.txt", ios::app);
+
+    appendFile << "Dopisano nowa linie do pliku" << endl;
+
+    appendFile.close();
+
+
+    // ===============================
+    // 6️⃣ KOPIOWANIE ZAWARTOŚCI JEDNEGO PLIKU DO DRUGIEGO
+    // ===============================
+
+    ifstream source("input.txt");
+    ofstream destination("copy.txt");
+
+    if (source.is_open() && destination.is_open()) {
+        string temp;
+        while (getline(source, temp)) {
+            destination << temp << endl;
+        }
+    }
+
+    source.close();
+    destination.close();
+
+
+    cout << "\nProgram zakonczyl dzialanie poprawnie." << endl;
+
+    return 0;
+}
