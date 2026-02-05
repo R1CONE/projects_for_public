@@ -2604,3 +2604,45 @@ int main() {
 
     return 0;
 }
+
+
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+int main() {
+
+    ifstream inputFile("C:\\cpp_projects\\Pan Tadeusz.txt");
+    ofstream outputFile("C:\\cpp_projects\\pan_tadeusz_output.txt");
+
+    if (!inputFile) {
+        cerr << "Błąd otwarcia pliku wejściowego." << endl;
+        return 1;
+    }
+
+    if (!outputFile) {
+        cerr << "Błąd otwarcia pliku wyjściowego." << endl;
+        return 1;
+    }
+
+    cout << "Text pliku Pan Tadeusz.txt:" << endl;
+    cout << "-----------------------------------" << endl;
+
+    string line;
+    while (getline(inputFile, line)) {
+        cout << line << endl;        
+        outputFile << line << endl; 
+    }
+
+    int arr_of_words = 0;
+
+
+    cout << "Liczba słów w pliku Pan Tadeusz.txt: " << arr_of_words << endl;
+
+    inputFile.close();
+    outputFile.close();
+
+    return 0;
+}
