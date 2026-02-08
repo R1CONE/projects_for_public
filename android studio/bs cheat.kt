@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.hardware.camera2.params.BlackLevelPattern
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.colorspace.Rgb
 import androidx.compose.ui.unit.dp
 
 class MainActivity : ComponentActivity() {
@@ -44,13 +46,11 @@ fun MainScreen() {
             .fillMaxSize()
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
+        ) {
 
-        CheckboxRow("Auto Shooting", check1, selectedColor) { check1 = it }
-        CheckboxRow("Auto Shooting", check2, selectedColor) { check2 = it }
-        CheckboxRow("text3", check3, selectedColor) { check3 = it }
-
-        Divider()
+        CheckboxRow("Auto Shooting", check1, ) { check1 = it }
+        CheckboxRow("Auto Shooting", check2, ) { check2 = it }
+        CheckboxRow("Auto Dodge", check3, ) { check3 = it }
 
         Text(
             text = "Select color",
@@ -74,7 +74,6 @@ fun MainScreen() {
 fun CheckboxRow(
     text: String,
     checked: Boolean,
-    color: Color,
     onCheckedChange: (Boolean) -> Unit
 ) {
     Row(
@@ -86,7 +85,7 @@ fun CheckboxRow(
         )
         Text(
             text = text,
-            color = color
+            color = Color.Black // ← ЯВНО чёрный
         )
     }
 }
