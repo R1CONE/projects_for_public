@@ -2646,3 +2646,55 @@ int main() {
 
     return 0;
 }
+
+
+#include <iostream>
+using namespace std;
+
+class Sejf {
+    int tajny_kod;
+    friend class SejfManager;
+
+private:
+    Sejf() : tajny_kod(123) {}
+
+    void zmien_kod(int nowy_kod)
+    {
+        tajny_kod = nowy_kod;
+    }
+
+    int pobierz_kod()
+    {
+        return tajny_kod;
+    }
+};
+
+class SejfManager {
+public:
+    Sejf utworz_sejf()
+    {
+        return Sejf();
+    }
+
+    void zmien_kod(Sejf& s, int kod)
+    {
+        s.zmien_kod(kod);
+    }
+
+    int pobierz_kod(Sejf& s)
+    {
+        return s.pobierz_kod();
+    }
+};
+
+int main()
+{
+    SejfManager manager;
+    Sejf s1 = manager.utworz_sejf();
+
+    manager.zmien_kod(s1, 456);
+    cout << manager.pobierz_kod(s1);
+
+    return 0;
+}
+
