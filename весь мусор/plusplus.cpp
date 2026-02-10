@@ -2700,60 +2700,63 @@ int main()
 
 
 #include <iostream>
+#include <fstream>
+#include <string>
 #include <cmath>
 
 using namespace std;
 
-class Punkt {
-    int x, y;
+class Wektor;
 
-public:
-    Punkt(int x = 0, int y = 0) : x(x), y(y) {}
+class Punkt{
+    friend double dlugosc_wektora(Wektor);
 
-    void wczytaj() {
-        cout << "Podaj x: ";
-        cin >> x;
-        cout << "Podaj y: ";
-        cin >> y;
-    }
+    int x;
+    int y;
 
-    int getX() const {
-        return x;
-    }
 
-    int getY() const {
-        return y;
-    }
+    public: Punkt (int x, int y): x(x), y(y){}
 };
 
-class Wektor {
-    Punkt start, koniec;
+class Wektor{
+    friend double dlugosc_wektora(Wektor);
+    Punkt p1;
+    Punkt p2;
 
-public:
-    Wektor(const Punkt& start, const Punkt& koniec) : start(start), koniec(koniec) {}
+    public:
 
-    double dlugosc_dane() const {
-        return sqrt(
-            pow(koniec.getX() - start.getX(), 2) +
-            pow(koniec.getY() - start.getY(), 2)
-        );
-    }
+    Wektor(Punkt p1, Punkt p2): p1(p1), p2(p2){}
 };
+
+double dlugosc_wektora(Wektor w){
+    int dx = w.p2.x - w.p1.x;
+    int dy = w.p2.y - w.p1.y;
+
+    return (double)sqrt(dx*dx+dy&dy);
+} 
 
 int main() {
-    // AB = √ [ (x2 − x1)² + (y2 − y1)² ]
-    Punkt A, B;
+    int a, b, c, d;
 
-    cout << "Punkt A\n";
-    A.wczytaj();
+    cout << "wpisz x1: ";
+    cin >> a;
+    cout << "wpisz y1: ";
+    cin >> b;
+    cout << "wpisz x2: ";
+    cin >> c;
+    cout << "wpisz y2: ";
+    cin >> d;
 
-    cout << "\nPunkt B\n";
-    B.wczytaj();
+    Punkt p1(a, b);
+    Punkt p2(c, d);
+    Wektor w(p1, p2);
 
-    Wektor AB(A, B);
-
-    cout << "\nDlugosc wektora AB: " << AB.dlugosc_dane() << endl;
+    cout << "Dlugosc wektora: " << dlugosc_wektora(w) << endl;
 
     return 0;
 }
+
+
+
+
 
