@@ -2698,3 +2698,62 @@ int main()
     return 0;
 }
 
+
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+class Punkt {
+    int x, y;
+
+public:
+    Punkt(int x = 0, int y = 0) : x(x), y(y) {}
+
+    void wczytaj() {
+        cout << "Podaj x: ";
+        cin >> x;
+        cout << "Podaj y: ";
+        cin >> y;
+    }
+
+    int getX() const {
+        return x;
+    }
+
+    int getY() const {
+        return y;
+    }
+};
+
+class Wektor {
+    Punkt start, koniec;
+
+public:
+    Wektor(const Punkt& start, const Punkt& koniec) : start(start), koniec(koniec) {}
+
+    double dlugosc_dane() const {
+        return sqrt(
+            pow(koniec.getX() - start.getX(), 2) +
+            pow(koniec.getY() - start.getY(), 2)
+        );
+    }
+};
+
+int main() {
+    // AB = √ [ (x2 − x1)² + (y2 − y1)² ]
+    Punkt A, B;
+
+    cout << "Punkt A\n";
+    A.wczytaj();
+
+    cout << "\nPunkt B\n";
+    B.wczytaj();
+
+    Wektor AB(A, B);
+
+    cout << "\nDlugosc wektora AB: " << AB.dlugosc_dane() << endl;
+
+    return 0;
+}
+
