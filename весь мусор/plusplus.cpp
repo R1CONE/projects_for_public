@@ -2804,5 +2804,87 @@ int main()
 }
 
 
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+class User{
+    private:
+        string login;
+        string password;
+        bool is_bloked = false;
+        
+    public:
+        User(string login, string password):login(login),password(password){};
+        
+
+        bool is_logged (string& podane_haslo ){
+            if (podane_haslo == password && !is_bloked){
+                return true;
+            }
+            return false;
+        }
+
+        void watchlLogin(){
+            cout<<"Login: "<<login<<endl;
+        }
+
+        friend class Administrator;
+
+};
+
+class Administrator{
+
+    public:
+    void resetujHaslo(User& u, string newPassword){
+        u.password = newPassword;
+    };
+    void zablokujKonto(User& u){
+        u.is_bloked = true;
+    };
+
+    void odblokujKonto(User u){
+        u.is_bloked = false;
+    };
+
+};
+
+int main(){
+    string login = "strogo";
+    string password = "wwteam228";
+    User u(login, password);
+    
+    if(u.is_logged (password)) {
+        cout << "Zalogowano pomyślnie!" << endl;
+    } else {
+        cout << "Błędne dane logowania!" << endl;
+    }
+
+    Administrator admin;
+    admin.zablokujKonto(u);
+
+
+    if(u.is_logged(password)) {
+        cout << "Zalogowano pomyślnie!" << endl;
+    } else {
+        cout << "Błędne dane logowania!" << endl;
+    }
+
+    admin.odblokujKonto(u);
+
+    admin.resetujHaslo(u, "nowehaslo");
+
+    if(u.is_logged(password)) {
+        cout << "Zalogowano pomyślnie!" << endl;
+    } else {
+        cout << "Błędne dane logowania!" << endl;
+    }
+
+    return 0;
+}
+
+
+
 
 
