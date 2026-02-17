@@ -2756,6 +2756,52 @@ int main() {
     return 0;
 }
 
+#include <iostream>
+using namespace std;
+ 
+class Konto;
+class Bank{
+    string nazwa;
+    public:
+    Bank(string nazwa):nazwa(nazwa){}
+    void zmien_saldo_wyplata(Konto& k, double kwota);
+};
+ 
+class Konto{
+  string numer_konta;
+  double saldo;
+  public:
+  Konto():numer_konta("0"),saldo(0){}
+  Konto(string numer_konta, double saldo):numer_konta(numer_konta),saldo(saldo){}
+  double get_saldo(){
+      return saldo;
+  }
+  friend void Bank::zmien_saldo_wyplata(Konto& k, double kwota);     
+};
+ 
+ 
+void Bank::zmien_saldo_wyplata(Konto& k, double kwota){
+    if(k.saldo>=0 && kwota>=0){
+        if(k.saldo>=kwota)
+            k.saldo-=kwota;
+        else
+            cout<<"Brak środków ma wypłatę "<<kwota<<endl;
+    } else {
+        cout<<"Kwota do wypłaty nie może być ujemna oraz saldo nie może być ujemne."<<endl;
+    }
+}
+ 
+ 
+int main()
+{
+    Konto k1("123456789",10000);
+    Bank b1("Alior");
+    b1.zmien_saldo_wyplata(k1,-10000);
+    cout<<"Saldo na koncie to: "<<k1.get_saldo()<<endl;
+
+ 
+    return 0;
+}
 
 
 
