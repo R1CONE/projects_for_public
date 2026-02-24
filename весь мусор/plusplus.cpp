@@ -3108,3 +3108,110 @@ int main() {
 
     return 0;
 }
+
+
+#include <iostream> 
+#include <fstream>
+#include <string>
+#include <cctype>
+#include <algorithm>
+
+using namespace std;
+
+// Функция переворачивания содержимого файла
+void reverseFileContent(const string& inputPath, const string& outputPath) {
+    ifstream input(inputPath);
+    ofstream output(outputPath);
+
+    if (!input || !output) {
+        cerr << "Błąd przy otwieraniu pliku do odwracania." << endl;
+        return;
+    }
+
+    // Считываем весь файл в одну строку
+    string content((istreambuf_iterator<char>(input)),
+                    istreambuf_iterator<char>());
+
+    // Переворачиваем строку
+    reverse(content.begin(), content.end());
+
+    // Записываем перевёрнутый текст
+    output << content;
+
+    input.close();
+    output.close();
+
+    cout << "Odwrócony tekst zapisany do pliku reverse_output.txt" << endl;
+}
+
+int main() {
+    string namefile = "C:\\cpp_projects\\Przedwosnie_fragment.txt";
+    ifstream inputFile(namefile);
+    ofstream outputFile("C:\\cpp_projects\\output.txt");
+
+    if (!inputFile) {
+        cerr << "Błąd otwarcia pliku wejściowego." << endl;
+        return 1;
+    }
+
+    if (!outputFile) {
+        cerr << "Błąd otwarcia pliku wyjściowego." << endl;
+        return 1;
+    }
+
+    cout << "Text pliku :" << namefile << endl;
+    cout << "-----------------------------------" << endl;
+
+    string line;
+    while (getline(inputFile, line)) {
+        cout << line << endl;        
+        outputFile << line << endl; 
+    }
+
+    inputFile.clear();
+    inputFile.seekg(0, inputFile.beg);
+
+    int arr_of_words = 0;   
+    string word;
+
+    while (inputFile >> word){
+        arr_of_words++;
+    }
+
+    cout << "Liczba słów w pliku: " << arr_of_words << endl;
+    
+    inputFile.clear();
+    inputFile.seekg(0, inputFile.beg);
+
+    int letters = 0;
+    char ch;
+    while(inputFile.get(ch)){   // <-- исправлено
+        if (isalpha(ch)){
+            letters++;
+        }
+    }
+    cout << "Liczba liter w pliku: " << letters << endl; 
+ 
+    inputFile.clear();
+    inputFile.seekg(0, inputFile.beg);
+
+    int count_lines = 0;
+    string line1;
+
+    while(getline(inputFile, line1)){
+        count_lines++;
+    }
+
+    cout << "Count of lines is: " << count_lines << endl; 
+    
+    inputFile.close();
+    outputFile.close();
+
+    // 🔥 Вызов функции переворачивания
+    reverseFileContent(
+        "C:\\cpp_projects\\Przedwosnie_fragment.txt",
+        "C:\\cpp_projects\\reverse_output.txt"
+    );
+
+    return 0;
+}
