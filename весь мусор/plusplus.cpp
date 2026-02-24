@@ -2967,3 +2967,144 @@ int main() {
 
     return 0;
 }
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Предварительное объявление класса
+class BankAccount;
+
+//////////////////////////////////////////////////
+// 1. Обычная friend-функция
+//////////////////////////////////////////////////
+
+void showBalance(const BankAccount& acc);
+
+//////////////////////////////////////////////////
+// 2. Класс-аудитор (будет другом)
+//////////////////////////////////////////////////
+
+class Auditor {
+public:
+    void inspectAccount(const BankAccount& acc);
+};
+
+//////////////////////////////////////////////////
+// 3. Основной класс
+//////////////////////////////////////////////////
+
+class BankAccount {
+private:
+    string owner;
+    double balance;
+    int secretCode;
+
+public:
+    BankAccount(string owner, double balance, int code)
+        : owner(owner), balance(balance), secretCode(code) {}
+
+    void deposit(double amount) {
+        balance += amount;
+    }
+
+    void withdraw(double amount) {
+        if (amount <= balance)
+            balance -= amount;
+    }
+
+    //////////////////////////////////////////////////
+    // 1. Объявление обычной friend-функции
+    //////////////////////////////////////////////////
+    friend void showBalance(const BankAccount& acc);
+
+    //////////////////////////////////////////////////
+    // 2. Друг — конкретный метод класса Auditor
+    //////////////////////////////////////////////////
+    friend void Auditor::inspectAccount(const BankAccount& acc);
+
+    //////////////////////////////////////////////////
+    // 3. Друг — весь класс
+    //////////////////////////////////////////////////
+    friend class BankManager;
+
+    //////////////////////////////////////////////////
+    // 4. Перегрузка оператора << как friend
+    //////////////////////////////////////////////////
+    friend ostream& operator<<(ostream& os, const BankAccount& acc);
+};
+
+//////////////////////////////////////////////////
+// Реализация friend-функции
+//////////////////////////////////////////////////
+
+void showBalance(const BankAccount& acc) {
+    cout << "[Friend Function] Владелец: " 
+         << acc.owner 
+         << ", Баланс: " 
+         << acc.balance 
+         << endl;
+}
+
+//////////////////////////////////////////////////
+// Реализация метода класса Auditor
+//////////////////////////////////////////////////
+
+void Auditor::inspectAccount(const BankAccount& acc) {
+    cout << "[Auditor] Проверка счета:\n";
+    cout << "Владелец: " << acc.owner << endl;
+    cout << "Баланс: " << acc.balance << endl;
+    cout << "Секретный код: " << acc.secretCode << endl;
+}
+
+//////////////////////////////////////////////////
+// Класс, полностью являющийся другом
+//////////////////////////////////////////////////
+
+class BankManager {
+public:
+    static void changeSecretCode(BankAccount& acc, int newCode) {
+        acc.secretCode = newCode;
+        cout << "[Manager] Секретный код изменён.\n";
+    }
+};
+
+//////////////////////////////////////////////////
+// Перегрузка оператора <<
+//////////////////////////////////////////////////
+
+ostream& operator<<(ostream& os, const BankAccount& acc) {
+    os << "[Operator<<] " 
+       << acc.owner 
+       << " | Баланс: " 
+       << acc.balance;
+    return os;
+}
+
+//////////////////////////////////////////////////
+// MAIN
+//////////////////////////////////////////////////
+
+int main() {
+
+    BankAccount acc("Ivan Petrov", 1000.0, 1234);
+
+    acc.deposit(500);
+    acc.withdraw(200);
+
+    // 1. Обычная friend-функция
+    showBalance(acc);
+
+    // 2. Метод класса-друга
+    Auditor auditor;
+    auditor.inspectAccount(acc);
+
+    // 3. Класс-друг
+    BankManager::changeSecretCode(acc, 9999);
+
+    // 4. Перегруженный оператор
+    cout << acc << endl;
+
+    return 0;
+}
