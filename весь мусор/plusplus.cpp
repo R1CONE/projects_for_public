@@ -3215,3 +3215,35 @@ int main() {
 
     return 0;
 }
+
+
+#include <iostream>
+#include <fstream>
+#include <vector>
+using namespace std;
+ 
+int main()
+{
+    ifstream plik_open("nazwa.txt", ios::in);
+    if(!plik_open.is_open())
+        cout<<"Nie udało się otworzyć pliku!"<<endl;
+ 
+    string x;
+    vector<string> ksiazka;
+    vector<string> ksiazka_slowa;
+ 
+    while(plik_open>>x){
+    }
+ 
+    cout<<"Książka XXY liczy "<<"x"<<" słów."<<endl;
+ 
+plik_open.close();
+ 
+ofstream plik_zapis("Od końca XXY.txt",ios::out);
+if(!plik_zapis.is_open())
+{
+    cout<<"Nie udało otworzyć się pliku do zapisu treści."<<endl;
+}
+plik_zapis.close();
+    return 0;
+}
