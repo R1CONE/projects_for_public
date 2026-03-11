@@ -193,4 +193,5 @@ GROUP BY sell_date
 ORDER BY sell_date ASC; 
 
 
+SELECT * FROM CDN.TraNag Order By TrN_DataDok DESC
 
