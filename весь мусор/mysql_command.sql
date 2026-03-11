@@ -195,3 +195,6 @@ ORDER BY sell_date ASC;
 
 SELECT * FROM CDN.TraNag Order By TrN_DataDok DESC
 
+
+UPDATE CDN.TraNag SET Trn_Bufor = 0 WHERE TrN_TrNID = 533;
+
