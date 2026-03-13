@@ -197,3 +197,15 @@ SELECT * FROM CDN.TraNag Order By TrN_DataDok DESC
 SElECT * FROM CDN.TraNag WHERE TrN_Termin = '2026-03-18';
 UPDATE CDN.TraNag SET Trn_Bufor = 0 WHERE TrN_TrNID = 533;
 
+----- zadanie z policzeniem 
+
+SELECT 
+    ok.OPK_OpkId,
+    ok.OPK_PraId,
+    ok.OPK_Procent,
+    ok.OPK_DzlId,
+    dz.DZL_DzlId,
+    dz.DZL_Nazwa
+FROM CDN.OpisKadry ok
+JOIN CDN.Dzialy dz 
+    ON ok.OPK_DzlId = dz.DZL_DzlId;
