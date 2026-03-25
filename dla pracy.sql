@@ -162,3 +162,95 @@ BEGIN
 
     SELECT ColumnName, ColumnValue FROM #Results
 END
+
+--------------
+
+
+SELECT * FROM CDN
+SELECT * FROM CDN.WymiaryWartosci -- WyW_WyyID
+SELECT * FROM CDN.Kategorie WHERE Kat_KatID = 49
+select * from cdn.Pracidx
+SELECT * FROM cdn.Dzialy
+select * from cdn.DefProjekty
+select * from cdn.opiskadry WHERE OPK_PraId = 19 -- OPK_OpkId --   ---- OPK_RodzajZrodla --16 
+select * FROM CDN.DokKodyJPKV7
+
+SELECT * FROM CDN.Konta 
+
+
+EXEC FindColumnInDatabase '%SlownikID%' 
+-- 
+
+SELECT * FROM CDN.WymiaryWartosci JOIN CDN.DokKodyJPKV7 ON CDN.WymiaryWartosci.WyW_LpPozycji = CDN.DokKodyJPKV7.DKV7_ParentTyp
+select * FROM CDN.DokKodyJPKV7
+
+UPDATE CDN.Kategorie SET Kat_Opis = 'Project rodzaju P3' WHERE Kat_KatID = 169;
+
+
+
+EXEC SearchAllTablesInt 16;
+
+select kat.Kat_KodSzczegol,d.DZL_Nazwa,d.DZL_Kod,dp.PRJ_Nazwa,dp.PRJ_Kod,tn.TrN_PodID,k.Knt_Nazwa1,TrN_TrNID,TrN_NumerPelny,* from cdn.pracidx pix        -- tu jest id pracownika
+join cdn.UmowyB2B ub on ub.UMB_PraId=pix.PRI_PraId -- tu są umowy b2b
+join cdn.OpisKadry ok on ok.OPK_PraId=pix.PRI_PraId -- tu jest opis analityczny PRACOWNIKA
+join cdn.dzialy d on d.DZL_DzlId=ok.OPK_DzlId -- Tu są nazwy o akronimy działów wydziałów
+join cdn.DefProjekty dp on dp.PRJ_PrjId=ok.OPK_PrjId --  tu są definicje projektów
+join cdn.TraNag tn on tn.TrN_PodID=ub.UMB_KntId  -- znajduję fakturę z kontrahentem z umowy b2b
+join cdn.Kontrahenci k on k.knt_kntid=tn.trn_podid -- łączem z nazwą kontrahenta
+join cdn.Kategorie kat on kat.Kat_KodSzczegol=dp.PRJ_Kod 
+WyW_WyyID
+-- slownik id  0 165 167 0 163 49 164
+
+SELECT * FROM cdn.OpisKadry -- Kat_RodzajZakupu 
+SELECT * FROM CDN.TraNAg
+
+SELECT * FROM CDN.WymiaryWartosci
+
+
+
+EXEC dbo.SearchAllTablesInt 167;  
+
+[CDN].[TraNag]	[TrN_KatID]	167
+[CDN].[TraNag]	[TrN_OdbID]	167
+[CDN].[TraNag]	[TrN_OdbID]	167
+[CDN].[TraNag]	[TrN_PlatnikID]	167
+[CDN].[TraNag]	[TrN_PlatnikID]	167
+[CDN].[TraNag]	[TrN_PodID]	167
+[CDN].[TraNag]	[TrN_PodID]	167
+
+SELECT * FROM CDN.WymiaryWartosci
+LEFT Join CDN.Kategorie On CDN.Kategorie.Kat_KatID = CDN.WymiaryWartosci.WyW_SlownikId
+
+SELECT * FROM CDN.TraNAg WHERE [TrN_KatID] = 167
+
+SELECT * FROM CDN.TraNAg
+
+SELECT * FROM CDN.Kategorie
+
+SELECT *
+FROM CDN.Kategorie
+WHERE CDN.Kategorie.Kat_KatID IN (149, 152, 153, 51, 52, 53, 55, 56, 57, 58, 59, 156, 157, 159, 160); --55
+
+FAPF/@numerS/2026FA/@numerS/2026 
+
+ ------------------
+
+EXEC SearchAllTables 'PRZYCHODY POZOSTAŁE';
+
+select * from CDN.Kategorie
+
+select * FROM CDN.DokKodyJPKV7
+
+
+
+select * FROM CDN.Towary
+
+SELECT * FROM CDN.RejestrOperacji
+
+
+SELECT Kat_KatId, Kat_KodSzczegol, Kat_Opis,
+(SELECT STUFF((SELECT '; ' + KV7_Kod FROM CDN.DokKodyJPKV7 
+JOIN CDN.KodyJPKV7 ON DKV7_KV7ID = KV7_KV7ID WHERE DKV7_ParentTyp = 3 
+AND DKV7_ParentID = Kat_KatID FOR XML PATH('')) , 1, 2, ''))
+AS KodyJPKV7, Kat_KodOgolny, Kat_Poziom, Kat_ParentID, Kat_Nieaktywny 
+select * FROM CDN.Kategorie -- 154 
