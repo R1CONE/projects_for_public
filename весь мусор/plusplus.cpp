@@ -3247,3 +3247,68 @@ if(!plik_zapis.is_open())
 plik_zapis.close();
     return 0;
 }
+
+
+
+#include <iostream>
+#include <fstream>
+#include <sstream>
+using namespace std;
+
+int main() {
+    ifstream file("C:\\cpp_projects\\paragon.csv");
+    string line;
+
+    getline(file, line);
+
+    int id;
+    string name, priceStr, unit, qtyStr;
+
+    double total = 0;
+    int searchId = 17;
+
+    while (getline(file, line)) {
+        stringstream ss(line);
+        string temp;
+
+        // ID
+        getline(ss, temp, ';'); //берет id первой строки что перед точкой с запятой
+        id = stoi(temp);
+
+        // nazwa
+        getline(ss, name, ';');
+
+        // cena
+        getline(ss, priceStr, ';');
+
+        // usuwamy " zł"
+        priceStr = priceStr.substr(0, priceStr.find(" "));
+        for (int i = 0; i < priceStr.size(); i++) {
+            if (priceStr[i] == ',') priceStr[i] = '.';
+        }
+        double price = stod(priceStr);
+
+        // jednostki 
+        getline(ss, unit, ';');
+
+        // ilość
+        getline(ss, qtyStr, ';');
+        for (int i = 0; i < qtyStr.size(); i++) {
+            if (qtyStr[i] == ',') qtyStr[i] = '.';
+        }
+        double qty = stod(qtyStr);
+
+        double sum = price * qty;
+
+        // jeśli znaleźliśmy potrzebny ID
+        if (id == searchId) {
+            cout << "Produkt ID " << id << ": " << sum << " zl" << endl;
+        }
+
+        total += sum;
+    }
+
+    cout << "Suma wszystkich produktow: " << total << " zl" << endl;
+
+    return 0;
+}
