@@ -3253,62 +3253,138 @@ plik_zapis.close();
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <vector>  
+#include <algorithm>
 using namespace std;
-
+ 
 int main() {
     ifstream file("C:\\cpp_projects\\paragon.csv");
+    ofstream newFile("C:\\cpp_projects\\paragon_new.csv");
     string line;
-
-    getline(file, line);
-
+ 
+    if (!file.is_open() || !newFile.is_open()) {
+        cout << "Nie mozna otworzyc pliku!" << endl;
+        return 1;
+    }
+ 
+    getline(file, line); // pomijamy nagłówek
+ 
     int id;
     string name, priceStr, unit, qtyStr;
-
+ 
     double total = 0;
     int searchId = 17;
-
+ 
     while (getline(file, line)) {
         stringstream ss(line);
         string temp;
-
-        // ID
-        getline(ss, temp, ';'); //берет id первой строки что перед точкой с запятой
+ 
+        getline(ss, temp, ';');
         id = stoi(temp);
-
-        // nazwa
+ 
         getline(ss, name, ';');
-
-        // cena
         getline(ss, priceStr, ';');
-
-        // usuwamy " zł"
-        priceStr = priceStr.substr(0, priceStr.find(" "));
-        for (int i = 0; i < priceStr.size(); i++) {
-            if (priceStr[i] == ',') priceStr[i] = '.';
+ 
+        size_t pos = priceStr.find(" zł");
+        if (pos != string::npos) {
+            priceStr.erase(pos, 4);
         }
+ 
+        for (char &c : priceStr) {
+            if (c == ',') c = '.';
+        }
+ 
         double price = stod(priceStr);
-
-        // jednostki 
+ 
         getline(ss, unit, ';');
-
-        // ilość
         getline(ss, qtyStr, ';');
-        for (int i = 0; i < qtyStr.size(); i++) {
-            if (qtyStr[i] == ',') qtyStr[i] = '.';
+ 
+        for (char &c : qtyStr) {
+            if (c == ',') c = '.';
         }
+ 
         double qty = stod(qtyStr);
-
+ 
         double sum = price * qty;
-
-        // jeśli znaleźliśmy potrzebny ID
+ 
         if (id == searchId) {
             cout << "Produkt ID " << id << ": " << sum << " zl" << endl;
         }
-
+ 
         total += sum;
     }
-
+ 
     cout << "Suma wszystkich produktow: " << total << " zl" << endl;
+ 
+    file.clear();                
+    file.seekg(0, file.beg);    
+ 
+    getline(file, line);
+ 
+    vector<string> id_towaru;
+    vector<string> towar;
+    vector<string> cena;
+    vector<string> jednostka;
+    vector<string> ilosc;
+ 
+    while (getline(file, line)) {
+        stringstream ss(line);
+        string temp;
+ 
+        getline(ss, temp, ';');
+        id_towaru.push_back(temp);
+ 
+        getline(ss, temp, ';');
+        towar.push_back(temp);
+ 
+        getline(ss, temp, ';');
+        cena.push_back(temp);
+ 
+        getline(ss, temp, ';');
+        jednostka.push_back(temp);
+ 
+        getline(ss, temp, ';');
+        ilosc.push_back(temp);
+    }
+ 
+    for (size_t i = 0; i < id_towaru.size(); ++i) {
+        cout << " Nazwa: " << towar[i];
+    }
+ 
+    file.clear();                
+    file.seekg(0, file.beg);  
+ 
+    if (newFile.is_open()) {
+        getline(file, line);
 
+        newFile << "ID" << ";" << "Towar" << ";" << ";Cena za kg lub szt." << ";" << "Jedn." << ";" << "Ile kupuję (kg lub sztuk)" << ";" << "iloczyn" << "\n";
+
+        for (int i = 1; i < id_towaru.size(); ++i) {
+ 
+            string cenaStr = cena[i];
+            string iloscStr = ilosc[i];
+ 
+            size_t pos = cenaStr.find("zł");
+            if (pos != string::npos) cenaStr.erase(pos, 4);
+ 
+            cenaStr.erase(remove(cenaStr.begin(), cenaStr.end(), ' '), cenaStr.end());
+            for (char &c : cenaStr) if (c == ',') c = '.';
+            double cenaVal = stod(cenaStr);
+ 
+            for (char &c : iloscStr) if (c == ',') c = '.';
+            double iloscVal = stod(iloscStr);
+ 
+            newFile << id_towaru[i] << ";"
+                    << towar[i] << ";"
+                    << cenaVal << ";"
+                    << jednostka[i] << ";"
+                    << iloscVal << ";"
+                    << cenaVal * iloscVal << "\n";
+        }
+ 
+        newFile.close();
+ 
+    }
+ 
     return 0;
 }
