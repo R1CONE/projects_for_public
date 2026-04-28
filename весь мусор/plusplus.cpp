@@ -3388,3 +3388,87 @@ int main() {
  
     return 0;
 }
+
+
+######################
+
+
+#include <iostream> 
+#include <fstream> 
+#include <string>   
+
+using namespace std;
+
+void str_Big_char(string Text){
+    int Big_nums = 0;
+    for (int b = 0; b < Text.length(); b++){
+
+        if(isupper(Text[b])){
+            Big_nums++;
+        }
+        
+    }
+
+    cout << "liczba dużych liter:" << Big_nums << endl;
+
+}
+
+void str_small_char(string Text){
+
+    int Lit_nums = 0;
+
+    for (int rr = 0; rr < Text.length(); rr++){
+
+        if(islower(Text[rr])){
+            Lit_nums++;
+        }
+        
+    }
+
+    cout << "liczba małych liter: " << Lit_nums << endl;
+
+}
+
+void str_interpunktion(string Text){
+
+    int counter_interpuktion = 0;
+
+    for (int lit = 0; lit < Text.length(); lit++){
+
+        if(ispunct(Text[lit])){
+            counter_interpuktion++;
+        }
+        
+    } 
+
+    cout << "liczba interpunkcji : " << counter_interpuktion << endl;
+}
+
+void str_liczba_liter(string Text) {
+    int counter_lett = 0;
+
+    for (int let = 0; let < Text.length(); let++){
+
+        if(isalpha(Text[let])){
+            counter_lett++;
+        }
+        
+    } 
+
+    cout << "liczba liter w tekstie: " << counter_lett << endl;
+}
+
+void str_liczba_liczb {
+    int counter_nums = 0;
+
+    for(int num = 0; num < Text.length; num++){
+        
+    }
+}
+
+int main() {
+
+    
+}
+
+
