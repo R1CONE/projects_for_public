@@ -3470,5 +3470,82 @@ int main() {
 
     
 }
+####################
 
+
+
+#include <iostream> 
+#include <fstream> 
+#include <string>   
+#include <cctype>
+
+using namespace std;
+
+void czy_litera(char Text){
+    if(isalpha(Text)){
+        cout << "to jest literą ";
+    }
+    if(isupper(Text)){
+        cout << "wielka ";
+    }
+    if(islower(Text)){
+        cout << "małą ";
+    }
+
+}
+
+
+void czy_cyfra(char Text) {
+
+    if(isdigit(Text)){
+        cout << "jest to cyfra ";
+    }
+       
+}
+
+void czy_bialy_znak(char Text){
+    if(isspace(Text)){
+        cout << "jest białym znakiem ";
+    }
+}
+
+void czy_znak_interpunkcyjny(char Text){
+    if(ispunct(Text)){
+        cout << "jest znakiem interpunkcyjnym ";
+    }
+
+}
+
+void czy_znak_drukowalny(char Text){
+    if(isprint(Text)){
+        cout << "jest znakiem drukowalnym ";
+    }
+}
+
+void czy_znak_graficzny(char Text){
+    if(isgraph(Text)){
+        cout << "jest znakiem graficznym ";
+    }
+}
+
+void czy_znak_szestnastkowy(int Text){
+    if(isxdigit(Text)){
+        cout << "jest znakiem szesnastkowym ";
+    }
+}
+
+int main() {
+    while(true){
+    char Text;
+    cout << "Podaj znak: ";
+    cin >> Text;
+
+    czy_litera(Text);
+    czy_bialy_znak(Text); 
+    czy_cyfra(Text);
+    czy_znak_drukowalny(Text);
+    czy_znak_graficzny(Text);
+    czy_znak_szestnastkowy(Text);
+    };
+} 
 
