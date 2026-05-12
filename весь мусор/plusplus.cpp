@@ -3548,4 +3548,61 @@ int main() {
     czy_znak_szestnastkowy(Text);
     };
 } 
+№№№№№№№№№№№№№№№№№№№№
+#include <iostream>
+using namespace std;
 
+class Kolo {
+public:
+    double promien;
+
+    Kolo(double p) {
+        promien = p;
+    }
+
+    double pole() {
+        return 3.14 * promien * promien;
+    }
+
+    double obwod() {
+        return 2 * 3.14 * promien;
+    }
+
+    void wypiszPole() {
+        cout << "Pole kola: " << pole() << endl;
+    }
+};
+
+class Stozek {
+public:
+    double wysokosc;
+
+    Stozek(double w) {
+        wysokosc = w;
+    }
+
+    double objetosc(Kolo x) {
+        return (1.0 / 3.0) * x.pole() * wysokosc;
+    }
+
+    double poleBoczne(Kolo x) {
+        return 3.14 * x.promien * wysokosc;
+    }
+
+    double poleCalkowite(Kolo x) {
+        return x.pole() + poleBoczne(x);
+    }
+};
+
+int main() {
+    Kolo x(13);
+    Stozek sto(55);
+
+    x.wypiszPole();
+
+    cout << "Objetosc stozka: " << sto.objetosc(x) << endl;
+    cout << "Pole boczne stozka: " << sto.poleBoczne(x) << endl;
+    cout << "Pole calkowite stozka: " << sto.poleCalkowite(x) << endl;
+
+    return 0;
+}
