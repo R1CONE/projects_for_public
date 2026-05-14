@@ -3606,3 +3606,66 @@ int main() {
 
     return 0;
 }
+
+
+#################
+
+#include <iostream>
+#include <string>
+using namespace std;
+class Przycisk
+{
+    float wysokosc;
+    float szerokosc;
+    string napis;
+    string kolor;
+ 
+    public:
+    Przycisk():wysokosc(1),szerokosc(1),napis(""),kolor("gray"){
+        cout<<"Domyślna inicjalizacja przycisku."<<endl;
+    }
+ 
+    Przycisk(float wysokosc, float szerokosc, string napis, string kolor):
+    wysokosc(wysokosc),szerokosc(szerokosc),napis(napis),kolor(kolor){
+        cout<<"Tworzę przycisk i inicjalizuję go przekazanymi wartościami"<<endl;
+    }
+   
+    float get_wysokosc(){return wysokosc;}
+    float get_szerokosc(){return szerokosc;}
+    string get_napis(){return napis;}
+    string get_kolor(){return kolor;}
+ 
+    void set_wysokosc(float w){
+        this->wysokosc=w;
+    }
+    void set_szerokosc(float s){
+        this->szerokosc=s;
+    }
+    void set_napis(string n){
+        this->napis=n;
+    }
+    void set_kolor(string k){
+        this->kolor=k;
+    }
+ 
+    void wyswietl_parametry_przycisku()
+    {   cout<<"\nWysokość: "<<wysokosc<<endl;
+        cout<<"Szerokość: "<<szerokosc<<endl;
+        cout<<"Napis: "<<napis<<endl;
+        cout<<"Kolor: "<<kolor<<endl;
+    }
+ 
+};
+ 
+int main()
+{
+    Przycisk p1(100,200,"Kliknij mnie!","gray");
+    Przycisk p2(200,200,"Wyjdź","lightblue");
+    Przycisk p3;
+ 
+    p1.wyswietl_parametry_przycisku();
+    p2.wyswietl_parametry_przycisku();
+    p3.wyswietl_parametry_przycisku();
+ 
+    return 0;
+}
