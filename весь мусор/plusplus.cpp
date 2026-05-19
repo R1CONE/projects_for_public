@@ -3609,9 +3609,9 @@ int main() {
 
 
 #################
-
 #include <iostream>
 #include <string>
+#include <stdexcept>
 using namespace std;
 class Przycisk
 {
@@ -3625,10 +3625,50 @@ class Przycisk
         cout<<"Domyślna inicjalizacja przycisku."<<endl;
     }
  
+    /*
     Przycisk(float wysokosc, float szerokosc, string napis, string kolor):
     wysokosc(wysokosc),szerokosc(szerokosc),napis(napis),kolor(kolor){
         cout<<"Tworzę przycisk i inicjalizuję go przekazanymi wartościami"<<endl;
     }
+    */
+   
+    //Najpierw zrobimy obsługę wyjątków dla konstruktora z ciałem - będzie łatwiej:
+    Przycisk(float wysokosc, float szerokosc, string napis, string kolor){
+        if(wysokosc<=0){
+            //this->wysokosc=1; //to jest rozwiązanie jeżeli nie chcesz rzucać błędów
+                               //przypisujesz wtedy z góry umówioną wysokość
+           throw invalid_argument("Podałeś ujemną lub zerową wysokość przycisku.");
+           
+           //Tak się nie powinno robić - łamie to zasadę hermetyzacji danych
+           /*
+           cout<<"Podałeś ujemną lub zerową wysokość"<<endl;
+           do
+           {
+                cout<<"Podaj poprawną wartość wysokości przycisku: "<<endl;
+                cin>>wysokosc;
+           } while (wysokosc<=0);
+           this->wysokosc=wysokosc;
+           */
+           
+        }
+ 
+        if(szerokosc<=0){
+            throw out_of_range("Podałeś ujemną lub zerową szerokość przycisku.");        
+ 
+        }
+ 
+        if(kolor.size()==0){
+            throw logic_error("Nie podałeś koloru przycisku.");
+ 
+        }
+ 
+        this->wysokosc=wysokosc;
+        this->szerokosc=szerokosc;
+        this->napis=napis;
+        this->kolor=kolor;
+ 
+    }
+   
    
     float get_wysokosc(){return wysokosc;}
     float get_szerokosc(){return szerokosc;}
@@ -3655,17 +3695,33 @@ class Przycisk
         cout<<"Kolor: "<<kolor<<endl;
     }
  
+   
 };
  
+
+
 int main()
 {
-    Przycisk p1(100,200,"Kliknij mnie!","gray");
-    Przycisk p2(200,200,"Wyjdź","lightblue");
-    Przycisk p3;
+    try {
+        Przycisk p1(100,200,"Kliknij mnie!","Niebieski");
+        Przycisk p2(200,200,"Wyjdź","lightblue");
+        Przycisk p3;
  
-    p1.wyswietl_parametry_przycisku();
-    p2.wyswietl_parametry_przycisku();
-    p3.wyswietl_parametry_przycisku();
+        p1.wyswietl_parametry_przycisku();
+        p2.wyswietl_parametry_przycisku();
+        p3.wyswietl_parametry_przycisku();
+ 
+    }
+    catch (invalid_argument &e){
+        cout<<"Błąd argumentu: "<<e.what()<<endl;
+    }
+    catch (out_of_range &e){
+        cout<<"Błąd zakresu wartości: "<<e.what()<<endl;
+    }
+    catch (exception &e){
+        cout<<"Błąd ogólny: "<<e.what()<<endl;
+    }
+    
  
     return 0;
 }
