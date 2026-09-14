@@ -109,3 +109,43 @@ do => while
         Scanner drt = new Scanner (System.in);
         char s;
         s = (char) drt.nextInt();
+
+
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        int dodatnie = 0;
+        int ujemne = 0;
+        int liczba;
+
+        System.out.println("Podawaj liczby całkowite. Wpisz 0, aby zakończyć.");
+
+        while (true) {
+            System.out.print("Podaj liczbę: ");
+            liczba = scanner.nextInt();
+
+            if (liczba == 0) {
+                break;
+            }
+
+            if (liczba > 0) {
+                dodatnie++;
+            } else {
+                ujemne++;
+            }
+        }
+
+        System.out.println("\nPodsumowanie:");
+        System.out.println("Liczb dodatnich: " + dodatnie);
+        System.out.println("Liczb ujemnych: " + ujemne);
+
+        scanner.close();
+    }
+}
+
+
