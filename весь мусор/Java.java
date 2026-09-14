@@ -110,7 +110,7 @@ do => while
         char s;
         s = (char) drt.nextInt();
 
-
+###############################################################################################
 
 import java.util.Scanner;
 
@@ -148,4 +148,19 @@ public class Main {
     }
 }
 
+
+                public class par2and3 {
+    public static void main(String[] args) {
+        int summa = 0;
+
+        for (int a = 1; a < 50; a++) {
+            if (a % 2 == 0 && a % 3 == 0) {
+                System.out.println(a);
+                summa += a;
+            }
+        }
+
+        System.out.println("summa liczb jest: " + String.valueOf(summa) );
+    }
+}
 
