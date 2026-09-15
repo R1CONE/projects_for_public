@@ -149,7 +149,7 @@ public class Main {
 }
 
 
-                public class par2and3 {
+    public class par2and3 {
     public static void main(String[] args) {
         int summa = 0;
 
