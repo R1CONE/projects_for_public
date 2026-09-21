@@ -193,3 +193,57 @@ public class zad_piramida {
 
         }
     }
+
+
+
+                import java.util.Random;
+import java.util.Scanner;
+
+public class ZadPiramida {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random rand = new Random();
+
+        System.out.print("Podaj maksymalną liczbę: ");
+        int max;
+        while (true) {
+            if (scanner.hasNextInt()) {
+                max = scanner.nextInt();
+                if (max > 0) break;
+                else System.out.print("Podaj liczbę większą od zera: ");
+            } else {
+                System.out.print("To nie jest liczba. Spróbuj ponownie: ");
+                scanner.next(); // czyści błędny wpis
+            }
+        }
+
+        int randomNumber = rand.nextInt(max) + 1; // losuje od 1 do max
+        int guess;
+        int attempts = 0;
+
+        System.out.println("Zgadnij liczbę od 1 do " + max);
+
+        while (true) {
+            System.out.print("Twoja próba: ");
+            if (!scanner.hasNextInt()) {
+                System.out.println("To nie jest liczba!");
+                scanner.next();
+                continue;
+            }
+
+            guess = scanner.nextInt();
+            attempts++;
+
+            if (guess > randomNumber) {
+                System.out.println("Mniej!");
+            } else if (guess < randomNumber) {
+                System.out.println("Więcej!");
+            } else {
+                System.out.println("Udało Ci się! Liczba prób: " + attempts);
+                break;
+            }
+        }
+
+        scanner.close();
+    }
+}
