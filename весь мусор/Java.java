@@ -164,3 +164,32 @@ public class Main {
     }
 }
 
+
+                import java.util.Scanner;
+
+public class zad_piramida {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Podaj liczbę N: ");
+        int N = scanner.nextInt();
+
+        int liczba = 1;
+
+        for (int i = 1; i <= N; i++) {
+
+            for (int j = 1; j <= i; j++) {
+                    if(liczba % 7 == 0)
+                        System.out.print("X");
+                    else
+                        System.out.print(liczba);
+                    liczba++;
+
+                }
+                
+                System.out.print("\n");
+            }
+
+
+        }
+    }
