@@ -247,3 +247,53 @@ public class ZadPiramida {
         scanner.close();
     }
 }
+
+
+
+                
+import java.util.ArrayList;
+import java.util.Random;
+
+public class zadminmax {
+
+    public static void main(String[] args){
+
+        Random rand = new Random();
+        ArrayList<Integer> oceny = new ArrayList<>();
+
+
+        int a = 10;
+
+        for(int b = 0; b < a; b++){
+            oceny.add(rand.nextInt(6));
+        }
+
+        int ilsoc = oceny.size();
+
+        for(int i = 0; i < ilsoc; i++){
+            System.err.println("oceny z wykresu: " + oceny.get(i));
+        };
+
+        
+        int max = oceny.get(0);
+        for(int ocena : oceny){
+            if(ocena > max){
+                max = ocena;
+            }
+        }
+
+        System.out.println("Największa liczba: " + max);
+
+        int min = oceny.get(0);
+        for(int ocena : oceny){
+            if(ocena < min){
+                min = ocena;
+            }
+        }
+
+        System.out.println("Najmniejsza liczba: " + max);
+ 
+    }
+
+}
+
