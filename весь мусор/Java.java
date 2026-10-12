@@ -250,7 +250,19 @@ public class ZadPiramida {
 
 
 
-                
+
+// ArrayList w Java - ciąg dalszy
+// Zadanie 2.1: Analiza wyników egzaminu zawodowego INF.04
+// Zaprojektuj program analizujący wyniki punktowe grupy uczniów z części praktycznej egzaminu.
+// Utwórz ArrayList<Integer> i wypełnij ją 10 losowymi wynikami z przedziału od 0 do 100 (użyj klasy Random lub Math.random()).
+// Zlicz, ilu uczniów zdało egzamin (próg zdawalności wynosi  75 punktów).
+// Utwórz drugą listę ArrayList<Integer> i przepisz do niej tylko te wyniki, które są niższe niż 75 punktów (osoby skierowane na poprawkę).
+// Znajdź wynik maksymalny oraz minimalny na liście bez używania gotowych funkcji sortujących (użyj pętli).
+// Wyświetl obie listy oraz obliczony procent zdawalności w grupie.
+ 
+// Podpowiedź: ArrayList<Integer> lista = new ArrayList<>(10);
+ 
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -284,16 +296,19 @@ public class zadminmax {
 
         System.out.println("Największa liczba: " + max);
 
-        int min = oceny.get(0);
-        for(int ocena : oceny){
-            if(ocena < min){
-                min = ocena;
+ 
+
+        int counter = 0;
+
+        for(int oc : oceny){
+            if(oc == 1){
+                counter++;
             }
         }
 
-        System.out.println("Najmniejsza liczba: " + max);
- 
+        double procent = oceny.size() / counter;
+
+        System.out.println("procent co nie zdało: " + procent);
     }
 
 }
-
