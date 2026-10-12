@@ -312,3 +312,19 @@ public class zadminmax {
     }
 
 }
+
+
+
+                // Zadanie 2.2: Unikalne słowa i filtrowanie tekstu
+// Napisz program, który pobiera od użytkownika słowa w konsoli (czyli z użyciem Scanner) do momentu wpisania słowa "stop".
+// Dodawaj słowa do ArrayList<String>, ale tylko wtedy, gdy danego słowa nie ma jeszcze na liście (brak powtórzeń).
+// Po wpisaniu "stop" wyświetl liczbę unikalnych słów.
+// Usuń z listy wszystkie słowa, których długość jest krótsza niż 4 znaki.
+// Wyświetl ostateczną listę słów.
+
+public class filtracja_slow {
+
+        
+
+}
+
