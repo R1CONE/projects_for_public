@@ -322,9 +322,32 @@ public class zadminmax {
 // Usuń z listy wszystkie słowa, których długość jest krótsza niż 4 znaki.
 // Wyświetl ostateczną listę słów.
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class filtracja_slow {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<String> slowa = new ArrayList<>();
 
-        
+        String slowo;
 
+        do {
+            System.out.print("Podaj slowo (stop - koniec): ");
+            slowo = scanner.nextLine();
+
+            if (!slowo.equals("stop") && !slowa.contains(slowo)) {
+                slowa.add(slowo);
+            }
+
+        } while (!slowo.equals("stop"));
+
+        System.out.println("Liczba unikalnych slow: " + slowa.size());
+
+        slowa.removeIf(s -> s.length() < 4);
+
+        System.out.println("Ostateczna lista slow: " + slowa);
+
+        scanner.close();
+    }
 }
-
