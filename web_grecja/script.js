@@ -5,27 +5,27 @@ const text = document.querySelector(".content-article");
 const tematy = [
     {
         naglowek: "Start",
-        opis: "Witaj w naszej kawiarni! Odkryj świat aromatycznej kawy i świetnej atmosfery."
+        opis: "hello "
     },
     {
         naglowek: "O firmie",
-        opis: "Jesteśmy pasjonatami kawy. Tworzymy miejsce, w którym każdy może odpocząć i delektować się ulubionym napojem."
+        opis: "firma."
     },
     {
         naglowek: "Oferta",
-        opis: "Oferujemy espresso, cappuccino, latte, herbatę oraz pyszne ciasta i desery."
+        opis: "Oferty."
     },
     {
         naglowek: "Cennik",
-        opis: "Espresso – 8 zł, cappuccino – 12 zł, latte – 14 zł, herbata – 10 zł."
+        opis: "cenniki"
     },
     {
         naglowek: "Portfolio",
-        opis: "Poznaj naszą kawiarnię, przytulne wnętrze oraz napoje przygotowywane przez naszych baristów."
+        opis: "portfolio"
     },
     {
         naglowek: "Kontakt",
-        opis: "Zapraszamy do naszej kawiarni! Skontaktuj się z nami, aby dowiedzieć się więcej."
+        opis: "+454545454"
     }
 ];
 
@@ -37,3 +37,5 @@ przyciski.forEach((przycisk, index) => {
         `;
     });
 });
+
+
