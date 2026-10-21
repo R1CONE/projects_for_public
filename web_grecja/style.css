@@ -36,17 +36,18 @@
   }
   
   .main-content {
+    padding-top: 5px;
     display: flex;
     flex: 1;
     gap: 30px;
-    padding: 25px;
     width: 100%;
     max-width: 100%;
   }
   
   .sidebar {
-    width: 220px;
+    width: 50%;
     flex-shrink: 0;
+
   }
   
   .nav-menu {
@@ -68,6 +69,7 @@
   .content-article {
     flex: 1;
     min-width: 0;
+    width: 50%;
   }
   
   .main-heading {
