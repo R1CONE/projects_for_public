@@ -1,4 +1,4 @@
-programmers notes for programming for mikhail Siruts 
+programmers notes  mikhail Siruts 
 SQl 
 Python 
 C++
