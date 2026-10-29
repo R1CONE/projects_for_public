@@ -1,0 +1,684 @@
+/* ========================================================
+   Excel Project - Styl arkusza kalkulacyjnego i aplikacji
+   ======================================================== */
+
+:root {
+    --excel-green: #107c41;
+    --excel-green-hover: #0b5a2f;
+    --excel-green-light: #e8f5e9;
+    --excel-border: #d0d7de;
+    --excel-cell-border: #e1e4e8;
+    --excel-header-bg: #f3f3f3;
+    --excel-header-text: #555555;
+    --excel-active-border: #107c41;
+    --excel-active-bg: rgba(16, 124, 65, 0.08);
+    --excel-select-cell: #eaf1fb;
+    --bg-gray: #f8f9fa;
+    --text-dark: #24292f;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-gray);
+    color: var(--text-dark);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Górna belka aplikacji */
+.app-header {
+    background-color: var(--excel-green);
+    color: white;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.brand-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.excel-icon {
+    width: 32px;
+    height: 32px;
+    background: white;
+    color: var(--excel-green);
+    font-weight: 900;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.brand-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.brand-subtitle {
+    font-size: 0.8rem;
+    opacity: 0.85;
+}
+
+.db-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+    background-color: #00e676;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00e676;
+}
+
+/* Główny kontener */
+.main-wrapper {
+    max-width: 1500px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Panel sterowania (Zarządzanie tabelą i bazą) */
+.control-card {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid var(--excel-border);
+    padding: 16px 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.section-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.input-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #444;
+}
+
+.table-name-input {
+    padding: 8px 14px;
+    font-size: 0.95rem;
+    border: 2px solid var(--excel-border);
+    border-radius: 6px;
+    outline: none;
+    transition: all 0.2s;
+    min-width: 260px;
+    font-weight: 500;
+}
+
+.table-name-input:focus {
+    border-color: var(--excel-green);
+    box-shadow: 0 0 0 3px rgba(16, 124, 65, 0.15);
+}
+
+.table-select {
+    padding: 8px 12px;
+    font-size: 0.95rem;
+    border: 2px solid var(--excel-border);
+    border-radius: 6px;
+    outline: none;
+    background-color: white;
+    cursor: pointer;
+    min-width: 250px;
+    transition: all 0.2s;
+}
+
+.table-select:focus {
+    border-color: var(--excel-green);
+}
+
+/* Przyciski */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.btn-primary {
+    background-color: var(--excel-green);
+    color: white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.btn-primary:hover {
+    background-color: var(--excel-green-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+.btn-secondary {
+    background-color: #f3f4f6;
+    color: #374151;
+    border-color: #d1d5db;
+}
+
+.btn-secondary:hover {
+    background-color: #e5e7eb;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border-color: var(--excel-green);
+    color: var(--excel-green);
+}
+
+.btn-outline:hover {
+    background-color: var(--excel-green-light);
+}
+
+.btn-danger {
+    background-color: #fee2e2;
+    color: #dc2626;
+    border-color: #fca5a5;
+}
+
+.btn-danger:hover {
+    background-color: #dc2626;
+    color: white;
+}
+
+/* Belka narzędziowa Excel (Wstążka) */
+.excel-toolbar {
+    background: white;
+    border-radius: 8px 8px 0 0;
+    border: 1px solid var(--excel-border);
+    border-bottom: none;
+    padding: 8px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    background: #fafbfc;
+}
+
+.toolbar-separator {
+    width: 1px;
+    height: 24px;
+    background-color: var(--excel-border);
+    margin: 0 4px;
+}
+
+.tool-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    background: white;
+    border: 1px solid var(--excel-border);
+    border-radius: 4px;
+    color: #4b5563;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    gap: 6px;
+}
+
+.tool-btn:hover {
+    background-color: #f3f4f6;
+    border-color: #9ca3af;
+    color: #111827;
+}
+
+.tool-btn:active {
+    background-color: #e5e7eb;
+}
+
+/* Pasek formuły (Formula Bar fx) */
+.formula-bar-container {
+    background: white;
+    border: 1px solid var(--excel-border);
+    border-bottom: 2px solid #c0c6cc;
+    display: flex;
+    align-items: center;
+    padding: 4px 12px;
+}
+
+.active-cell-box {
+    width: 65px;
+    padding: 4px 8px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #333;
+    background: #f1f3f5;
+    border: 1px solid #ced4da;
+    border-radius: 3px;
+    text-align: center;
+    user-select: none;
+}
+
+.fx-label {
+    font-family: "Georgia", serif;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #777;
+    padding: 0 12px;
+    user-select: none;
+}
+
+.formula-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
+    font-size: 0.95rem;
+    padding: 4px 8px;
+    color: #111;
+}
+
+/* Obszar arkusza kalkulacyjnego */
+.spreadsheet-container {
+    background: white;
+    border: 1px solid var(--excel-border);
+    border-radius: 0 0 8px 8px;
+    overflow: auto;
+    max-height: 520px;
+    position: relative;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.spreadsheet-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    background: white;
+    font-size: 0.9rem;
+}
+
+/* Nagłówki kolumn i wierszy */
+.header-corner {
+    width: 45px;
+    min-width: 45px;
+    height: 28px;
+    background-color: var(--excel-header-bg);
+    border-right: 1px solid var(--excel-border);
+    border-bottom: 1px solid var(--excel-border);
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    text-align: center;
+    cursor: pointer;
+}
+
+.col-header {
+    background-color: var(--excel-header-bg);
+    color: var(--excel-header-text);
+    font-weight: 600;
+    text-align: center;
+    border-right: 1px solid var(--excel-cell-border);
+    border-bottom: 1px solid var(--excel-border);
+    height: 28px;
+    min-width: 110px;
+    width: 110px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    user-select: none;
+    font-size: 0.85rem;
+    position: relative;
+    cursor: pointer;
+}
+
+.col-header:hover {
+    background-color: #e6e6e6;
+}
+
+.col-header.col-active {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+    border-bottom: 2px solid var(--excel-green);
+}
+
+.row-header {
+    background-color: var(--excel-header-bg);
+    color: var(--excel-header-text);
+    font-weight: 600;
+    text-align: center;
+    border-right: 1px solid var(--excel-border);
+    border-bottom: 1px solid var(--excel-cell-border);
+    width: 45px;
+    min-width: 45px;
+    position: sticky;
+    left: 0;
+    z-index: 5;
+    user-select: none;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.row-header:hover {
+    background-color: #e6e6e6;
+}
+
+.row-header.row-active {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+    border-right: 2px solid var(--excel-green);
+}
+
+/* Komórki siatki */
+.sheet-cell {
+    border-right: 1px solid var(--excel-cell-border);
+    border-bottom: 1px solid var(--excel-cell-border);
+    padding: 4px 8px;
+    height: 28px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    outline: none;
+    position: relative;
+    cursor: cell;
+    user-select: text;
+    background: white;
+}
+
+.sheet-cell.selected {
+    outline: 2px solid var(--excel-active-border);
+    outline-offset: -1px;
+    z-index: 2;
+    background-color: var(--excel-active-bg);
+}
+
+.sheet-cell.editing {
+    outline: 2px solid #2563eb;
+    background: white !important;
+    z-index: 3;
+    cursor: text;
+}
+
+/* Sekcja informacji o aktywnej tabeli i bazie */
+.info-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    color: #6b7280;
+    background: white;
+    border: 1px solid var(--excel-border);
+    border-radius: 6px;
+}
+
+.current-table-badge {
+    font-weight: 600;
+    color: var(--excel-green);
+}
+
+/* Karta z listą tabel z bazy danych */
+.database-tables-card {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid var(--excel-border);
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #1f2937;
+}
+
+.db-tables-list {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+}
+
+.db-tables-list th {
+    background: #f8fafc;
+    border-bottom: 2px solid #e2e8f0;
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.db-tables-list td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #edf2f7;
+    font-size: 0.9rem;
+}
+
+.db-tables-list tr:hover td {
+    background-color: #f8fafc;
+}
+
+.badge-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 0.78rem;
+    border-radius: 12px;
+    background: #e2e8f0;
+    color: #475569;
+    font-weight: 500;
+}
+
+.badge-sql {
+    background: #e0f2fe;
+    color: #0369a1;
+    font-family: monospace;
+}
+
+/* Pływające powiadomienia (Toast) */
+.toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    background: #1f2937;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    animation: slideIn 0.3s ease;
+    min-width: 280px;
+}
+
+.toast.success {
+    background: #0f766e;
+    border-left: 5px solid #2dd4bf;
+}
+
+.toast.error {
+    background: #991b1b;
+    border-left: 5px solid #f87171;
+}
+
+.toast.info {
+    background: #1e3a8a;
+    border-left: 5px solid #60a5fa;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ========================================================
+   Logowanie / rejestracja / panel użytkownika
+   ======================================================== */
+.auth-body {
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: linear-gradient(135deg, #e8f5e9 0%, #f8f9fa 100%);
+}
+
+.auth-card {
+    background: white;
+    width: 100%;
+    max-width: 400px;
+    padding: 32px 28px;
+    border-radius: 10px;
+    border: 1px solid var(--excel-border);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.auth-icon {
+    background: var(--excel-green);
+    color: white;
+    margin: 0 auto 12px;
+    width: 44px;
+    height: 44px;
+    font-size: 26px;
+}
+
+.auth-card h1 {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.auth-sub {
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 18px;
+}
+
+.auth-card label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #444;
+    margin: 12px 0 4px;
+}
+
+.auth-card input[type="text"],
+.auth-card input[type="email"],
+.auth-card input[type="password"] {
+    width: 100%;
+    padding: 9px 12px;
+    font-size: 0.95rem;
+    border: 2px solid var(--excel-border);
+    border-radius: 6px;
+    outline: none;
+}
+
+.auth-card input:focus {
+    border-color: var(--excel-green);
+    box-shadow: 0 0 0 3px rgba(16, 124, 65, 0.15);
+}
+
+.auth-submit {
+    width: 100%;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 0.9rem;
+}
+
+.auth-footer a {
+    color: var(--excel-green);
+    font-weight: 600;
+}
+
+.auth-alert {
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    margin-bottom: 10px;
+}
+
+.auth-error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+.auth-ok {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+}
+
+.user-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.user-chip {
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
