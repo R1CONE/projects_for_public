@@ -3725,3 +3725,126 @@ int main()
  
     return 0;
 }
+//////////
+///// ZADANIE SKLEP DOBRA NOTATKA 
+//////
+
+
+
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+class Produkt {
+private:
+    string nazwa_towaru;
+    float cena_jednostkowa;
+    int ilosc;
+
+public:
+    Produkt(string, float, int);
+
+    float sprawdz_liczby(float);
+    string get_nazwa_towaru();
+    float get_cena_jednostkowa();
+    float get_ilosc();
+    float oblicz_wartosc_pozycji();
+    string opis();
+};
+
+Produkt::Produkt(string nazwa, float cena, int il)
+    : nazwa_towaru(nazwa),
+      cena_jednostkowa(sprawdz_liczby(cena)),
+      ilosc(il) {
+}
+
+float Produkt::sprawdz_liczby(float wartosc) {
+    if (wartosc < 0.0)
+        return wartosc * (-1);
+    else
+        return wartosc;
+}
+
+string Produkt::get_nazwa_towaru() {
+    return nazwa_towaru;
+}
+
+float Produkt::get_cena_jednostkowa() {
+    return cena_jednostkowa;
+}
+
+float Produkt::get_ilosc() {
+    return ilosc;
+}
+
+float Produkt::oblicz_wartosc_pozycji() {
+    return ilosc * cena_jednostkowa;
+}
+
+string Produkt::opis() {
+    return nazwa_towaru + " " +
+           to_string(cena_jednostkowa) + " " +
+           to_string(ilosc);
+}
+
+
+class Zamowienie {
+private:
+    int numer_zamowienia;
+    string data_zamowienia;
+    vector<Produkt> pozycje;
+
+public:
+    Zamowienie(int, string);
+
+    void dodaj_pozycje(string, float, int);
+    float oblicz_suma_calkowita();
+    void wyswietl_zamowienie();
+};
+
+Zamowienie::Zamowienie(int numer, string data)
+    : numer_zamowienia(numer), data_zamowienia(data) {
+}
+
+void Zamowienie::dodaj_pozycje(string nazwa, float cena, int ilosc) {
+    pozycje.push_back(Produkt(nazwa, cena, ilosc));
+}
+
+float Zamowienie::oblicz_suma_calkowita() {
+    float suma = 0;
+
+    for (int i = 0; i < pozycje.size(); i++) {
+        suma += pozycje[i].oblicz_wartosc_pozycji();
+    }
+
+    return suma;
+}
+
+void Zamowienie::wyswietl_zamowienie() {
+    cout << "Numer zamowienia: " << numer_zamowienia << endl;
+    cout << "Data zamowienia: " << data_zamowienia << endl;
+
+    for (int i = 0; i < pozycje.size(); i++) {
+        cout << "\nProdukt: " << pozycje[i].opis() << endl;
+        cout << "Wartosc: "
+             << pozycje[i].oblicz_wartosc_pozycji() << " zl" << endl;
+    }
+
+    cout << "\nSuma calkowita: "  << oblicz_suma_calkowita() << " zl" << endl;
+}
+
+int main() {
+    Zamowienie zamowienie(101, "02.11.2026");
+
+    zamowienie.dodaj_pozycje("Salo", 24.82, 11);
+    zamowienie.dodaj_pozycje("Chleb", 5.51, 12);
+    zamowienie.dodaj_pozycje("Mleko", 4.29, 42);
+    zamowienie.dodaj_pozycje("Ser", 12.12, 12);
+
+    zamowienie.wyswietl_zamowienie();
+
+
+
+    return 0;
+}
