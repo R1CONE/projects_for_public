@@ -1,14 +1,12 @@
-import './App.css'
-import Tablica from "./Tablica"
+import './App.css';
+import User from "./User";
 
 function App() {
-return(
-     <div className="App">
-      <Tablica />
+  return (
+    <div className="App">
+      <User />
     </div>
-)
-   
-  
+  );
 }
 
-export default App
+export default App;
