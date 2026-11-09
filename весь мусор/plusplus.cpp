@@ -3848,3 +3848,92 @@ int main() {
 
     return 0;
 }
+
+////////////
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+class Programista {
+private:
+    int id;
+    string imieNazwisko;
+    string jezykWiodacy;
+    int stazLat;
+
+public:
+    Programista(int i, string imie, string jezyk, int staz) {
+        id = i;
+        imieNazwisko = imie;
+        jezykWiodacy = jezyk;
+        stazLat = staz;
+    }
+
+    void wyswietlProgramiste() {
+        cout << "ID: " << id << endl;
+        cout << "Imie i nazwisko: " << imieNazwisko << endl;
+        cout << "Jezyk wiodacy: " << jezykWiodacy << endl;
+        cout << "Staz pracy: " << stazLat << " lat" << endl;
+    }
+
+    void dodajStaz(int nowyStaz) {
+        stazLat = stazLat + nowyStaz;
+    }
+};
+
+class ProjektIT {
+private:
+    string nazwaProjektu;
+    double budzet;
+    vector<Programista*> zespol;
+
+public:
+    ProjektIT(string nazwa, double b) {
+        nazwaProjektu = nazwa;
+        budzet = b;
+    }
+
+    void dodajProgramiste(Programista* p) {
+        zespol.push_back(p);
+    }
+
+    void wyswietlZespolProjektu() {
+        cout << "\n===== RAPORT PROJEKTU =====" << endl;
+        cout << "Nazwa projektu: " << nazwaProjektu << endl;
+        cout << "Budzet: " << budzet << " PLN" << endl;
+
+        cout << "\nLista programistow:" << endl;
+
+        for (int i = 0; i < zespol.size(); i++) {
+            cout << "\n--- Programista " << i + 1 << " ---" << endl;
+            zespol[i]->wyswietlProgramiste();
+        }
+    }
+};
+
+int main() {
+
+    Programista p1(1, "Jan Kowalski", "C++", 5);
+    Programista p2(2, "Adam Nowak", "Java", 3);
+    Programista p3(3, "Piotr Wisniewski", "Python", 7);
+    Programista p4(4, "Tomasz Zielinski", "JavaScript", 2);
+
+    ProjektIT projekt("System Zarzadzania Projektami", 50000);
+
+    projekt.dodajProgramiste(&p1);
+    projekt.dodajProgramiste(&p2);
+    projekt.dodajProgramiste(&p3);
+    projekt.dodajProgramiste(&p4);
+
+
+    projekt.wyswietlZespolProjektu();
+
+    p3.dodajStaz(4)
+    p3.dodajStaz(1)
+
+    return 0;
+}
+
